@@ -2,7 +2,7 @@
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
-Rails.application.config.sorcery.submodules = %i[user_activation remember_me reset_password session_timeout brute_force_protection activity_logging magic_login jwt]
+Rails.application.config.sorcery.submodules = []
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -39,12 +39,12 @@ Rails.application.config.sorcery.configure do |config|
   # How long in seconds to keep the session alive.
   # Default: `3600`
   #
-  config.session_timeout = 3600
+  # config.session_timeout =
 
   # Use the last action as the beginning of session timeout.
   # Default: `false`
   #
-  config.session_timeout_from_last_action = true
+  # config.session_timeout_from_last_action =
 
   # -- http_basic_auth --
   # What realm to display for which controller name. For example {"My App" => "Application"}
@@ -241,7 +241,7 @@ Rails.application.config.sorcery.configure do |config|
     # WARNING: If used for users' passwords, changing this key will leave passwords undecryptable!
     # Default: `nil`
     #
-    user.encryption_key = 'Bl0w0u+Go0u+'
+    # user.encryption_key =
 
     # use an external encryption class.
     # Default: `nil`
@@ -262,7 +262,7 @@ Rails.application.config.sorcery.configure do |config|
     # How long in seconds the session length will be
     # Default: `604800`
     #
-    user.remember_me_for = 604_800
+    # user.remember_me_for =
 
     # when true sorcery will persist a single remember me token for all
     # logins/logouts (supporting remembering on multiple browsers simultaneously).
@@ -294,7 +294,7 @@ Rails.application.config.sorcery.configure do |config|
     # your mailer class. Required.
     # Default: `nil`
     #
-    user.user_activation_mailer = UserMailer
+    # user.user_activation_mailer =
 
     # when true sorcery will not automatically
     # email activation details and allow you to
@@ -343,7 +343,7 @@ Rails.application.config.sorcery.configure do |config|
     # mailer class. Needed.
     # Default: `nil`
     #
-    user.reset_password_mailer = UserMailer
+    # user.reset_password_mailer =
 
     # reset password email method on your mailer class.
     # Default: `:reset_password_email`
@@ -366,7 +366,7 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `5 * 60`
     #
     # user.reset_password_time_between_emails =
-
+    
     # access counter to a reset password page attribute name
     # Default: `:access_count_to_reset_password_page`
     #
@@ -378,25 +378,30 @@ Rails.application.config.sorcery.configure do |config|
     #
     # user.magic_login_token_attribute_name =
 
+
     # expires at attribute name.
     # Default: `:magic_login_token_expires_at`
     #
     # user.magic_login_token_expires_at_attribute_name =
+
 
     # when was email sent, used for hammering protection.
     # Default: `:magic_login_email_sent_at`
     #
     # user.magic_login_email_sent_at_attribute_name =
 
+
     # mailer class. Needed.
     # Default: `nil`
     #
     # user.magic_login_mailer_class =
 
+
     # magic login email method on your mailer class.
     # Default: `:magic_login_email`
     #
     # user.magic_login_email_method_name =
+
 
     # when true sorcery will not automatically
     # email magic login details and allow you to
@@ -405,10 +410,12 @@ Rails.application.config.sorcery.configure do |config|
     #
     # user.magic_login_mailer_disabled =
 
+
     # how many seconds before the request expires. nil for never expires.
     # Default: `nil`
     #
     # user.magic_login_expiration_period =
+
 
     # hammering protection, how long in seconds to wait before allowing another email to be sent.
     # Default: `5 * 60`
@@ -498,9 +505,6 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `:uid`
     #
     # user.provider_uid_attribute_name =
-
-    user.jwt_secret = Rails.application.credentials.secret_key_base
-    user.jwt_algorithm = 'HS256' # HS256 is used by default.
   end
 
   # This line must come after the 'user config' block.
