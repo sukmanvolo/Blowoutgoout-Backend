@@ -13,4 +13,10 @@ Rails.application.routes.draw do
 
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
+
+
+  # namespace the controllers without affecting the URI
+  scope module: :v1, constraints: ApiVersion.new('v1', true) do
+    resources :users
+  end  
 end
