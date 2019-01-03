@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
 
   # namespace the controllers without affecting the URI
-  scope module: :v1, constraints: ApiVersion.new('v1', true) do
-    resources :users
+  namespace :api do
+    namespace :v1 do
+      resources :users
+    end
   end  
 end
