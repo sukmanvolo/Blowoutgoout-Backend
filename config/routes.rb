@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # namespace the controllers without affecting the URI
   namespace :api do
     namespace :v1 do
+      post 'auth/login', to: 'authentication#authenticate'
       resources :users
     end
   end  
