@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jwt'
 gem 'rolify'
 gem 'sorcery'
-gem 'sorcery-jwt'
+# gem 'sorcery-jwt'
 
 gem 'bulma-extensions-rails'
 gem 'bulma-rails', '~> 0.7.2'
@@ -45,6 +45,7 @@ gem 'font-awesome-sass', '~> 5.5.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
