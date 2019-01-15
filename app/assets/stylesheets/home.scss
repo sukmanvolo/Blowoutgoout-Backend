@@ -9,27 +9,21 @@
     background-position-y: -15vw;
     background-repeat: no-repeat;
     padding-top: 2rem;
-    padding-bottom: 20rem;
+    padding-bottom: 16rem;
 
     .bg-logo {
       width: 16em;
-      text-align: center;
       padding-bottom: 10rem
     }
 
     .bg-container {
-      text-align: center;
-      font-family: 'Nunito', sans-serif;
 
-      .bg-title {
-        font-size: 3rem;
-        text-transform: uppercase;
+      .bg-hero-title {
         letter-spacing: 0.64px;
         margin-bottom: 1em;
       }
 
-      .bg-subtitle {
-        font-size: 1.5rem;
+      .bg-hero-subtitle {
         margin-bottom: 2em;
       }
 
@@ -45,6 +39,36 @@
       .ghost-btn {
         background-color: rgba(255,255,255,0);
         color: white;
+      }
+    }
+  }
+}
+
+.below-hero {
+  background: repeating-linear-gradient(45deg, #ffffff, #ffffff 16px, #f3f3f3 10px, #f3f3f3 20px);
+
+  .container {
+    background-color: #ffffff;
+    margin-top: -6em;
+    padding: 2vw 10vw;
+    border-radius: 2em;
+    box-shadow: 0 0 6em rgba(0,0,0,0.3);
+
+    .bg-bh-title {
+      color: #ED1E74;
+    }
+
+    .columns {
+      .column {
+
+        .download-cta {
+          margin-top: 1.5em;
+          color: #8748AB;
+        }
+
+        .app-badges {
+          margin-top: 1em;
+        }
       }
     }
   }

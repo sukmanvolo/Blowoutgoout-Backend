@@ -1,18 +1,44 @@
 <section class="hero is-medium is-primary bg-home-hero">
   <div class="bg-hero-body">
-    <div class="container bg-logo">
-      <%= image_tag 'bogo-logo-sm.png' %>
+    <div class="container is-centered bg-logo">
+      <%= image_tag 'bogo-logo-sm.svg' %>
     </div>
-    <div class="container bg-container">
-      <h1 class="title bg-title">
+    <div class="container has-text-centered bg-container">
+      <h1 class="title is-size-1 is-uppercase bg-hero-title">
         Beauty on Demand
       </h1>
-      <h2 class="subtitle bg-subtitle">
+      <h2 class="subtitle is-size-4 bg-hero-subtitle">
         On demand blowouts at home, at work, and everywhere you travel.
       </h2>
       <div class="buttons is-centered">
         <span class="button is-large">Get the App</span>
         <span class="button is-large ghost-btn">Become a Stylist</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section below-hero">
+  <div class="container is-fluid">
+    <h1 class="title has-text-centered bg-bh-title">Our Services</h1>
+    <h2 class="subtitle has-text-centered bg-bh-subtitle">
+      Top Rated Stylists – Elite Level Service – Amazing App
+    </h2>
+    <div class="columns is-vcentered">
+      <div class="column is-5">
+        <p>Book an appointment with a top rated stylist and receive service in as little as 30 minutes wherever you are!</p>
+        <h3 class="download-cta is-size-5 has-text-weight-bold">Download the app today!</h3>
+        <div class="columns app-badges">
+          <div class="column">
+            <%= image_tag 'app-store-badge.png' %>
+          </div>
+          <div class="column">
+            <%= image_tag 'google-play-badge.png' %>
+          </div>
+        </div>
+      </div>
+      <div class="column is-6 is-offset-1 has-text-centered">
+        <%= image_tag 'iphone-placeholder.png' %>
       </div>
     </div>
   </div>
