@@ -11,7 +11,7 @@
         Get quick access to blowouts at home, at work, and everywhere you travel.
       </h2>
       <div class="buttons is-centered">
-        <span class="button is-large">Get the App</span>
+        <span class="button is-large is-pink">Get the App</span>
         <span class="button is-large ghost-btn">Become a Stylist</span>
       </div>
     </div>
@@ -20,25 +20,44 @@
 
 <section class="section below-hero">
   <div class="container is-fluid">
-    <h1 class="title has-text-centered bg-bh-title">Our Services</h1>
-    <h2 class="subtitle has-text-centered bg-bh-subtitle">
+    <h2 class="title has-text-centered is-pink bg-bh-title">Our Services</h2>
+    <h3 class="subtitle has-text-centered bg-bh-subtitle">
       Top Rated Stylists – Elite Level Service – Amazing App
-    </h2>
+    </h3>
     <div class="columns is-vcentered">
       <div class="column is-5">
         <p>Book an appointment with a top rated stylist and receive service in as little as 30 minutes wherever you are!</p>
-        <h3 class="download-cta is-size-5 has-text-weight-bold">Download the app today!</h3>
+        <h3 class="download-cta is-size-5 is-purple has-text-weight-bold">Download the app today!</h3>
         <div class="columns app-badges">
           <div class="column">
-            <%= image_tag 'app-store-badge.png' %>
+            <a href="#"><%= image_tag 'app-store-badge.png' %></a>
           </div>
           <div class="column">
-            <%= image_tag 'google-play-badge.png' %>
+            <a href="#"><%= image_tag 'google-play-badge.png' %></a>
           </div>
         </div>
       </div>
       <div class="column is-6 is-offset-1 has-text-centered">
         <%= image_tag 'iphone-placeholder.png' %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section stylist-section">
+  <div class="container is-fluid">
+    <h2 class="title has-text-centered is-purple bg-bh-title">Meet a few of our stylists</h2>
+    <div class="columns is-vcentered">
+      <div class="column is-6 has-text-centered">
+        <%= image_tag 'stylist-profile-images.svg' %>
+      </div>
+      <div class="column is-5">
+        <p>Our stylists have all been vetted and hand selected through a process of interviews, background checks and qualification assessments.
+          We only partner with the best of the best "nationwide" to ensure optimal results and a wonderful experience wherever you are.</p>
+        <h3 class="stylist-cta is-size-5 is-pink has-text-weight-bold">You have the skills to be one of our stylists?</h3>
+        <div class="stylist-cta">
+          <span class="button is-large is-purple ghost-btn">Become a Stylist</span>
+        </div>
       </div>
     </div>
   </div>

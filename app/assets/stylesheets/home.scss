@@ -33,12 +33,21 @@
         text-transform: uppercase;
         letter-spacing: 0.69px;
         border-radius: 8px;
-        color: #CC4A95;
+        transition: 0.4s;
+
+        &:hover {
+          background-color: #ED1E74;
+          color: #fff;
+        }
       }
 
       .ghost-btn {
         background-color: rgba(255,255,255,0);
         color: white;
+
+        &:hover {
+          background-color: #8748AB;
+        }
       }
     }
   }
@@ -54,21 +63,40 @@
     border-radius: 2em;
     box-shadow: 0 0 6em rgba(0,0,0,0.3);
 
-    .bg-bh-title {
-      color: #ED1E74;
-    }
-
     .columns {
       .column {
 
         .download-cta {
           margin-top: 1.5em;
-          color: #8748AB;
         }
 
         .app-badges {
           margin-top: 1em;
         }
+      }
+    }
+  }
+}
+
+.stylist-section {
+  background-color: #e8e8e8;
+
+  .stylist-cta {
+    margin-top: 1.5em;
+
+    .ghost-btn {
+      border-color: #8748AB;
+      min-width: 12em;
+      text-transform: uppercase;
+      letter-spacing: 0.69px;
+      border-radius: 8px;
+      background-color: rgba(255,255,255,0);
+      transition: 0.4s;
+
+      &:hover {
+        background-color: #8748AB;
+        border-color: #fff;
+        color: #fff;
       }
     }
   }
