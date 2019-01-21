@@ -1,7 +1,16 @@
-<h1>Login</h1>
+<h1>Sign Up</h1>
 
-<%= render 'form' %>
+<%= form_for @user do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
 
-<%= link_to 'Back', user_sessions_path %>
-
-<%= link_to 'Forgot Password?', new_password_reset_path %>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.submit "Login" %>
+  </div>
+<% end %>

@@ -1,30 +1,24 @@
 class UserSessionsController < ApplicationController
-  skip_before_action :require_login, only: %i[index new create]
+  before_action :authorize, except: %i[new create]
 
   def new
     @user = User.new
   end
 
   def create
-    # @user = login(params[:email], params[:password])
-    token = login_and_issue_token(params[:email], params[:password], params[:remember])
-
-    respond_to do |format|
-      if current_user
-        format.html { redirect_back_or_to :users }
-        format.json do
-          render json: { user: serialize(current_user),
-                         token: token }, status: :created
-        end
-      else
-        format.html { flash.now[:alert] = 'Login failed' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    user = User.find_by(email: params[:login][:email].downcase)
+    
+    if user && user.authenticate(params[:login][:password]) 
+      session[:user_id] = user.id.to_s
+      redirect_to root_path, notice: 'Successfully logged in!'
+    else
+      flash.now.alert = "Incorrect email or password, try again."
+      render :new
     end
   end
 
   def destroy
-    logout
-    redirect_to(:users, notice: 'Logged out!')
-  end
+    session.delete(:user_id)
+    redirect_to login_path, notice: "Logged out!"
+  end  
 end

@@ -1,4 +1,6 @@
 class AuthenticateUser
+  prepend SimpleCommand
+
   def initialize(email, password)
     @email = email
     @password = password
@@ -16,7 +18,7 @@ class AuthenticateUser
   # verify user credentials
   def user
     user = User.find_by(email: email)
-    return user if user && user.authenticate(password)
+    return user if user && user.login(email,password)
     # raise Authentication error if credentials are invalid
     raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
   end

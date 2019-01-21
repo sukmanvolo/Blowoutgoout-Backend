@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[index new create activate]
+  before_action :authorize, except: %i[new create]
   before_action :set_user, only: %i[show edit update destroy]
 
   # GET /users
@@ -24,24 +24,18 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to :users, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def activate
-    if @user = User.load_from_activation_token(params[:id])
-      @user.activate!
-      redirect_to(login_path, notice: 'User was successfully activated.')
+    
+    # store all emails in lowercase to avoid duplicates and case-sensitive login errors:
+    @user.email.downcase!
+    
+    if @user.save
+      # If user saves in the db successfully:
+      flash[:notice] = "Account created successfully!"
+      redirect_to root_path
     else
-      not_authenticated
+      # If user fails model validation - probably a bad password or duplicate email:
+      flash.now.alert = "Oops, couldn't create account. Please make sure you are using a valid email and password and try again."
+      render :new
     end
   end
 
