@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'about-us', to: 'pages#about_us'
 
   resources :user_sessions
-  resources :users 
+  resources :users
 
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
