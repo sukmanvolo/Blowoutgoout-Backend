@@ -28,13 +28,19 @@
       <div class="column is-5">
         <p>Book an appointment with a top rated stylist and receive service in as little as 30 minutes wherever you are!</p>
         <h3 class="download-cta is-size-5 is-purple has-text-weight-bold">Download the app today!</h3>
-        <div class="columns app-badges">
-          <div class="column">
-            <a href="#"><%= image_tag 'app-store-badge.png' %></a>
-          </div>
-          <div class="column">
-            <a href="#"><%= image_tag 'google-play-badge.png' %></a>
-          </div>
+        <div class="app-links">
+          <ul>
+            <li>
+              <a href="#">
+                <%= image_tag 'app-store-badge.png' %>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <%= image_tag 'google-play-badge.png' %>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="column is-6 is-offset-1 has-text-centered">
@@ -48,7 +54,7 @@
   <div class="container is-fluid">
     <h2 class="title has-text-centered is-purple bg-bh-title">Meet a few of our stylists</h2>
     <div class="columns is-vcentered">
-      <div class="column is-6 has-text-centered">
+      <div class="column is-6 has-text-centered stylist-img">
         <%= image_tag 'stylist-profile-images.png' %>
       </div>
       <div class="column is-5">
