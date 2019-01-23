@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'authenticate', to: 'authentication#authenticate'
       resources :users
+      post 'password/forgot', to: 'password#forgot'
+      post 'password/reset', to: 'password#reset'
     end
   end
 end
