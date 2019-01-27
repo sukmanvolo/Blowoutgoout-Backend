@@ -1,0 +1,23 @@
+.left-nav-collapsed {
+  background: transparent;
+  position: fixed;
+  width: 5em;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-right: solid 1px #743f92;
+  color: #743f92;
+  transition: 0.4s;
+  z-index: 99999999999;
+
+  &:hover {
+    background: rgba(255, 255, 255, .7);
+    cursor: pointer;
+  }
+
+  .menu-text {
+    transform: rotate(-90deg) translateY(-100%) translateX(-90%);
+    position: absolute;
+    left: 52%;
+  }
+}
