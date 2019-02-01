@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :require_login, only: %i[home about_us contact_us]
+  skip_before_action :require_login
 
   def home; end
 

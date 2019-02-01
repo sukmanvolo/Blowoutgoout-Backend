@@ -2,7 +2,7 @@
   display: none;
 }
 .bg-home-hero {
-  background-image: linear-gradient(78deg, #ED1E74 0%, #9855D0 100%);
+  background-image: linear-gradient(78deg, $pink 0%, #9855D0 100%);
 
   .bg-hero-body {
     background-image: image-url("curls-night-out.png");
@@ -36,7 +36,7 @@
         transition: 0.4s;
 
         &:hover {
-          background-color: #ED1E74;
+          background-color: $pink;
           color: #fff;
         }
       }
