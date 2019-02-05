@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :users
       post 'password/forgot', to: 'password#forgot'
       post 'password/reset', to: 'password#reset'
+      resources :services
     end
   end
 end
