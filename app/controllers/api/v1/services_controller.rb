@@ -10,7 +10,7 @@ module Api::V1
 
     # POST /services
     def create
-      @service = service.create!(service_params)
+      @service = Service.create!(service_params)
       json_response(@service, :created)
     end
 
@@ -34,12 +34,11 @@ module Api::V1
     private
 
     def service_params
-      # whitelist params
       params.permit(:name, :service_type)
     end
 
     def set_service
-      @service = service.find(params[:id])
+      @service = Service.find(params[:id])
     end
   end
 end
