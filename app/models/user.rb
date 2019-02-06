@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   rolify
   # validations
-  validates :password, presence: true
+  validates :password, presence: true, on: :create
   validates :email, uniqueness: true
 
   # relantionships
@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :services, through: :user_services
 
 
-  # callbacks  
+  # callbacks
   after_create :assign_default_role
 
   def generate_password_token!
@@ -27,14 +27,14 @@ class User < ApplicationRecord
    self.reset_password_token = nil
    self.password = password
    save!
-  end  
+  end
 
-  private  
+  private
 
   def generate_token
    SecureRandom.hex(10)
-  end  
+  end
   def assign_default_role
     self.add_role(:regular) if self.roles.blank?
-  end  
+  end
 end
