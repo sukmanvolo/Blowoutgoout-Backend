@@ -34,7 +34,7 @@ module Api::V1
     private
 
     def service_params
-      params.permit(:name, :service_type)
+      params.require(:services).permit(:name, :service_type, :active)
     end
 
     def set_service
