@@ -12,13 +12,13 @@ module Api::ExceptionHandler
 
   included do
     # Define custom handlers
-    rescue_from ::Api::ExceptionHandler::UserNoValid, with: :user_no_valid
-    rescue_from ::Api::ExceptionHandler::AuthenticationError, with: :unauthorized_request
-    rescue_from ::Api::ExceptionHandler::MissingToken, with: :four_twenty_two
-    rescue_from ::Api::ExceptionHandler::InvalidToken, with: :four_twenty_two
-    rescue_from ::Api::ExceptionHandler::CredentialError, with: :unauthorized_request
-    rescue_from ::Api::ExceptionHandler::InvalidTransactionAction, with: :invalid_transaction_action
-    rescue_from ::Api::ExceptionHandler::InvalidRole, with: :role_does_not_exist
+    rescue_from Api::ExceptionHandler::UserNoValid, with: :user_no_valid
+    rescue_from Api::ExceptionHandler::AuthenticationError, with: :unauthorized_request
+    rescue_from Api::ExceptionHandler::MissingToken, with: :four_twenty_two
+    rescue_from Api::ExceptionHandler::InvalidToken, with: :four_twenty_two
+    rescue_from Api::ExceptionHandler::CredentialError, with: :unauthorized_request
+    rescue_from Api::ExceptionHandler::InvalidTransactionAction, with: :invalid_transaction_action
+    rescue_from Api::ExceptionHandler::InvalidRole, with: :role_does_not_exist
     rescue_from ActionController::RoutingError, with: :four_zero_four
     # rescue_from ActiveRecord::RecordNotFound, with: :four_zero_four
     rescue_from ActiveRecord::RecordInvalid, with: :four_twenty_two

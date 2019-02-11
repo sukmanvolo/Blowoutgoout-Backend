@@ -6,7 +6,8 @@ class AuthorizeApiRequest
   # Service entry point - return valid user object
   def call
     {
-      user: user
+      user: user,
+      role: role
     }
   end
 
@@ -24,6 +25,17 @@ class AuthorizeApiRequest
     raise(
       Api::ExceptionHandler::InvalidToken,
       ("#{Message.invalid_token} #{e.message}")
+    )
+  end
+
+  def role
+    # memoize user role
+    @role ||= decoded_auth_token[:role] if decoded_auth_token
+    return @role unless @role.nil? || @role.empty?
+    # handle role not found
+    # raise custom error
+    raise(
+      Api::ExceptionHandler::InvalidRole, ("User role is empty")
     )
   end
 

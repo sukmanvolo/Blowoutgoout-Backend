@@ -8,6 +8,9 @@ class User < ApplicationRecord
   # relantionships
   has_many :user_services, -> { order(date: :asc) }
   has_many :services, through: :user_services
+  has_one :client
+
+  enum role: [:client, :stylist]
 
 
   # callbacks
