@@ -6,6 +6,7 @@ class CreateClients < ActiveRecord::Migration[5.2]
       t.string :phone
       t.string :facebook_id
       t.integer :user_id
+      t.timestamps
     end
 
     add_index :clients, :user_id

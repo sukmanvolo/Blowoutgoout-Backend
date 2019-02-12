@@ -3,14 +3,18 @@ class User < ApplicationRecord
   rolify
   # validations
   validates :password, presence: true, on: :create
-  validates :email, uniqueness: true
+  validates :gcm_id, :device_type, :device_id, :role, presence: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, uniqueness: { scope: :role }
 
   # relantionships
   has_many :user_services, -> { order(date: :asc) }
   has_many :services, through: :user_services
-  has_one :client
+  has_one :client, inverse_of: :user, dependent: :destroy
+  has_one :stylist, inverse_of: :user, dependent: :destroy
 
   enum role: [:client, :stylist]
+  enum status: [:inactive, :active]
 
 
   # callbacks
@@ -35,8 +39,9 @@ class User < ApplicationRecord
   private
 
   def generate_token
-   SecureRandom.hex(10)
+    SecureRandom.hex(10)
   end
+
   def assign_default_role
     self.add_role(:regular) if self.roles.blank?
   end

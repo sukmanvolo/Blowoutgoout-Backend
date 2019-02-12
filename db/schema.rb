@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030565) do
+ActiveRecord::Schema.define(version: 2019_12_18_030566) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_12_18_030565) do
     t.string "phone"
     t.string "facebook_id"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
@@ -42,6 +44,23 @@ ActiveRecord::Schema.define(version: 2019_12_18_030565) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "stylists", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.text "description"
+    t.string "phone"
+    t.integer "welcome_kit", default: 0
+    t.integer "service_type", default: 1
+    t.integer "register_by"
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "long", precision: 10, scale: 6
+    t.integer "radius"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_stylists_on_user_id"
+  end
+
   create_table "user_services", force: :cascade do |t|
     t.datetime "date", null: false
     t.string "comments"
@@ -61,6 +80,10 @@ ActiveRecord::Schema.define(version: 2019_12_18_030565) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.integer "role"
+    t.string "gcm_id"
+    t.string "device_type"
+    t.string "device_id"
+    t.integer "status", default: 1
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

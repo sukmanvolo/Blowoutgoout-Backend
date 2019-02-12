@@ -16,6 +16,11 @@ Rails.application.routes.draw do
       resources :users
       post 'password/forgot', to: 'password#forgot'
       post 'password/reset', to: 'password#reset'
+
+      post 'clients/signup', to: 'clients_signup#create'
+      post 'stylists/signup', to: 'stylists_signup#create'
+      resources :clients
+      resources :stylists
       resources :services
     end
   end

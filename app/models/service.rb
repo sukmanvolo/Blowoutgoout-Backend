@@ -1,7 +1,7 @@
 class Service < ApplicationRecord
   # scopes
   scope :actives, -> { where(active: true) }
-  # enum 
+  # enum
   enum service_type: { hair: 0, makeup: 1, hair_makeupnormal: 2 }
 
   # validations
