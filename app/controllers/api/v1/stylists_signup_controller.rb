@@ -11,10 +11,9 @@ module Api::V1
     private
 
     def stylist_params
-      params.require(:stylists).permit(:first_name, :last_name, :phone,
-                                      :user_id, :lat, :long, user_attributes: [
-                                      :id, :email, :password, :role, :gcm_id,
-                                      :device_type, :device_id, :status])
+      params.require(:stylists).permit(:first_name, :last_name, :phone, :user_id,
+                                       user_attributes: [:id, :email, :password,
+                                       :role, :gcm_id, :device_type, :device_id, :status])
     end
   end
 end
