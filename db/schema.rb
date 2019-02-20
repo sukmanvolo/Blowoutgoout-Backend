@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030566) do
+ActiveRecord::Schema.define(version: 2019_12_18_030568) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,23 @@ ActiveRecord::Schema.define(version: 2019_12_18_030566) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "services", force: :cascade do |t|
-    t.integer "service_type", default: 0, null: false
-    t.string "name", null: false
-    t.boolean "active", default: true
+  create_table "service_types", force: :cascade do |t|
+    t.string "title"
+    t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "service_type_id"
+    t.bigint "stylist_id"
+    t.decimal "amount", precision: 10, scale: 2
+    t.integer "status", default: 1
+    t.index ["service_type_id"], name: "index_services_on_service_type_id"
+    t.index ["stylist_id"], name: "index_services_on_stylist_id"
   end
 
   create_table "stylists", force: :cascade do |t|
@@ -94,4 +105,6 @@ ActiveRecord::Schema.define(version: 2019_12_18_030566) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "services", "service_types"
+  add_foreign_key "services", "stylists"
 end

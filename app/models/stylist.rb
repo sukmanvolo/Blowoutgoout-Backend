@@ -3,6 +3,9 @@ class Stylist < ApplicationRecord
 
   validates :first_name, presence: true
 
+  # relantionships
+  has_many :services
+
   # emun welcome_kit: [] ask for values
   enum service_type: [:hair, :makeup, :hair_and_makeup]
   enum register_by: [:normal, :facebook]

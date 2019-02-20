@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :clients
       resources :stylists
       resources :services
+      resources :service_types
     end
   end
 end

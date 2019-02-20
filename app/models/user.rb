@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   rolify
+
   # validations
   validates :password, presence: true, on: :create
   validates :gcm_id, :device_type, :device_id, :role, presence: true
@@ -10,12 +11,13 @@ class User < ApplicationRecord
   # relantionships
   has_many :user_services, -> { order(date: :asc) }
   has_many :services, through: :user_services
+
   has_one :client, inverse_of: :user, dependent: :destroy
   has_one :stylist, inverse_of: :user, dependent: :destroy
 
+  # enum
   enum role: [:client, :stylist]
   enum status: [:inactive, :active]
-
 
   # callbacks
   after_create :assign_default_role
