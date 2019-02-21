@@ -5,6 +5,8 @@ class PagesController < ApplicationController
 
   def stylists; end
 
+  def faq; end
+
   def about_us; end
 
   def contact_us; end

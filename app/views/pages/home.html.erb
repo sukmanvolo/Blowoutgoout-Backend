@@ -1,12 +1,7 @@
 <section class="hero is-medium is-primary bg-home-hero">
   <div class="bg-hero-body">
-    <div class="container is-centered bg-logo">
-      <%= link_to root_path do %>
-      <%= image_tag 'bogo-logo-sm.svg' %>
-      <% end %>
-    </div>
     <div class="container has-text-centered bg-container">
-      <h1 class="title is-size-1 is-uppercase bg-hero-title">
+      <h1 class="title is-size-2 is-uppercase bg-hero-title">
         Beauty on Demand
       </h1>
       <h2 class="subtitle is-size-4 bg-hero-subtitle">
@@ -14,16 +9,14 @@
       </h2>
       <div class="buttons is-centered">
         <span class="button is-large is-pink">Get the App</span>
-        <%= link_to stylists_path do %>
-        <span class="button is-large ghost-btn">Become a Stylist</span>
-        <% end %>
       </div>
+      <h3 class="stylist-cta">Want to begin earning money as one of our stylists? <%= link_to stylists_path do %>Click here<% end %></h3>
     </div>
   </div>
 </section>
 
 <section class="section below-hero">
-  <div class="container is-fluid">
+  <div class="container is-fluid bg-shadow-container">
     <h2 class="title has-text-centered is-pink bg-bh-title">Our Services</h2>
     <h3 class="subtitle has-text-centered bg-bh-subtitle">
       Top Rated Stylists – Elite Level Service – Amazing App

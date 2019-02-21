@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # Static pages
   get 'stylists', to: 'pages#stylists'
+  get 'faq', to: 'pages#faq'
   get 'about-us', to: 'pages#about_us'
 
   resources :user_sessions

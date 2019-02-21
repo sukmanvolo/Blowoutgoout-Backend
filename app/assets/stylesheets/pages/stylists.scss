@@ -1,31 +1,28 @@
 .bg-stylist-hero {
-  background-image: linear-gradient(78deg, #ED1E74 0%, #9855D0 100%);
+  background-image: linear-gradient(0deg, #3D1457 0%, #9855D0 100%);
 
   .bg-hero-body {
-    background-image: image-url("curls-night-out.png");
-    background-position-y: -15vw;
+    background-image: image-url("stylist-hero.png");
     background-repeat: no-repeat;
     padding-top: 2rem;
-    padding-bottom: 16rem;
-
-    .bg-logo {
-      width: 16em;
-      padding-bottom: 10rem
-    }
+    padding-bottom: 12rem;
 
     .bg-container {
 
       .bg-hero-title {
         letter-spacing: 0.64px;
+        margin-top: 10rem;
         margin-bottom: 1em;
       }
 
       .bg-hero-subtitle {
+        max-width: 40em;
+        margin: auto;
         margin-bottom: 2em;
       }
 
       .button {
-        border-color: #fff;
+        border-color: $white;
         min-width: 12em;
         text-transform: uppercase;
         letter-spacing: 0.69px;
@@ -33,63 +30,47 @@
         transition: 0.4s;
 
         &:hover {
-          background-color: #ED1E74;
-          color: #fff;
+          background-color: $pink;
+          color: $white;
         }
       }
 
       .ghost-btn {
         background-color: rgba(255,255,255,0);
-        color: white;
+        color: $white;
 
         &:hover {
-          background-color: #8748AB;
+          background-color: $pink;
         }
       }
     }
   }
 }
 
-.below-hero {
-  background: repeating-linear-gradient(45deg, #ffffff, #ffffff 16px, #f3f3f3 10px, #f3f3f3 20px);
+.qualification-section {
 
-  .container {
-    background-color: #ffffff;
+  .bg-shadow-container {
+    background-color: $white;
     margin-top: -6em;
     padding: 2vw 10vw;
     border-radius: 2em;
     box-shadow: 0 0 6em rgba(0,0,0,0.3);
 
+    .qualification-columns {
+      .qualification-text {
+        margin-top: 18px;
+      }
+    }
+  }
+
+  .why-section {
+    .why-section-title {
+      margin-top: 2em;
+    }
+
     .columns {
       .column {
-
-        .download-cta {
-          margin-top: 1.5em;
-        }
-
-        .app-links {
-
-          ul {
-            margin-top: 3em;
-            list-style: none;
-            margin-left: 0;
-            display: flex;
-            flex-wrap: nowrap;
-
-            li {
-              margin: 0 18px;
-              margin-left: 0;
-
-              &:last-child {
-                margin-right: 0;
-              }
-
-              a {
-                color: #fff;
-              }
-            }
-          }
-        }
+        background-color: $pink;
       }
     }
   }
