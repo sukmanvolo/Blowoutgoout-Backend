@@ -4,13 +4,15 @@ module Api::V1
 
     # GET /service_types
     def index
-      @service_types = ServiceType.all
+      @service_types = ServiceType.actives
       json_response(@service_types)
     end
 
     # POST /service_types
     def create
-      @service_type = ServiceType.create!(service_type_params)
+      @service_type = ServiceType.new(service_type_params)
+      authorize @service_type
+      @service_type.save!(service_type_params)
       json_response(@service_type, :created)
     end
 
@@ -21,12 +23,14 @@ module Api::V1
 
     # PUT /service_types/:id
     def update
+      authorize @service_type
       @service_type.update(service_type_params)
       head :no_content
     end
 
     # DELETE /service_types/:id
     def destroy
+      authorize @service_type
       @service_type.destroy
       head :no_content
     end
@@ -34,7 +38,7 @@ module Api::V1
     private
 
     def service_type_params
-      params.require(:service_types).permit(:title, :status)
+      params.require(:service_types).permit(:name, :status)
     end
 
     def set_service_type

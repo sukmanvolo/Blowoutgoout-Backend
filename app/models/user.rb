@@ -4,7 +4,8 @@ class User < ApplicationRecord
 
   # validations
   validates :password, presence: true, on: :create
-  validates :gcm_id, :device_type, :device_id, :role, presence: true
+  # validates :gcm_id, :device_type, :device_id, presence: true
+  validates :role, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, uniqueness: { scope: :role }
 
@@ -16,7 +17,7 @@ class User < ApplicationRecord
   has_one :stylist, inverse_of: :user, dependent: :destroy
 
   # enum
-  enum role: [:client, :stylist]
+  enum role: [:client, :stylist, :admin]
   enum status: [:inactive, :active]
 
   # callbacks

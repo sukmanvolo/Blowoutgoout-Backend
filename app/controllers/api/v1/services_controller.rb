@@ -10,7 +10,9 @@ module Api::V1
 
     # POST /services
     def create
-      @service = Service.create!(service_params)
+      @service = Service.new(service_params)
+      authorize @service
+      @service = @service.save!
       json_response(@service, :created)
     end
 
@@ -21,12 +23,14 @@ module Api::V1
 
     # PUT /services/:id
     def update
+      authorize @service
       @service.update(service_params)
       head :no_content
     end
 
     # DELETE /services/:id
     def destroy
+      authorize @service
       @service.destroy
       head :no_content
     end
@@ -34,7 +38,8 @@ module Api::V1
     private
 
     def service_params
-      params.require(:services).permit(:name, :service_type, :active)
+      params.require(:services).permit(:name, :service_type, :status, :service_type_id,
+                                       :stylist_id, :amount, :service_id)
     end
 
     def set_service

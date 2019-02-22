@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030568) do
   end
 
   create_table "service_types", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

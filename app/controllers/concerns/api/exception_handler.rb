@@ -4,6 +4,7 @@ module Api::ExceptionHandler
   # Define custom error subclasses - rescue catches `StandardErrors`
   class AuthenticationError < StandardError; end
   class UserNoValid < StandardError; end
+  class UserNotAuthorized < StandardError; end
   class MissingToken < StandardError; end
   class InvalidToken < StandardError; end
   class CredentialError < StandardError; end
@@ -13,6 +14,7 @@ module Api::ExceptionHandler
   included do
     # Define custom handlers
     rescue_from Api::ExceptionHandler::UserNoValid, with: :user_no_valid
+    rescue_from Api::ExceptionHandler::UserNotAuthorized, with: :user_not_authorized
     rescue_from Api::ExceptionHandler::AuthenticationError, with: :unauthorized_request
     rescue_from Api::ExceptionHandler::MissingToken, with: :four_twenty_two
     rescue_from Api::ExceptionHandler::InvalidToken, with: :four_twenty_two
@@ -20,7 +22,7 @@ module Api::ExceptionHandler
     rescue_from Api::ExceptionHandler::InvalidTransactionAction, with: :invalid_transaction_action
     rescue_from Api::ExceptionHandler::InvalidRole, with: :role_does_not_exist
     rescue_from ActionController::RoutingError, with: :four_zero_four
-    # rescue_from ActiveRecord::RecordNotFound, with: :four_zero_four
+    rescue_from ActiveRecord::RecordNotFound, with: :four_zero_four
     rescue_from ActiveRecord::RecordInvalid, with: :four_twenty_two
 
     rescue_from ActiveRecord::RecordNotFound do |e|
