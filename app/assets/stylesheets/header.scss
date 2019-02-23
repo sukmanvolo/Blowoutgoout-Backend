@@ -1,8 +1,9 @@
 .bg-logo {
   width: 100%;
-  position: absolute;
+  position: relative;
   text-align: center;
-  top: 1em;
+  padding-top: 8px;
+  border-bottom: solid 1px #f0f0f0;
 }
 
 // .left-nav-collapsed {

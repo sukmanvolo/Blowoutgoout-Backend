@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   # Static pages
   get 'stylists', to: 'pages#stylists'
   get 'faq', to: 'pages#faq'
+  get 'privacy', to: 'pages#privacy'
   get 'about-us', to: 'pages#about_us'
+
 
   resources :user_sessions
   resources :users do

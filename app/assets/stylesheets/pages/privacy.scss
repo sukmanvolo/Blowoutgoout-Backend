@@ -1,4 +1,4 @@
-.faq-page {
+.privacy-page {
   padding: 6vw;
 
   h1 {
@@ -7,9 +7,12 @@
     }
   }
 
-  h3 {
-    font-weight: bold;
-    color: $purple;
-    padding-bottom: 0.4em;
+  p {
+    font-size: 1em;
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: 3em;
   }
 }

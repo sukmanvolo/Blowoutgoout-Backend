@@ -1,7 +1,9 @@
 <footer class="footer">
   <div class="content has-text-centered">
     <div class="logo-b">
+      <%= link_to root_path do %>
       <%= image_tag 'logo-b.svg' %>
+      <% end %>
     </div>
     <nav class="footer-nav">
       <div class="footer-links">
@@ -16,7 +18,7 @@
             <a href="#">Terms</a>
           </li>
           <li>
-            <a href="#">Privacy</a>
+            <%= link_to privacy_path do %>Privacy<% end %>
           </li>
           <li>
             <a href="#">Contact</a>
