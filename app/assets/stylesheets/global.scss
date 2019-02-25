@@ -24,6 +24,15 @@ body {
     font-size: 1.15rem;
   }
 
+  a {
+    color: $pink;
+    transition: 0.4s;
+
+    &:hover {
+      color: $purple;
+    }
+  }
+
   img {
     user-drag: none;
     user-select: none;

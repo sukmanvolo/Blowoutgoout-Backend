@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'stylists', to: 'pages#stylists'
   get 'faq', to: 'pages#faq'
   get 'privacy', to: 'pages#privacy'
+  get 'terms', to: 'pages#terms'
   get 'about-us', to: 'pages#about_us'
 
 

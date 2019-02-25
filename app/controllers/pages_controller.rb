@@ -9,6 +9,8 @@ class PagesController < ApplicationController
 
   def privacy; end
 
+  def terms; end
+
   def about_us; end
 
   def contact_us; end
