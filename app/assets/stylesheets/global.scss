@@ -55,4 +55,14 @@ body {
   .is-gray {
     color: #a5a5a5;
   }
+
+  //Modal
+  .modal-background {
+    background-color: rgba(255, 255, 255, 0.94);
+  }
+
+  .modal-close {
+    background: $pink;
+    transition: 0.4s;
+  }
 }
