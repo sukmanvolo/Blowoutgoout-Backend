@@ -17,8 +17,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-gem 'simple_command'
-gem 'jwt'
+gem 'simple_command', '0.0.9'
+gem 'jwt', '1.5.6'
 gem 'rolify'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bulma-extensions-rails'
@@ -29,6 +29,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'omniauth-facebook'
 gem 'pundit', '2.0.1'
+gem 'geokit-rails', '2.3.1'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

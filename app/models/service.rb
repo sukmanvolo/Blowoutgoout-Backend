@@ -1,7 +1,7 @@
 class Service < ApplicationRecord
   # relantionships
   belongs_to :service_type
-  belongs_to :stytlist
+  belongs_to :stylist
 
   # validations
   validates :name, presence: true

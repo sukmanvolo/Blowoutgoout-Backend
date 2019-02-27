@@ -12,7 +12,7 @@ module Api::V1
     def create
       @service_type = ServiceType.new(service_type_params)
       authorize @service_type
-      @service_type.save!(service_type_params)
+      @service_type.save!
       json_response(@service_type, :created)
     end
 

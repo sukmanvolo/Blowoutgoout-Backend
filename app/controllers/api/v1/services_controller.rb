@@ -12,7 +12,7 @@ module Api::V1
     def create
       @service = Service.new(service_params)
       authorize @service
-      @service = @service.save!
+      @service.save!
       json_response(@service, :created)
     end
 
@@ -35,11 +35,19 @@ module Api::V1
       head :no_content
     end
 
+    # GET /services/nearest_services
+    def nearest_services
+      @services = FilterNearestServices.call(params[:lat],
+                                             params[:long],
+                                             params[:service_type_id]).result
+      json_response(@services)
+    end
+
     private
 
     def service_params
-      params.require(:services).permit(:name, :service_type, :status, :service_type_id,
-                                       :stylist_id, :amount, :service_id)
+      params.require(:services).permit(:name, :service_type, :status,
+                                       :service_type_id, :stylist_id, :amount)
     end
 
     def set_service

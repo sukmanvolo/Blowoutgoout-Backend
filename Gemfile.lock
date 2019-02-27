@@ -91,6 +91,10 @@ GEM
     ffi (1.9.25)
     font-awesome-sass (5.5.0.1)
       sassc (>= 1.11)
+    geokit (1.13.1)
+    geokit-rails (2.3.1)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
@@ -244,8 +248,9 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   font-awesome-sass (~> 5.5.0)
+  geokit-rails (= 2.3.1)
   jbuilder (~> 2.5)
-  jwt
+  jwt (= 1.5.6)
   listen (>= 3.0.5, < 3.2)
   omniauth-facebook
   pg
@@ -256,7 +261,7 @@ DEPENDENCIES
   rolify
   sass-rails (~> 5.0)
   selenium-webdriver
-  simple_command
+  simple_command (= 0.0.9)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
