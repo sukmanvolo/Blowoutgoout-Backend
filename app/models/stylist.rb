@@ -5,6 +5,7 @@ class Stylist < ApplicationRecord
 
   # relantionships
   has_many :services
+  has_many :schedules
 
   # emun welcome_kit: [] ask for values
   enum service_type: [:hair, :makeup, :hair_and_makeup]

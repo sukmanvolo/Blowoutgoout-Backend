@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030568) do
+ActiveRecord::Schema.define(version: 2019_12_18_030571) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "availabilities", force: :cascade do |t|
+    t.bigint "schedule_id"
+    t.time "time_from"
+    t.time "time_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedule_id"], name: "index_availabilities_on_schedule_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "stylist_id"
+    t.bigint "service_id"
+    t.time "time_from"
+    t.time "time_to"
+    t.decimal "fee", default: "0.0"
+    t.decimal "service_lat"
+    t.decimal "service_long"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_bookings_on_client_id"
+    t.index ["service_id"], name: "index_bookings_on_service_id"
+    t.index ["stylist_id"], name: "index_bookings_on_stylist_id"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string "first_name"
@@ -34,6 +60,16 @@ ActiveRecord::Schema.define(version: 2019_12_18_030568) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.bigint "stylist_id"
+    t.bigint "service_type_id"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_type_id"], name: "index_schedules_on_service_type_id"
+    t.index ["stylist_id"], name: "index_schedules_on_stylist_id"
   end
 
   create_table "service_types", force: :cascade do |t|
@@ -105,6 +141,12 @@ ActiveRecord::Schema.define(version: 2019_12_18_030568) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "availabilities", "schedules"
+  add_foreign_key "bookings", "clients"
+  add_foreign_key "bookings", "services"
+  add_foreign_key "bookings", "stylists"
+  add_foreign_key "schedules", "service_types"
+  add_foreign_key "schedules", "stylists"
   add_foreign_key "services", "service_types"
   add_foreign_key "services", "stylists"
 end
