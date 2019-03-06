@@ -1,5 +1,6 @@
 class Stylist < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
+  has_one_attached :image
 
   validates :first_name, presence: true
 
