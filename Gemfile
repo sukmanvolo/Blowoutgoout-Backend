@@ -30,6 +30,8 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'omniauth-facebook'
 gem 'pundit', '2.0.1'
 gem 'geokit-rails', '2.3.1'
+gem "aws-sdk-s3", '1.9.1', require: false
+gem 'image_processing', '1.8.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
