@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       end
       resources :service_types
       resources :schedules
+      resources :availabilities
     end
   end
 end
