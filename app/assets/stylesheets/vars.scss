@@ -1,5 +1,6 @@
 // Example variables
-// $primary: #2B90C7;
+$pink: #ED1E74;
+$purple: #8748AB;
 // $blue: $primary;
 // $primary-background: #273642;
 // $light-background: #36444F;
@@ -14,3 +15,11 @@
 // $twitter: #568EDF;
 // $phone: #6BA323;
 // $family-sans-serif: Roboto, BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+
+// Setting ranges for breakpoint media queries
+$mobile-bp: 0px 768px;
+$tablet-bp: 769px 1023px;
+$desktop-bp: 1024px 1215px;
+$widescreen-bp: 1216px 1407px;
+$fullhd-bp: 1408px;
