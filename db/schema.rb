@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030573) do
+ActiveRecord::Schema.define(version: 2019_12_18_030575) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,25 @@ ActiveRecord::Schema.define(version: 2019_12_18_030573) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "stylist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_favorites_on_client_id"
+    t.index ["stylist_id"], name: "index_favorites_on_stylist_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "text"
+    t.float "rate", default: 0.0
+    t.bigint "stylist_id"
+    t.integer "status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stylist_id"], name: "index_reviews_on_stylist_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -167,6 +186,9 @@ ActiveRecord::Schema.define(version: 2019_12_18_030573) do
   add_foreign_key "bookings", "clients"
   add_foreign_key "bookings", "services"
   add_foreign_key "bookings", "stylists"
+  add_foreign_key "favorites", "clients"
+  add_foreign_key "favorites", "stylists"
+  add_foreign_key "reviews", "stylists"
   add_foreign_key "schedules", "service_types"
   add_foreign_key "schedules", "stylists"
   add_foreign_key "services", "service_types"

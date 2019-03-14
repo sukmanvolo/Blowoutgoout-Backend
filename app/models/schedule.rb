@@ -1,6 +1,7 @@
 class Schedule < ApplicationRecord
   belongs_to :stylist
   belongs_to :service_type
+  has_many :availabilities
 
   validates :date, presence: true
 

@@ -20,7 +20,11 @@ Rails.application.routes.draw do
       post 'clients/signup', to: 'clients_signup#create'
       post 'stylists/signup', to: 'stylists_signup#create'
       resources :clients
-      resources :stylists
+      resources :stylists do
+        collection do
+          get 'nearest_stylists', to: 'stylists#nearest_stylists'
+        end
+      end
       resources :services do
         collection do
           get 'nearest_services', to: 'services#nearest_services'
@@ -29,6 +33,7 @@ Rails.application.routes.draw do
       resources :service_types
       resources :schedules
       resources :availabilities
+      resources :favorites
     end
   end
 end

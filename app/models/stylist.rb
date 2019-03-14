@@ -7,6 +7,8 @@ class Stylist < ApplicationRecord
   # relantionships
   has_many :services
   has_many :schedules
+  has_many :reviews
+  has_many :favorites, dependent: :destroy
 
   # emun welcome_kit: [] ask for values
   enum service_type: [:hair, :makeup, :hair_and_makeup]
@@ -20,6 +22,8 @@ class Stylist < ApplicationRecord
                    :lat_column_name => :lat,
                    :lng_column_name => :long
 
-  scope :actives, -> { joins(:user).where( users: { status: :active } )}
+  DISTANCE = 20
 
+  scope :actives, -> { joins(:user).where( users: { status: :active } )}
+  scope :nearest_stylists, ->(lat, long) { actives.within(DISTANCE, origin: [lat, long]) }
 end
