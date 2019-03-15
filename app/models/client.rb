@@ -9,6 +9,8 @@ class Client < ApplicationRecord
 
   accepts_nested_attributes_for :user
 
+  validates :image, presence: true, blob: { content_type: :image }
+
   delegate :first_name, :last_name, :phone, to: :user, prefix: false
 
   def image_attached?

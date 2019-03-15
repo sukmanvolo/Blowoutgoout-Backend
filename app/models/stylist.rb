@@ -1,6 +1,9 @@
 class Stylist < ApplicationRecord
   belongs_to :user, dependent: :destroy
   has_one_attached :image
+  has_one_attached :cosmetology_license
+  has_one_attached :liability_insurance
+  has_one_attached :eligibility_document
 
   # relantionships
   has_many :services
@@ -22,6 +25,11 @@ class Stylist < ApplicationRecord
                    :lat_column_name => :lat,
                    :lng_column_name => :long
 
+  validates :image, presence: true, blob: { content_type: :image }
+  validates :cosmetology_license, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
+  validates :liability_insurance, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
+  validates :eligibility_document, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
+
   DISTANCE = 20
 
   scope :actives, -> { joins(:user).where( users: { status: :active } )}
@@ -31,4 +39,17 @@ class Stylist < ApplicationRecord
   def image_attached?
     image.attached?
   end
+
+  def cosmetology_license_attached?
+    cosmetology_license.attached?
+  end
+
+  def liability_insurance_attached?
+    liability_insurance.attached?
+  end
+
+  def eligibility_document_attached?
+    eligibility_document.attached?
+  end
+
 end
