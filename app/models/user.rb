@@ -4,10 +4,10 @@ class User < ApplicationRecord
 
   # validations
   validates :password, presence: true, on: :create
-  # validates :gcm_id, :device_type, :device_id, presence: true
   validates :role, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, uniqueness: { scope: :role }
+  validates :first_name, presence: true
 
   # relantionships
   has_many :user_services, -> { order(date: :asc) }

@@ -45,8 +45,13 @@ module Api::V1
     private
 
     def stylist_params
-      params.require(:stylists).permit(:name, :service_type, :status, :first_name,
-                                       :last_name, :description, :phone, :welcome_kit,
+      params.require(:stylists).permit(:years_of_experience, :license_agreement,
+                                       :has_smartphone, :has_transportation,
+                                       :portfolio_link, :is_eligible_to_work_in_us,
+                                       :previous_contractor_date, :has_conviction,
+                                       :agrees_to_unemployment_understanding,
+                                       :agrees_to_taxation_understanding,
+                                       :status, :description, :welcome_kit,
                                        :lat, :long, :user_id, :radius)
     end
 

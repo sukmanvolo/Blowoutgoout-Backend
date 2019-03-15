@@ -11,10 +11,12 @@ module Api::V1
     private
 
     def client_params
-      params.require(:clients).permit(:first_name, :last_name, :phone,:facebook_id,
-                                      :user_id, :image, user_attributes: [
-                                      :id, :email, :password, :role, :gcm_id,
-                                      :device_type, :device_id])
+      params.require(:clients).permit(:facebook_id, :user_id, :image,
+                                      user_attributes: [
+                                        :first_name, :last_name, :phone,
+                                        :id, :email, :password, :role, :gcm_id,
+                                        :device_type, :device_id]
+                                      )
     end
   end
 end

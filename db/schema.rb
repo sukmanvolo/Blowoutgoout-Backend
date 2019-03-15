@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030575) do
+ActiveRecord::Schema.define(version: 2019_12_18_030580) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,13 +64,11 @@ ActiveRecord::Schema.define(version: 2019_12_18_030575) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone"
     t.string "facebook_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
@@ -133,10 +131,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030575) do
   end
 
   create_table "stylists", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
     t.text "description"
-    t.string "phone"
     t.integer "welcome_kit", default: 0
     t.integer "service_type", default: 1
     t.integer "register_by"
@@ -146,6 +141,16 @@ ActiveRecord::Schema.define(version: 2019_12_18_030575) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "years_of_experience", default: 0
+    t.boolean "license_agreement"
+    t.integer "has_smartphone", default: 0
+    t.boolean "has_transportation"
+    t.string "portfolio_link"
+    t.boolean "is_eligible_to_work_in_us", default: false
+    t.date "previous_contractor_date"
+    t.boolean "has_conviction"
+    t.boolean "agrees_to_unemployment_understanding"
+    t.boolean "agrees_to_taxation_understanding"
     t.index ["user_id"], name: "index_stylists_on_user_id"
   end
 
@@ -172,6 +177,13 @@ ActiveRecord::Schema.define(version: 2019_12_18_030575) do
     t.string "device_type"
     t.string "device_id"
     t.integer "status", default: 1
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "postal_code"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
