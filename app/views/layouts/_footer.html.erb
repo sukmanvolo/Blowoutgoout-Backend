@@ -1,0 +1,72 @@
+<footer class="footer">
+  <div class="content has-text-centered">
+    <div class="logo-b">
+      <%= link_to root_path do %>
+      <%= image_tag 'logo-b.svg' %>
+      <% end %>
+    </div>
+    <nav class="footer-nav">
+      <div class="footer-links">
+        <ul>
+          <li>
+            <%= link_to stylists_path do %>Stylists<% end %>
+          </li>
+          <li>
+            <%= link_to faq_path do %>FAQs<% end %>
+          </li>
+          <li>
+            <%= link_to terms_path do %>Terms<% end %>
+          </li>
+          <li>
+            <%= link_to privacy_path do %>Privacy<% end %>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-social-links">
+        <ul>
+          <li>
+            <a href="#">
+              <%= image_tag 'icon-facebook.svg' %>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <%= image_tag 'icon-instagram.svg' %>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <%= image_tag 'icon-twitter.svg' %>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <%= image_tag 'icon-pinterest.svg' %>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-app-links">
+        <ul>
+          <li>
+            <a href="#">
+              <%= image_tag 'app-store-badge.png' %>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <%= image_tag 'google-play-badge.png' %>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="small-print">
+        ©<%= (Time.new).year %> Blow Out Go Out. Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries.
+        Mac App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google Inc.
+      </div>
+    </nav>
+  </div>
+</footer>

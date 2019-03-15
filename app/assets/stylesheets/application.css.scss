@@ -15,9 +15,19 @@
 
  // Variables like site colors, etc...
 @import "vars";
+@import "breakpoint";
 @import "bulma";
 @import 'bulma-extensions';
 
 
 // Global styles
 @import "global";
+@import "header";
+@import "footer";
+
+// Page styles
+@import "pages/home";
+@import "pages/stylists";
+@import "pages/faq";
+@import "pages/privacy";
+@import "pages/terms";

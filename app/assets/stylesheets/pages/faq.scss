@@ -1,0 +1,15 @@
+.faq-page {
+  padding: 6vw;
+
+  h1 {
+    @include breakpoint($mobile-bp) {
+      line-height: 1em;
+    }
+  }
+
+  h3 {
+    font-weight: bold;
+    color: $purple;
+    padding-bottom: 0.4em;
+  }
+}

@@ -1,1 +1,69 @@
-Home Page
+<section class="hero is-medium is-primary bg-home-hero">
+  <div class="bg-hero-body">
+    <div class="container has-text-centered bg-container">
+      <h1 class="title is-size-2 is-uppercase bg-hero-title">
+        Beauty on Demand
+      </h1>
+      <h3 class="subtitle is-size-4 bg-hero-subtitle">
+        Get quick access to blowouts at home, at work, and everywhere you travel.
+      </h3>
+      <div class="buttons is-centered">
+        <span class="button is-large is-pink">Get the App</span>
+      </div>
+      <p class="stylist-cta">Want to begin earning money as one of our stylists? <%= link_to stylists_path do %>Click here<% end %></p>
+    </div>
+  </div>
+</section>
+
+<section class="section below-hero">
+  <div class="container is-fluid bg-shadow-container">
+    <h2 class="title has-text-centered is-pink bg-bh-title">Our Services</h2>
+    <h3 class="subtitle has-text-centered bg-bh-subtitle">
+      Top Rated Stylists – Elite Level Service – Amazing App
+    </h3>
+    <div class="columns is-vcentered">
+      <div class="column is-5">
+        <p>Book an appointment with a top rated stylist and receive service in as little as 30 minutes wherever you are!</p>
+        <h3 class="download-cta is-size-5 is-purple has-text-weight-bold">Download the app today!</h3>
+        <div class="app-links">
+          <ul>
+            <li>
+              <a href="#">
+                <%= image_tag 'app-store-badge.png' %>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <%= image_tag 'google-play-badge.png' %>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="column is-6 is-offset-1 has-text-centered">
+        <%= image_tag 'iphone-placeholder.png' %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section stylist-section">
+  <div class="container is-fluid">
+    <h2 class="title has-text-centered is-purple bg-bh-title">Meet a few of our stylists</h2>
+    <div class="columns is-vcentered">
+      <div class="column is-6 has-text-centered stylist-img">
+        <%= image_tag 'stylist-profile-images.png' %>
+      </div>
+      <div class="column is-5">
+        <p>Our stylists have all been vetted and hand selected through a process of interviews, background checks and qualification assessments.
+          We only partner with the best of the best "nationwide" to ensure optimal results and a wonderful experience wherever you are.</p>
+        <h3 class="stylist-cta is-size-5 is-pink has-text-weight-bold">You have the skills to be one of our stylists?</h3>
+        <div class="stylist-cta">
+          <%= link_to stylists_path do %>
+          <span class="button is-large is-purple ghost-btn">Become a Stylist</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
