@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030580) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "stripe_id"
+    t.string "customer_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 

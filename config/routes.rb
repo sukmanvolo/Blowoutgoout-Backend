@@ -39,6 +39,12 @@ Rails.application.routes.draw do
       resources :schedules
       resources :availabilities
       resources :favorites
+      resources :bookings do
+        member do
+          put 'confirm'
+          put 'reject'
+        end
+      end
     end
   end
 end

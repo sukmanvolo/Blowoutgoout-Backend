@@ -25,10 +25,10 @@ class Stylist < ApplicationRecord
                    :lat_column_name => :lat,
                    :lng_column_name => :long
 
-  validates :image, presence: true, blob: { content_type: :image }
-  validates :cosmetology_license, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
-  validates :liability_insurance, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
-  validates :eligibility_document, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
+  validates :image, presence: false, blob: { content_type: :image }
+  validates :cosmetology_license, presence: false, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
+  validates :liability_insurance, presence: false, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
+  validates :eligibility_document, presence: false, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
 
   DISTANCE = 20
 

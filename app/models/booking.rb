@@ -1,9 +1,17 @@
 class Booking < ApplicationRecord
   belongs_to :client
-  belongs_to :stytlist
+  belongs_to :stylist
   belongs_to :service
-  belongs_to :card
+
+  before_create :check_status_default
 
   # enum
-  enum status: [:confirm, :complete, :cancel, :start]
+  enum status: [:confirmed, :completed, :rejected, :pending]
+
+  private
+
+  def check_status_default
+    return unless self.status.nil?
+    self.status = 'pending'
+  end
 end
