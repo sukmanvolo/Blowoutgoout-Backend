@@ -5,7 +5,7 @@ class Service < ApplicationRecord
   has_one_attached :image
 
   # validations
-  validates :name, presence: true
+  validates :name, :amount, presence: true
 
   # enum
   enum status: [:inactive, :active]

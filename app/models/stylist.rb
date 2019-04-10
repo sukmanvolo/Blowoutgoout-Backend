@@ -36,6 +36,10 @@ class Stylist < ApplicationRecord
   scope :nearest_stylists, ->(lat, long) { actives.within(DISTANCE, origin: [lat, long]) }
   delegate :first_name, :last_name, :phone, to: :user, prefix: false
 
+  def full_name
+    [last_name, first_name].join(' ')
+  end
+
   def image_attached?
     image.attached?
   end

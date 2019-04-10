@@ -1,4 +1,4 @@
-class FavoritePolicy < ApplicationPolicy
+class ClientPolicy < ApplicationPolicy
 
   def create?
     user.admin? || user.client?

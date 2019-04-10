@@ -35,6 +35,7 @@ gem 'geokit-rails', '2.3.1'
 gem "aws-sdk-s3", '1.9.1', require: false
 gem 'image_processing', '1.8.0'
 gem 'activestorage-validator', '0.1.2'
+gem 'stripe'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
