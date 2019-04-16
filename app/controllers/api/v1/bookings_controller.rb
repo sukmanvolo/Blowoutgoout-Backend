@@ -26,7 +26,7 @@ module Api::V1
       authorize @booking
       @booking.attributes = booking_params
       if UpdateBooking.call(@booking).result
-        json_response(@booking, status: :accepted)
+        json_response(@booking, :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)
       end
@@ -61,15 +61,33 @@ module Api::V1
       end
     end
 
+    # PUT /bookings/upcoming_appointments
+    def upcoming_appointments
+      @bookings = Booking.confirmed
+      @bookings = @bookings.by_client(client_id) if client_id
+      @bookings = @bookings.by_stylist(stylist_id) if stylist_id
+      @bookings = @bookings.upcoming
+      json_response(@bookings)
+    end
+
     private
 
     def booking_params
-      params.require(:bookings).permit(:client_id, :stylist_id, :service_id, :time_from,
-                                      :time_to, :fee, :service_lat, :service_long, :status)
+      params.require(:bookings).permit(:client_id, :stylist_id, :service_id,
+                                       :time_from, :time_to, :fee, :service_lat,
+                                       :service_long, :date, :status)
     end
 
     def set_booking
-      @booking = Booking.find(params[:id])
+      @booking = Booking.find_by_id(params[:id])
+    end
+
+    def client_id
+      params[:bookings][:client_id]
+    end
+
+    def stylist_id
+      params[:bookings][:stylist_id]
     end
   end
 end

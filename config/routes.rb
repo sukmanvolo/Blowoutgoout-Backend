@@ -44,8 +44,12 @@ Rails.application.routes.draw do
           put 'confirm'
           put 'reject'
         end
+        collection do
+          get 'upcoming_appointments', to: 'bookings#upcoming_appointments'
+        end
       end
       resources :payments
+      resources :messages
     end
   end
 end

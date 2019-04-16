@@ -44,7 +44,7 @@ module Api::V1
     end
 
     def set_availability
-      @availability = Availability.find(params[:id])
+      @availability = Availability.find_by_id(params[:id])
     end
 
     def set_data_params

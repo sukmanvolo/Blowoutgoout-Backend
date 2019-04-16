@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030581) do
+ActiveRecord::Schema.define(version: 2019_12_18_030583) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030581) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date"
     t.index ["client_id"], name: "index_bookings_on_client_id"
     t.index ["service_id"], name: "index_bookings_on_service_id"
     t.index ["stylist_id"], name: "index_bookings_on_stylist_id"
@@ -79,6 +80,19 @@ ActiveRecord::Schema.define(version: 2019_12_18_030581) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_favorites_on_client_id"
     t.index ["stylist_id"], name: "index_favorites_on_stylist_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "booking_id"
+    t.bigint "client_id"
+    t.bigint "stylist_id"
+    t.text "text"
+    t.integer "status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_messages_on_booking_id"
+    t.index ["client_id"], name: "index_messages_on_client_id"
+    t.index ["stylist_id"], name: "index_messages_on_stylist_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -213,6 +227,9 @@ ActiveRecord::Schema.define(version: 2019_12_18_030581) do
   add_foreign_key "bookings", "stylists"
   add_foreign_key "favorites", "clients"
   add_foreign_key "favorites", "stylists"
+  add_foreign_key "messages", "bookings"
+  add_foreign_key "messages", "clients"
+  add_foreign_key "messages", "stylists"
   add_foreign_key "payments", "bookings"
   add_foreign_key "reviews", "stylists"
   add_foreign_key "schedules", "service_types"

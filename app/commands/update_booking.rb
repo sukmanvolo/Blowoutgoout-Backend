@@ -17,7 +17,7 @@ class UpdateBooking
         # TODO: send push notification.
         booking.status = 'pending'
       end
-      booking.errors.empty? && booking.save
     end
+    booking.errors.empty? && booking.save
   end
 end

@@ -1,11 +1,11 @@
 class Stylist < ApplicationRecord
-  belongs_to :user, dependent: :destroy
   has_one_attached :image
   has_one_attached :cosmetology_license
   has_one_attached :liability_insurance
   has_one_attached :eligibility_document
 
   # relantionships
+  belongs_to :user, dependent: :destroy
   has_many :services
   has_many :schedules
   has_many :reviews
