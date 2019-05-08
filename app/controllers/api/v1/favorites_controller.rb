@@ -5,6 +5,8 @@ module Api::V1
     # GET /stylists
     def index
       @favorites = Favorite.all
+      @favorites = @favorites.by_client(client) if client
+      @favorites = Stylist.where(id: @favorites.pluck(:stylist_id))
       json_response(@favorites)
     end
 
@@ -30,7 +32,12 @@ module Api::V1
     end
 
     def set_favorite
-      @favorite = Favorite.find(params[:id])
+      @favorite = Favorite.find_by_id(params[:id])
+    end
+
+    def client
+      id = params[:favorites] && params[:favorites][:client_id]
+      @client ||= Client.find_by_id(id)
     end
   end
 end

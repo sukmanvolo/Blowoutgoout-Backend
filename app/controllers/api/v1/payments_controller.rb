@@ -4,7 +4,7 @@ module Api::V1
 
     # GET payments
     def index
-      @payments = Payments.all
+      @payments = Payment.all
       json_response(@payments)
     end
 

@@ -63,10 +63,15 @@ module Api::V1
 
     # PUT /bookings/upcoming_appointments
     def upcoming_appointments
-      @bookings = Booking.confirmed
-      @bookings = @bookings.by_client(client_id) if client_id
+      @bookings = Booking.by_client(client_id) if client_id
       @bookings = @bookings.by_stylist(stylist_id) if stylist_id
       @bookings = @bookings.upcoming
+      json_response(@bookings)
+    end
+
+    def past_appointments
+      @bookings = Booking.by_client(client_id) if client_id
+      @bookings = @bookings.past
       json_response(@bookings)
     end
 
@@ -83,11 +88,11 @@ module Api::V1
     end
 
     def client_id
-      params[:bookings][:client_id]
+      params[:bookings] && params[:bookings][:client_id]
     end
 
     def stylist_id
-      params[:bookings][:stylist_id]
+      params[:bookings] && params[:bookings][:stylist_id]
     end
   end
 end

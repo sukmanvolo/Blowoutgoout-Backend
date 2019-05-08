@@ -16,8 +16,4 @@ class Client < ApplicationRecord
   def image_attached?
     image.attached?
   end
-
-  def full_name
-    [last_name, first_name].join(' ')
-  end
 end

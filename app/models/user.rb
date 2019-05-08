@@ -39,6 +39,10 @@ class User < ApplicationRecord
    save!
   end
 
+  def full_name
+    [last_name, first_name].join(' ')
+  end
+
   private
 
   def generate_token

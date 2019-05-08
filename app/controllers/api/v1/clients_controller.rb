@@ -24,8 +24,11 @@ module Api::V1
     # PUT /clients/:id
     def update
       authorize @client
-      @client.update(client_params)
-      head :no_content
+      if @client.update(client_params)
+        json_response(@client, :accepted)
+      else
+        json_response(@client.errors.messages, :unprocessable_entity)
+      end
     end
 
     # DELETE /clients/:id

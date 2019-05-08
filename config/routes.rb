@@ -46,10 +46,13 @@ Rails.application.routes.draw do
         end
         collection do
           get 'upcoming_appointments', to: 'bookings#upcoming_appointments'
+          get 'past_appointments', to: 'bookings#past_appointments'
         end
       end
       resources :payments
       resources :messages
+      resources :cards
+      resources :contacts, only: [:create]
     end
   end
 end

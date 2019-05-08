@@ -12,9 +12,9 @@ module Api::V1
 
       if user.present?
         user.generate_password_token!
-        render json: {status: 'ok'}, status: :ok
+        render json: { status: 'ok' }, status: :ok
       else
-        render json: {error: ['Email address not found. Please check and try again.']}, status: :not_found
+        render json: { error: ['Email address not found. Please check and try again.'] }, status: :not_found
       end
     end
 
