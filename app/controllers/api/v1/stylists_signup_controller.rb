@@ -4,8 +4,14 @@ module Api::V1
     include ::Api::ExceptionHandler
 
     def create
-      @stylist = Stylist.create!(stylist_params)
-      json_response(@stylist, :created)
+      @stylist = Stylist.new(stylist_params)
+      @stylist.user.role = 'stylist'
+      if @stylist.save
+        CreateNotification.call(@stylist.user, notification_message)
+        json_response(@stylist, :created)
+      else
+        json_response(@stylist.errors.messages, :unprocessable_entity)
+      end
     end
 
     private
@@ -20,6 +26,10 @@ module Api::V1
                                        :image, user_attributes: [:id, :first_name, :last_name,
                                        :phone,:email, :password, :role, :gcm_id, :device_type,
                                        :device_id, :status])
+    end
+
+    def notification_message
+      "Your stylist account was created sucessfully!"
     end
   end
 end

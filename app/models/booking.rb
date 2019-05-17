@@ -14,7 +14,7 @@ class Booking < ApplicationRecord
   scope :upcoming, -> { where(status: 'confirmed', date: Date.today..3.days.from_now) }
   scope :past, -> { where(status: ['confirmed', 'completed']).where('date < ?',  Date.today) }
 
-  delegate :amount, to: :service, prefix: true
+  delegate :amount, :name, to: :service, prefix: true
   delegate :customer_id, to: :client, prefix: true
 
   private

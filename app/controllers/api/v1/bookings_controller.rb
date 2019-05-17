@@ -55,6 +55,7 @@ module Api::V1
       authorize @booking
       @booking.status = 'rejected'
       if ChangeBookingStatus.call(@booking).result
+        CreateNotification.call(current_user, cancel_notification)
         json_response(@booking, status: :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)
@@ -93,6 +94,12 @@ module Api::V1
 
     def stylist_id
       params[:bookings] && params[:bookings][:stylist_id]
+    end
+
+    def cancel_notification
+      "Your booking for the service #{@booking.service_name} " \
+      "on #{@booking.date} at #{@booking.time_from.strftime('%m-%d-%Y %H:%M')} " \
+      "has been canceled"
     end
   end
 end

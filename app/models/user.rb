@@ -1,27 +1,22 @@
 class User < ApplicationRecord
   has_secure_password
-  rolify
 
   # validations
-  validates :password, presence: true, on: :create
-  validates :role, presence: true
+  validates :password, presence: true, on: :create, allow_nil: true
+  validates :role, presence: true, on: :create
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, uniqueness: { scope: :role }
   validates :first_name, presence: true
 
-  # relantionships
-  has_many :user_services, -> { order(date: :asc) }
-  has_many :services, through: :user_services
-
   has_one :client, inverse_of: :user, dependent: :destroy
   has_one :stylist, inverse_of: :user, dependent: :destroy
+  has_many :notifications
 
   # enum
   enum role: [:client, :stylist, :admin]
   enum status: [:inactive, :active]
 
   # callbacks
-  after_create :assign_default_role
 
   def generate_password_token!
    self.reset_password_token = generate_token
@@ -47,9 +42,5 @@ class User < ApplicationRecord
 
   def generate_token
     SecureRandom.hex(10)
-  end
-
-  def assign_default_role
-    self.add_role(:regular) if self.roles.blank?
   end
 end
