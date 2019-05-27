@@ -11,6 +11,6 @@ class PaymentSerializer < ActiveModel::Serializer
   end
 
   def appointment_date
-    object.service.name
+    object.booking.date && object.booking.date.strftime('%m-%d-%Y %H:%M')
   end
 end
