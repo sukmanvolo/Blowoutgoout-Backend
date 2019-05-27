@@ -65,7 +65,7 @@ module Api::V1
     # PUT /bookings/upcoming_appointments
     def upcoming_appointments
       @bookings = Booking.by_client(client_id) if client_id
-      @bookings = @bookings.by_stylist(stylist_id) if stylist_id
+      @bookings = Booking.by_stylist(stylist_id) if stylist_id
       @bookings = @bookings.upcoming
       json_response(@bookings)
     end

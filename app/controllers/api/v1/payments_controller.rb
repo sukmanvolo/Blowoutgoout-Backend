@@ -4,7 +4,8 @@ module Api::V1
 
     # GET payments
     def index
-      @payments = Payment.all
+      @payments = []
+      @payments = Payment.by_stylist(stylist) if stylist
       json_response(@payments)
     end
 
@@ -39,7 +40,7 @@ module Api::V1
       json_response(@payment)
     end
 
-    # PUT payments/:id
+    # PUT payments/:customer_id
     def update
       authorize @payment
       @payment.update(payment_params)
@@ -68,11 +69,16 @@ module Api::V1
     end
 
     def booking
+      return nil unless params[:payments]
       @booking ||= Booking.confirmed.find_by_id(params[:payments][:booking_id])
     end
 
     def customer_id
       @customer_id ||= booking&.client_customer_id
+    end
+
+    def stylist
+      params[:payments] && params[:payments][:stylist_id]
     end
   end
 end
