@@ -44,6 +44,7 @@ module Api::V1
       authorize @booking
       @booking.status = 'confirmed'
       if ChangeBookingStatus.call(@booking).result
+        availability.update(status: 'used')
         json_response(@booking, status: :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)
@@ -55,6 +56,7 @@ module Api::V1
       authorize @booking
       @booking.status = 'rejected'
       if ChangeBookingStatus.call(@booking).result
+        availability.update(status: 'free')
         CreateNotification.call(current_user, cancel_notification)
         json_response(@booking, status: :accepted)
       else
@@ -81,7 +83,8 @@ module Api::V1
     def booking_params
       params.require(:bookings).permit(:client_id, :stylist_id, :service_id,
                                        :time_from, :time_to, :fee, :service_lat,
-                                       :service_long, :date, :status)
+                                       :service_long, :date, :status, :availability_id
+                                       :availability_id)
     end
 
     def set_booking
@@ -100,6 +103,10 @@ module Api::V1
       "Your booking for the service #{@booking.service_name} " \
       "on #{@booking.date} at #{@booking.time_from.strftime('%m-%d-%Y %H:%M')} " \
       "has been canceled"
+    end
+
+    def availability
+      Availability.find_by_id(@booking.availability_id)
     end
   end
 end

@@ -1,8 +1,12 @@
 class Availability < ApplicationRecord
   belongs_to :schedule
+  has_one :booking
 
   # enum
-  enum status: [:free, :used]
+  enum status: [:free, :reserved, :used]
 
-  scope :free, -> { where(status: :free ) }
+
+  def can_delete?
+    schedule.date != Date.today && schedule.date != Date.today + 1
+  end
 end

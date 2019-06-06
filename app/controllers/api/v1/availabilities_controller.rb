@@ -5,8 +5,8 @@ module Api::V1
 
     # GET /availabilities
     def index
-      @availabilities = Availability.free
-      @availabilities = @schedule.availabilities.free if @schedule
+      @availabilities =
+      @availabilities = @schedule.availabilities if @schedule
       json_response(@availabilities)
     end
 
@@ -33,8 +33,12 @@ module Api::V1
     # DELETE /availabilities/:id
     def destroy
       authorize @availability
-      @availability.destroy
-      head :no_content
+      if @availability.can_delete?
+        @availability.destroy
+        head :no_content
+      else
+        render json: { error: ['You can not remove current and next day schedules'] }, status: :unprocessable_entity
+      end
     end
 
     private

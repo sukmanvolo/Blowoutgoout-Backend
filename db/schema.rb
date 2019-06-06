@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030584) do
+ActiveRecord::Schema.define(version: 2019_12_18_030586) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 2019_12_18_030584) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
+    t.bigint "availability_id"
+    t.index ["availability_id"], name: "index_bookings_on_availability_id"
     t.index ["client_id"], name: "index_bookings_on_client_id"
     t.index ["service_id"], name: "index_bookings_on_service_id"
     t.index ["stylist_id"], name: "index_bookings_on_stylist_id"
@@ -139,11 +141,11 @@ ActiveRecord::Schema.define(version: 2019_12_18_030584) do
 
   create_table "schedules", force: :cascade do |t|
     t.bigint "stylist_id"
-    t.bigint "service_type_id"
+    t.bigint "service_id"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["service_type_id"], name: "index_schedules_on_service_type_id"
+    t.index ["service_id"], name: "index_schedules_on_service_id"
     t.index ["stylist_id"], name: "index_schedules_on_stylist_id"
   end
 
@@ -241,7 +243,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030584) do
   add_foreign_key "messages", "stylists"
   add_foreign_key "payments", "bookings"
   add_foreign_key "reviews", "stylists"
-  add_foreign_key "schedules", "service_types"
+  add_foreign_key "schedules", "service_types", column: "service_id"
   add_foreign_key "schedules", "stylists"
   add_foreign_key "services", "service_types"
   add_foreign_key "services", "stylists"

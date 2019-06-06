@@ -3,6 +3,7 @@ class Booking < ApplicationRecord
   belongs_to :stylist
   belongs_to :service
   has_many :messages
+  belongs_to :availibility
 
   before_create :check_status_default
 

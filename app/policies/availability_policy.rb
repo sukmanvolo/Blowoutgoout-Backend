@@ -1,4 +1,4 @@
-class ServicePolicy < ApplicationPolicy
+class AvailabilityPolicy < ApplicationPolicy
 
   def create?
     user.admin? || user.stylist?

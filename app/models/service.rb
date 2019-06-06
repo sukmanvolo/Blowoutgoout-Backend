@@ -1,8 +1,9 @@
 class Service < ApplicationRecord
-  # relantionships
+  has_one_attached :image
+
   belongs_to :service_type
   belongs_to :stylist
-  has_one_attached :image
+  has_many :schedules
 
   # validations
   validates :name, :amount, presence: true
