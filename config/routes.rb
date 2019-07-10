@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       resources :messages
       resources :cards
       resources :contacts, only: [:create]
+      resources :reviews
     end
   end
 end

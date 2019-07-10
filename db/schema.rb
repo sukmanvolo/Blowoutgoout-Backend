@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030586) do
+ActiveRecord::Schema.define(version: 2019_12_18_030587) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,8 @@ ActiveRecord::Schema.define(version: 2019_12_18_030586) do
     t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "client_id"
+    t.index ["client_id"], name: "index_reviews_on_client_id"
     t.index ["stylist_id"], name: "index_reviews_on_stylist_id"
   end
 
@@ -242,6 +244,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030586) do
   add_foreign_key "messages", "clients"
   add_foreign_key "messages", "stylists"
   add_foreign_key "payments", "bookings"
+  add_foreign_key "reviews", "clients"
   add_foreign_key "reviews", "stylists"
   add_foreign_key "schedules", "service_types", column: "service_id"
   add_foreign_key "schedules", "stylists"
