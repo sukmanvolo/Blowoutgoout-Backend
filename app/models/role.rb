@@ -11,5 +11,5 @@ belongs_to :resource,
 #           :inclusion => { :in => Rolify.resource_types },
 #           :allow_nil => true
 
-scopify
+# scopify
 end
