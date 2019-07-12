@@ -1,0 +1,205 @@
+<div class="container">
+
+  <%= form_with(model: @stylist, local: true, url: wizard_path, method: :put) do |form| %>
+
+  <div class="file">
+    <label class="file-label">
+      <%= form.file_field :image, class: 'file-input', accept: 'image/png,image/jpg,image/jpeg', required: true %>
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+          Upload a profile image…
+        </span>
+      </span>
+    </label>
+  </div>
+
+  <div class="field">
+    <label class="label">Years of Experience:</label>
+    <div class="control">
+      <div class="select">
+        <%= form.select( :years_of_experience, options_for_select( Stylist.years_of_experiences.map{ |k, v| [k.humanize.capitalize, v]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Services Offered:</label>
+    <div class="control">
+      <div class="select">
+        <%= form.select( :service_type, options_for_select( Stylist.service_types.map{ |k, v| [k.humanize.capitalize, v]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Smart Phone Type:</label>
+    <div class="control">
+      <div class="select">
+        <%= form.select( :has_smartphone, options_for_select( Stylist.has_smartphones.map{ |k, v| [k.humanize.capitalize, v]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="file">
+    <label class="file-label">
+      <%= form.file_field :cosmetology_license, class: 'file-input', accept: 'image/png,image/jpg,image/jpeg,application/pdf', required: true %>
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+          Upload cosmetology license…
+        </span>
+      </span>
+    </label>
+  </div>
+
+  <div class="file">
+    <label class="file-label">
+      <%= form.file_field :liability_insurance, class: 'file-input', accept: 'image/png,image/jpg,image/jpeg,application/pdf', required: true %>
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+          Upload liability insurance…
+        </span>
+      </span>
+    </label>
+  </div>
+
+  <div class="control">
+    <label class="label">Are you legally eligible for work in the U.S.A.?</label>
+    <label class="radio">
+      <%= form.radio_button :is_eligible_to_work_in_us, 'true' %>
+      Yes
+    </label>
+    <label class="radio">
+      <%= form.radio_button :is_eligible_to_work_in_us, 'false' %>
+      No
+    </label>
+  </div>
+
+  <div class="file">
+    <label class="file-label">
+      <%= form.file_field :eligibility_document, class: 'file-input', accept: 'image/png,image/jpg,image/jpeg,application/pdf', required: true %>
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+          Upload proof of work eligibility…
+        </span>
+      </span>
+    </label>
+  </div>
+
+  <div class="control">
+    <label class="label">Do you agree to obtain any and all licenses that may be required to do business as an independent contractor or self-employed person?</label>
+    <label class="radio">
+      <%= form.radio_button :license_agreement, 'true' %>
+      Yes
+    </label>
+    <label class="radio">
+      <%= form.radio_button :license_agreement, 'false' %>
+      No
+    </label>
+  </div>
+
+  <div class="control">
+    <label class="label">Do you have trasportation?</label>
+    <label class="radio">
+      <%= form.radio_button :has_transportation, 'true' %>
+      Yes
+    </label>
+    <label class="radio">
+      <%= form.radio_button :has_transportation, 'false' %>
+      No
+    </label>
+  </div>
+
+  <div class="control">
+    <label class="label">If you've ever been contracted with BlowOutGoOut, LLC. before, please provide the most recent date?</label>
+    <div class="control">
+      <%= form.date_field :previous_contractor_date %>
+    </div>
+  </div>
+
+  <div class="control">
+    <label class="label">Have you ever been convicted of sexual crimes, violent assault, or stalking?</label>
+    <label class="radio">
+      <%= form.radio_button :has_conviction, 'true' %>
+      Yes
+    </label>
+    <label class="radio">
+      <%= form.radio_button :has_conviction, 'false' %>
+      No
+    </label>
+  </div>
+
+  <div class="control">
+    <label class="label">Do you understand that as an independent contractor, you would not be eligible for unemployment benefits at the end of any contract with BlowOutGoOut LLC?</label>
+    <label class="radio">
+      <%= form.radio_button :agrees_to_unemployment_understanding, 'true' %>
+      Yes
+    </label>
+    <label class="radio">
+      <%= form.radio_button :agrees_to_unemployment_understanding, 'false' %>
+      No
+    </label>
+  </div>
+
+  <div class="control">
+    <label class="label">Do you understand that, as an independent contractor, you would be responsible for payment of any and all state and/or federal income, Social Security, self-employment taxes, sales and use taxes, unemployment taxes, and payroll taxes and you will receive a form 1099 for service provided to BlowOutGoOut LLC. by you?</label>
+    <label class="radio">
+      <%= form.radio_button :agrees_to_taxation_understanding, 'true' %>
+      Yes
+    </label>
+    <label class="radio">
+      <%= form.radio_button :agrees_to_taxation_understanding, 'false' %>
+      No
+    </label>
+  </div>
+
+
+
+
+
+  <div class="field is-grouped">
+    <div class="control">
+      <!-- <button class="button is-link">Submit</button> -->
+      <%= form.submit 'Next', class: 'button is-link' %>
+    </div>
+    <div class="control">
+      <%= link_to 'Skip', next_wizard_path, class: 'button is-text' %>
+      <!-- <button class="button is-text">Cancel</button> -->
+    </div>
+  </div>
+
+<% end %>
+</div>
+
+<script type="text/javascript">
+// Initialize all input of type date
+var calendars = bulmaCalendar.attach('[type="date"]', options);
+
+// Loop on each calendar initialized
+for (var i = 0; i < calendars.length; i++) {
+  // Add listener to date:selected event
+  calendars[i].on('select', date => {
+    console.log(date);
+  });
+}
+
+// To access to bulmaCalendar instance of an element
+var element = document.querySelector('#my-element');
+if (element) {
+  // bulmaCalendar instance is available as element.bulmaCalendar
+  element.bulmaCalendar.on('select', function (datepicker) {
+    console.log(datepicker.data.value());
+  });
+}
+</script>

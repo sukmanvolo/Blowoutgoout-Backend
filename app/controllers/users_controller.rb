@@ -24,18 +24,19 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    
+
     # store all emails in lowercase to avoid duplicates and case-sensitive login errors:
     @user.email.downcase!
-    
-    if @user.save
-      # If user saves in the db successfully:
-      flash[:notice] = "Account created successfully!"
-      redirect_to root_path
-    else
-      # If user fails model validation - probably a bad password or duplicate email:
-      flash.now.alert = "Oops, couldn't create account. Please make sure you are using a valid email and password and try again."
-      render :new
+
+    @user.role = :stylist
+    respond_to do |format|
+      if @user.save
+        @user.authenticate(user_params[:password]) 
+        format.html { redirect_to stylist_signup_path(id: :profile, stylist_id: @user.id), notice: 'Account was successfully created.' }
+      else
+        # If user fails model validation - probably a bad password or duplicate email:
+        format.html { redirect_to stylists_signup_path, notice: @user.errors }
+      end
     end
   end
 
@@ -72,6 +73,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
   end
 end
