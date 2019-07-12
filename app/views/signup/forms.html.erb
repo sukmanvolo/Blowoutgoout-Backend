@@ -20,7 +20,7 @@
     <label class="label">Years of Experience:</label>
     <div class="control">
       <div class="select">
-        <%= form.select( :years_of_experience, options_for_select( Stylist.years_of_experiences.map{ |k, v| [k.humanize.capitalize, v]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
+        <%= form.select( :years_of_experience, options_for_select( Stylist.years_of_experiences.map{ |k, _v| [k.humanize.capitalize, k]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
     <label class="label">Services Offered:</label>
     <div class="control">
       <div class="select">
-        <%= form.select( :service_type, options_for_select( Stylist.service_types.map{ |k, v| [k.humanize.capitalize, v]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
+        <%= form.select( :service_type, options_for_select( Stylist.service_types.map{ |k, _v| [k.humanize.capitalize, k]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
     <label class="label">Smart Phone Type:</label>
     <div class="control">
       <div class="select">
-        <%= form.select( :has_smartphone, options_for_select( Stylist.has_smartphones.map{ |k, v| [k.humanize.capitalize, v]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
+        <%= form.select( :has_smartphone, options_for_select( Stylist.has_smartphones.map{ |k, _v| [k.humanize.capitalize, k]} ), prompt: 'Years of Experince', style: 'color: white;', multiple: false, size: 1 ) %>
       </div>
     </div>
   </div>
