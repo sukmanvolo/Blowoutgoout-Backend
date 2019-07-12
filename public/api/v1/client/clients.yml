@@ -1,0 +1,10 @@
+get:
+  description: Get all clients
+  tags:
+    - Admin management
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string

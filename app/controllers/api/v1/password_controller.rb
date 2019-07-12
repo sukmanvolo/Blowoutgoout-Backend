@@ -26,6 +26,7 @@ module Api::V1
       end
 
       user = User.find_by(reset_password_token: token)
+      puts "*** user: #{user}"
 
       if user.present? && user.password_token_valid?
         if user.reset_password!(params[:password])
