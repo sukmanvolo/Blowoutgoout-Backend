@@ -116,6 +116,8 @@ GEM
       rails (>= 3.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    grape-swagger-rails (0.3.1)
+      railties (>= 3.2.12)
     hashie (3.6.0)
     i18n (1.2.0)
       concurrent-ruby (~> 1.0)
@@ -206,7 +208,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    rolify (5.2.0)
     ruby-vips (2.0.13)
       ffi (~> 1.9)
     ruby_dep (1.5.0)
@@ -285,6 +286,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   font-awesome-sass (~> 5.5.0)
   geokit-rails (= 2.3.1)
+  grape-swagger-rails
   image_processing (= 1.8.0)
   jbuilder (~> 2.5)
   jwt (= 1.5.6)
@@ -295,7 +297,6 @@ DEPENDENCIES
   pundit (= 2.0.1)
   rack-cors
   rails (~> 5.2.0)
-  rolify
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_command (= 0.0.9)

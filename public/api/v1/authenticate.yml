@@ -1,0 +1,22 @@
+post:
+  description: Sign in user
+  tags:
+    - Authentication
+  parameters:
+    - name: params
+      in: body
+      description: Credentials
+      schema:
+        $ref: '#/definitions/Credentials'
+  responses:
+    201:
+      description: Successful response
+
+definitions:
+  Credentials:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string

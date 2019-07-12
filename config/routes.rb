@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount GrapeSwaggerRails::Engine => '/docs'
+
   root to: 'pages#home'
   # Static pages
   get 'stylists', to: 'pages#stylists'

@@ -4,8 +4,9 @@ module Api::V1
 
     # GET /clients
     def index
-      @clients = Clients.all
-      json_response(@clients)
+      puts "*** resp: #{request.env.inspect}"
+      # @clients = Client.all
+      # json_response(@clients)
     end
 
     # POST /clients
