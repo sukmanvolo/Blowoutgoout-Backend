@@ -17,7 +17,9 @@ paths:
   stylist/signup:
     $ref: '/api/v1/stylist/signup.yml'
   clients:
-    $ref: '/api/v1/client/clients.yml'
+    $ref: '/api/v1/admin/clients.yml'
+  stylists:
+    $ref: '/api/v1/admin/stylists.yml'
   clients/{id}:
     $ref: '/api/v1/client/client_by_id.yml'
   stylist:

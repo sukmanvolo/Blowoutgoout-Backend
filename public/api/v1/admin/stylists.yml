@@ -1,5 +1,5 @@
 get:
-  description: Get all clients
+  description: Get all stylists
   tags:
     - Admin management
   parameters:
