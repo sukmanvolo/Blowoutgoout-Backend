@@ -5,10 +5,11 @@ module Api::V1
     # GET /stylists
     def index
       @stylists = Stylist.all
+      authorize @stylists
       json_response(@stylists)
     end
 
-    # POST /stylists
+    # POST /stylists only for admin
     def create
       @stylist = Stylist.new(stylist_params)
       authorize @stylist

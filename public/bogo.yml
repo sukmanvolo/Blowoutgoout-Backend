@@ -3,7 +3,8 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: 'Bogo API'
-host: <%= Rails.application.secrets.secret_key_base %>
+host: localhost:3000/api/v1/
+# host: <%= Rails.application.secrets.secret_key_base %>
 paths:
   authenticate:
     $ref: '/api/v1/authenticate.yml'
@@ -17,9 +18,15 @@ paths:
     $ref: '/api/v1/stylist/signup.yml'
   clients:
     $ref: '/api/v1/client/clients.yml'
+  clients/{id}:
+    $ref: '/api/v1/client/client_by_id.yml'
+  stylist:
+    $ref: '/api/v1/client/stylists.yml'
+  stylists/{id}:
+    $ref: '/api/v1/stylist/stylist_by_id.yml'
 securityDefinitions:
   JWT:
-    description: "Token token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzAyODM5OTUsInN1YiI6MX0.W424hnODbNICqKIZjc_uSNkL6WYdtKD2hbZb8DE8bu0"
-    type: apiKey
+    description: "Token token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJyb2xlIjoiY2xpZW50IiwiZXhwIjoxNTY1ODEzMzY2fQ.3SNznryLiq9p2N9Ts28F6RaB-ae0pPKh75ZET6klkOY"
+    type: string
     name: Authorization
     in: header

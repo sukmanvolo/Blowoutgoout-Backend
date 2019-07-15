@@ -1,0 +1,83 @@
+get:
+  description: Show stylist by ID
+  tags:
+    - Stylist
+  security:
+   - JWT: []
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+patch:
+  description: Update stylist by ID
+  tags:
+    - Stylist
+  security:
+  - JWT: []
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+    - name: params
+      in: body
+      description: Stylist data
+      schema:
+        $ref: '#/components/schemas/stylist_data'
+delete:
+  description: Delete stylist by ID
+  tags:
+    - Stylist
+  security:
+  - JWT: []
+  parameters:
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+components:
+  schemas:
+    stylist_data:
+      type: object
+      properties:
+        stylists:
+          type: object
+          properties:
+            years_of_experience:
+              type: string
+            description:
+              type: string
+            user_attributes:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                phone:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                gcm_id:
+                  type: string
+                device_type:
+                  type: string
+                device_id:
+                  type: string
