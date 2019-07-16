@@ -22,8 +22,6 @@ paths:
     $ref: '/api/v1/admin/stylists.yml'
   clients/{id}:
     $ref: '/api/v1/client/client_by_id.yml'
-  stylist:
-    $ref: '/api/v1/stylist/stylists.yml'
   stylists/{id}:
     $ref: '/api/v1/stylist/stylist_by_id.yml'
   stylists/nearest_stylists:
