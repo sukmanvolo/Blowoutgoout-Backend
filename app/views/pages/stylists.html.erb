@@ -47,9 +47,9 @@
 
   <div class="container is-fluid why-section">
     <h3 class="title has-text-centered is-4 why-section-title">Why Partner with Blow Out Go Out?</h3>
-      <div class="columns is-fluid why-content">
+      <div class="container columns is-fluid why-content">
         <div class="column">
-          Image
+          <%= image_tag 'stylist-stock.png' %>
         </div>
         <div class="column">
           <div class="content-1">
@@ -61,6 +61,9 @@
           <div class="content-3">
             Work anywhere-anytime
           </div>
+          <%# link_to stylists_path do %>
+          <span class="button is-large is-purple ghost-btn">Apply Now</span>
+          <%# end %>
         </div>
       </div>
   </div>
