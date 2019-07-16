@@ -1,18 +1,46 @@
 class User < ApplicationRecord
   has_secure_password
-  rolify
+
   # validations
-  # validates :password, length: { minimum: 6 }, if: -> { new_record? || changes[:crypted_password] }
-  # validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
-  # validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
+  validates :password, presence: true, on: :create, allow_nil: true
+  validates :role, presence: true, on: :create
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, uniqueness: { scope: :role }
+  validates :first_name, presence: true
 
-  validates :email, uniqueness: true
+  has_one :client, inverse_of: :user, dependent: :destroy
+  has_one :stylist, inverse_of: :user, dependent: :destroy
+  has_many :notifications
 
-  # callbacks  
-  after_create :assign_default_role
+  # enum
+  enum role: [:client, :stylist, :admin]
+  enum status: [:inactive, :active]
 
-  private  
-  def assign_default_role
-    self.add_role(:regular) if self.roles.blank?
-  end  
+  # callbacks
+
+  def generate_password_token!
+   self.reset_password_token = generate_token
+   self.reset_password_sent_at = Time.now.utc
+   save!
+  end
+
+  def password_token_valid?
+   (self.reset_password_sent_at + 4.hours) > Time.now.utc
+  end
+
+  def reset_password!(password)
+   self.reset_password_token = nil
+   self.password = password
+   save!
+  end
+
+  def full_name
+    [last_name, first_name].join(' ')
+  end
+
+  private
+
+  def generate_token
+    SecureRandom.hex(10)
+  end
 end

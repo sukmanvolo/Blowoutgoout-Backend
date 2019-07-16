@@ -6,7 +6,8 @@ class AuthorizeApiRequest
   # Service entry point - return valid user object
   def call
     {
-      user: user
+      user: user,
+      role: role
     }
   end
 
@@ -22,8 +23,19 @@ class AuthorizeApiRequest
   rescue ActiveRecord::RecordNotFound => e
     # raise custom error
     raise(
-      ExceptionHandler::InvalidToken,
-      ("#{Message.invalid_token} #{e.message}")
+      Api::ExceptionHandler::InvalidToken,
+      ("#{ErrorMessage.invalid_token} #{e.message}")
+    )
+  end
+
+  def role
+    # memoize user role
+    @role ||= decoded_auth_token[:role] if decoded_auth_token
+    return @role unless @role.nil? || @role.empty?
+    # handle role not found
+    # raise custom error
+    raise(
+      Api::ExceptionHandler::InvalidRole, ("User role is empty")
     )
   end
 
@@ -37,6 +49,6 @@ class AuthorizeApiRequest
     if headers['Authorization'].present?
       return headers['Authorization'].split(' ').last
     end
-    raise(ExceptionHandler::MissingToken, Message.missing_token)
+    raise(Api::ExceptionHandler::MissingToken, ErrorMessage.missing_token)
   end
 end

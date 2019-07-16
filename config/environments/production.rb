@@ -40,6 +40,18 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
+  Rails.application.routes.default_url_options[:host] = Rails.application.secrets.host
+  config.action_mailer.default_url_options = { host: Rails.application.secrets.host }
+
+  ActionMailer::Base.smtp_settings = {
+    user_name:  Rails.application.secrets.sendgrid_username,
+    password:  Rails.application.secrets.sendgrid_password,
+    domain:  Rails.application.secrets.host,
+    address:  'smtp.sendgrid.net',
+    port:  587,
+    authentication:  :plain,
+    enable_starttls_auto: true
+  }
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -91,4 +103,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.secret_key_base = Rails.application.secrets.secret_key_base
 end

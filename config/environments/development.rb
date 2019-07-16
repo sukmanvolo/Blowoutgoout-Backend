@@ -52,10 +52,25 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  ActionMailer::Base.smtp_settings = {
+    user_name:  Rails.application.secrets.sendgrid_username,
+    password:  Rails.application.secrets.sendgrid_password,
+    domain:  Rails.application.secrets.host,
+    address:  'smtp.sendgrid.net',
+    port:  587,
+    authentication:  :plain,
+    enable_starttls_auto: true
+  }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.secret_key_base = Rails.application.secrets.secret_key_base
 end

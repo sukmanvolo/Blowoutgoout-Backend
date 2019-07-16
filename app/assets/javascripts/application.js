@@ -13,4 +13,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+
+//= require 'bulma/extensions/steps.min'
+//= require 'bulma/extensions/bulma-calendar.min'
 //= require_tree .

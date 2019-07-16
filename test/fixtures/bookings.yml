@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: one
+  stytlist: one
+  service: one
+  time_from: 2019-02-28 16:38:07
+  time_to: 2019-02-28 16:38:07
+  fee: 9.99
+  service_lat: 9.99
+  service_long: 9.99
+  starus: 1
+  card: one
+
+two:
+  client: two
+  stytlist: two
+  service: two
+  time_from: 2019-02-28 16:38:07
+  time_to: 2019-02-28 16:38:07
+  fee: 9.99
+  service_lat: 9.99
+  service_long: 9.99
+  starus: 1
+  card: two
