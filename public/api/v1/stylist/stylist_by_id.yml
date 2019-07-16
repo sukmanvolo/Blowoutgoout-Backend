@@ -19,8 +19,6 @@ patch:
   description: Update stylist by ID
   tags:
     - Stylist
-  security:
-  - JWT: []
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -41,8 +39,6 @@ delete:
   description: Delete stylist by ID
   tags:
     - Stylist
-  security:
-  - JWT: []
   parameters:
     - name: id
       in: path

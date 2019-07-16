@@ -23,9 +23,11 @@ paths:
   clients/{id}:
     $ref: '/api/v1/client/client_by_id.yml'
   stylist:
-    $ref: '/api/v1/client/stylists.yml'
+    $ref: '/api/v1/stylist/stylists.yml'
   stylists/{id}:
     $ref: '/api/v1/stylist/stylist_by_id.yml'
+  stylists/nearest_stylists:
+    $ref: '/api/v1/stylist/stylist_collection_actions.yml'
 securityDefinitions:
   JWT:
     description: "Token token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJyb2xlIjoiY2xpZW50IiwiZXhwIjoxNTY1ODEzMzY2fQ.3SNznryLiq9p2N9Ts28F6RaB-ae0pPKh75ZET6klkOY"
