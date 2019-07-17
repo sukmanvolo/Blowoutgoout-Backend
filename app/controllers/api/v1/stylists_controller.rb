@@ -5,10 +5,11 @@ module Api::V1
     # GET /stylists
     def index
       @stylists = Stylist.all
+      authorize @stylists
       json_response(@stylists)
     end
 
-    # POST /stylists
+    # POST /stylists only for admin
     def create
       @stylist = Stylist.new(stylist_params)
       authorize @stylist
@@ -52,7 +53,7 @@ module Api::V1
                                        :agrees_to_unemployment_understanding,
                                        :agrees_to_taxation_understanding,
                                        :status, :description, :welcome_kit,
-                                       :lat, :long, :user_id, :radius)
+                                       :lat, :long, :user_id, :radius, :image)
     end
 
     def set_stylist

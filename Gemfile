@@ -37,6 +37,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'simple_command', '0.0.9'
 gem 'stripe'
 gem 'wicked'
+gem 'grape-swagger-rails'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

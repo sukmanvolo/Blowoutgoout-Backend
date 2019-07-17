@@ -4,11 +4,12 @@ module Api::V1
 
     # GET /clients
     def index
-      @clients = Clients.all
+      @clients = Client.all
+      authorize @clients
       json_response(@clients)
     end
 
-    # POST /clients
+    # POST /clients only for admin
     def create
       @client = Client.new(client_params)
       authorize @client

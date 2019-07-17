@@ -1,5 +1,9 @@
 class ClientPolicy < ApplicationPolicy
 
+  def index?
+    user.admin?
+  end
+
   def create?
     user.admin? || user.client?
   end
