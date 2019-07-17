@@ -4,8 +4,7 @@ info:
   version: '1.0'
   title: 'Bogo API'
 # host: localhost:3000/api/v1/
-# host: <%= Rails.application.secrets.secret_key_base %>
-host: https://bogo-staging.herokuapp.com/api/v1/
+host: <%= Rails.application.secrets.secret_key_base %>
 paths:
   authenticate:
     $ref: '/api/v1/authenticate.yml'
