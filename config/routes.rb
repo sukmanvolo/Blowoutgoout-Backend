@@ -9,9 +9,13 @@ Rails.application.routes.draw do
   get 'terms', to: 'pages#terms'
   get 'about-us', to: 'pages#about_us'
 
-
   resources :user_sessions
   resources :users
+  get 'stylists/signup', to: 'stylists#new', as: 'stylists_signup'
+  resources :stylists, only: %i[create] do
+    resources :signup, only: %i[show update]
+  end
+
 
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
