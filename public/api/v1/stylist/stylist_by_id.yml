@@ -2,8 +2,6 @@ get:
   description: Show stylist by ID
   tags:
     - Stylist
-  security:
-   - JWT: []
   parameters:
     - name: Authorization
       description: "JWT token"
