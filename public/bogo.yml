@@ -4,7 +4,6 @@ info:
   version: '1.0'
   title: 'Bogo API'
 # host: localhost:3000/api/v1/
-# host: <%= Rails.application.secrets.secret_key_base %>
 host: bogo-staging.herokuapp.com/api/v1/
 paths:
   authenticate:
@@ -27,6 +26,11 @@ paths:
     $ref: '/api/v1/stylist/stylist_by_id.yml'
   stylists/nearest_stylists:
     $ref: '/api/v1/stylist/stylist_collection_actions.yml'
+  services:
+    $ref: '/api/v1/stylist/services.yml'
+  services/{id}:
+    $ref: '/api/v1/stylist/service_by_id.yml'
+
 securityDefinitions:
   JWT:
     description: "Token token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJyb2xlIjoiY2xpZW50IiwiZXhwIjoxNTY1ODEzMzY2fQ.3SNznryLiq9p2N9Ts28F6RaB-ae0pPKh75ZET6klkOY"

@@ -1,0 +1,63 @@
+get:
+  description: Show service by ID
+  tags:
+    - Stylist
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+patch:
+  description: Update service by ID
+  tags:
+    - Stylist
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+    - name: params
+      in: body
+      description: Service data
+      schema:
+        $ref: '#/components/schemas/service_data'
+delete:
+  description: Delete service by ID
+  tags:
+    - Stylist
+  parameters:
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+components:
+  schemas:
+    service_data:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          enum:
+            - inactive
+            - active
+        service_type_id:
+          type: integer
+        stylist_id:
+          type: integer
+        amount:
+          type: string
