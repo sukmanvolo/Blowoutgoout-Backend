@@ -1,0 +1,26 @@
+get:
+  description: Get nearest stylists
+  tags:
+    - Stylist
+  parameters:
+    - name: Authorization
+      in: header
+      description: "JWT token"
+      type: string
+    - name: params
+      in: body
+      description: Stylist data
+      schema:
+        $ref: '#/components/schemas/query_params'
+components:
+  schemas:
+    query_params:
+      type: object
+      properties:
+        service_type_id:
+          type: integer
+          format: int64
+        lat:
+          type: string
+        long:
+          type: string

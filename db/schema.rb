@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030572) do
+ActiveRecord::Schema.define(version: 2019_12_18_030587) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030572) do
     t.time "time_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["schedule_id"], name: "index_availabilities_on_schedule_id"
   end
 
@@ -57,20 +58,77 @@ ActiveRecord::Schema.define(version: 2019_12_18_030572) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date"
+    t.bigint "availability_id"
+    t.index ["availability_id"], name: "index_bookings_on_availability_id"
     t.index ["client_id"], name: "index_bookings_on_client_id"
     t.index ["service_id"], name: "index_bookings_on_service_id"
     t.index ["stylist_id"], name: "index_bookings_on_stylist_id"
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone"
     t.string "facebook_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "customer_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "stylist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_favorites_on_client_id"
+    t.index ["stylist_id"], name: "index_favorites_on_stylist_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "booking_id"
+    t.bigint "client_id"
+    t.bigint "stylist_id"
+    t.text "text"
+    t.integer "status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_messages_on_booking_id"
+    t.index ["client_id"], name: "index_messages_on_client_id"
+    t.index ["stylist_id"], name: "index_messages_on_stylist_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "message"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "booking_id"
+    t.string "coupon_code"
+    t.integer "discount_percent"
+    t.decimal "tip_fee"
+    t.decimal "discount"
+    t.decimal "amount"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_payments_on_booking_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "text"
+    t.float "rate", default: 0.0
+    t.bigint "stylist_id"
+    t.integer "status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "client_id"
+    t.index ["client_id"], name: "index_reviews_on_client_id"
+    t.index ["stylist_id"], name: "index_reviews_on_stylist_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -85,11 +143,11 @@ ActiveRecord::Schema.define(version: 2019_12_18_030572) do
 
   create_table "schedules", force: :cascade do |t|
     t.bigint "stylist_id"
-    t.bigint "service_type_id"
+    t.bigint "service_id"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["service_type_id"], name: "index_schedules_on_service_type_id"
+    t.index ["service_id"], name: "index_schedules_on_service_id"
     t.index ["stylist_id"], name: "index_schedules_on_stylist_id"
   end
 
@@ -113,10 +171,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030572) do
   end
 
   create_table "stylists", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
     t.text "description"
-    t.string "phone"
     t.integer "welcome_kit", default: 0
     t.integer "service_type", default: 1
     t.integer "register_by"
@@ -126,6 +181,16 @@ ActiveRecord::Schema.define(version: 2019_12_18_030572) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "years_of_experience", default: 0
+    t.boolean "license_agreement"
+    t.integer "has_smartphone", default: 0
+    t.boolean "has_transportation"
+    t.string "portfolio_link"
+    t.boolean "is_eligible_to_work_in_us", default: false
+    t.date "previous_contractor_date"
+    t.boolean "has_conviction"
+    t.boolean "agrees_to_unemployment_understanding"
+    t.boolean "agrees_to_taxation_understanding"
     t.index ["user_id"], name: "index_stylists_on_user_id"
   end
 
@@ -152,6 +217,13 @@ ActiveRecord::Schema.define(version: 2019_12_18_030572) do
     t.string "device_type"
     t.string "device_id"
     t.integer "status", default: 1
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "postal_code"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -166,7 +238,15 @@ ActiveRecord::Schema.define(version: 2019_12_18_030572) do
   add_foreign_key "bookings", "clients"
   add_foreign_key "bookings", "services"
   add_foreign_key "bookings", "stylists"
-  add_foreign_key "schedules", "service_types"
+  add_foreign_key "favorites", "clients"
+  add_foreign_key "favorites", "stylists"
+  add_foreign_key "messages", "bookings"
+  add_foreign_key "messages", "clients"
+  add_foreign_key "messages", "stylists"
+  add_foreign_key "payments", "bookings"
+  add_foreign_key "reviews", "clients"
+  add_foreign_key "reviews", "stylists"
+  add_foreign_key "schedules", "service_types", column: "service_id"
   add_foreign_key "schedules", "stylists"
   add_foreign_key "services", "service_types"
   add_foreign_key "services", "stylists"

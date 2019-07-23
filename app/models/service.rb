@@ -1,11 +1,12 @@
 class Service < ApplicationRecord
-  # relantionships
-  belongs_to :service_type
-  belongs_to :stylist
   has_one_attached :image
 
+  belongs_to :service_type
+  belongs_to :stylist
+  has_many :schedules
+
   # validations
-  validates :name, presence: true
+  validates :name, :amount, presence: true
 
   # enum
   enum status: [:inactive, :active]

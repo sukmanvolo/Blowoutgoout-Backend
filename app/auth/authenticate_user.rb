@@ -21,6 +21,6 @@ class AuthenticateUser
     return user if user&.authenticate(password)
 
     # raise Authentication error if credentials are invalid
-    raise(Api::ExceptionHandler::AuthenticationError, Message.invalid_credentials)
+    raise(Api::ExceptionHandler::AuthenticationError, ErrorMessage.invalid_credentials)
   end
 end

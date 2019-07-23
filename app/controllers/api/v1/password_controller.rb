@@ -12,9 +12,9 @@ module Api::V1
 
       if user.present?
         user.generate_password_token!
-        render json: {status: 'ok'}, status: :ok
+        render json: { status: 'ok' }, status: :ok
       else
-        render json: {error: ['Email address not found. Please check and try again.']}, status: :not_found
+        render json: { error: ['Email address not found. Please check and try again.'] }, status: :not_found
       end
     end
 
@@ -26,6 +26,7 @@ module Api::V1
       end
 
       user = User.find_by(reset_password_token: token)
+      puts "*** user: #{user}"
 
       if user.present? && user.password_token_valid?
         if user.reset_password!(params[:password])

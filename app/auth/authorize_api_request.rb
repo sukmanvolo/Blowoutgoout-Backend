@@ -24,7 +24,7 @@ class AuthorizeApiRequest
     # raise custom error
     raise(
       Api::ExceptionHandler::InvalidToken,
-      ("#{Message.invalid_token} #{e.message}")
+      ("#{ErrorMessage.invalid_token} #{e.message}")
     )
   end
 
@@ -49,6 +49,6 @@ class AuthorizeApiRequest
     if headers['Authorization'].present?
       return headers['Authorization'].split(' ').last
     end
-    raise(Api::ExceptionHandler::MissingToken, Message.missing_token)
+    raise(Api::ExceptionHandler::MissingToken, ErrorMessage.missing_token)
   end
 end

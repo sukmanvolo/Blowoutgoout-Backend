@@ -7,9 +7,9 @@ belongs_to :resource,
            :optional => true
 
 
-validates :resource_type,
-          :inclusion => { :in => Rolify.resource_types },
-          :allow_nil => true
+# validates :resource_type,
+#           :inclusion => { :in => Rolify.resource_types },
+#           :allow_nil => true
 
-scopify
+# scopify
 end

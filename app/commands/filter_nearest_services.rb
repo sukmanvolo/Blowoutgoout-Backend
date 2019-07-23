@@ -10,7 +10,7 @@ class FilterNearestServices
   end
 
   def call
-    stylists = Stylist.actives.within(20, origin: [lat, long])
+    stylists = Stylist.nearest_stylists(lat, long)
     Service.actives.where(service_type: service_type_id, stylist: stylists)
   end
 end

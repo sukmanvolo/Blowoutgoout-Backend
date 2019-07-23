@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount GrapeSwaggerRails::Engine => '/docs'
+
   root to: 'pages#home'
   # Static pages
   get 'stylists', to: 'pages#stylists'
@@ -7,9 +9,13 @@ Rails.application.routes.draw do
   get 'terms', to: 'pages#terms'
   get 'about-us', to: 'pages#about_us'
 
-
   resources :user_sessions
   resources :users
+  get 'stylists/signup', to: 'stylists#new', as: 'stylists_signup'
+  resources :stylists, only: %i[create] do
+    resources :signup, only: %i[show update]
+  end
+
 
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
@@ -25,7 +31,11 @@ Rails.application.routes.draw do
       post 'clients/signup', to: 'clients_signup#create'
       post 'stylists/signup', to: 'stylists_signup#create'
       resources :clients
-      resources :stylists
+      resources :stylists do
+        collection do
+          get 'nearest_stylists', to: 'stylists#nearest_stylists'
+        end
+      end
       resources :services do
         collection do
           get 'nearest_services', to: 'services#nearest_services'
@@ -33,6 +43,23 @@ Rails.application.routes.draw do
       end
       resources :service_types
       resources :schedules
+      resources :availabilities
+      resources :favorites
+      resources :bookings do
+        member do
+          put 'confirm'
+          put 'reject'
+        end
+        collection do
+          get 'upcoming_appointments', to: 'bookings#upcoming_appointments'
+          get 'past_appointments', to: 'bookings#past_appointments'
+        end
+      end
+      resources :payments
+      resources :messages
+      resources :cards
+      resources :contacts, only: [:create]
+      resources :reviews
     end
   end
 end
