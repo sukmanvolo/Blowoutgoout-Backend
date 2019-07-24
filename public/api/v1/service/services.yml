@@ -1,8 +1,13 @@
 post:
   description: Create new service - [Admin, Stylist]
   tags:
-    - Stylist
+    - Service
   parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
     - name: params
       in: body
       description: Service data
@@ -11,7 +16,7 @@ post:
 get:
   description: Get all services - [Admin, Client, Stylist]
   tags:
-    - Stylist
+    - Service
   parameters:
     - name: authorization
       in: header

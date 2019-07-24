@@ -1,7 +1,7 @@
 get:
-  description: Show service by ID
+  description: Show service type by ID
   tags:
-    - Stylist
+    - Service Type
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -14,9 +14,9 @@ get:
       type: integer
       format: int64
 patch:
-  description: Update service by ID
+  description: Update service type by ID
   tags:
-    - Stylist
+    - Service Type
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -30,13 +30,13 @@ patch:
       format: int64
     - name: params
       in: body
-      description: Service data
+      description: Service Type data
       schema:
-        $ref: '#/components/schemas/service_data'
+        $ref: '#/components/schemas/service_type_data'
 delete:
-  description: Delete service by ID
+  description: Delete service type by ID
   tags:
-    - Stylist
+    - Service Type
   parameters:
     - name: id
       in: path
@@ -46,7 +46,7 @@ delete:
       format: int64
 components:
   schemas:
-    service_data:
+    service_type_data:
       type: object
       properties:
         name:
@@ -55,9 +55,3 @@ components:
           enum:
             - inactive
             - active
-        service_type_id:
-          type: integer
-        stylist_id:
-          type: integer
-        amount:
-          type: string

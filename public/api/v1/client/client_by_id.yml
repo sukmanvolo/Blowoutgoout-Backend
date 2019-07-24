@@ -2,8 +2,6 @@ get:
   description: Show client by ID
   tags:
     - Client
-  security:
-   - JWT: []
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -19,8 +17,6 @@ patch:
   description: Update client by ID
   tags:
     - Client
-  security:
-  - JWT: []
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -41,8 +37,6 @@ delete:
   description: Delete client by ID
   tags:
     - Client
-  security:
-  - JWT: []
   parameters:
     - name: id
       in: path

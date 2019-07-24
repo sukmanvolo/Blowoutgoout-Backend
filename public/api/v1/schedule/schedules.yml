@@ -1,0 +1,36 @@
+post:
+  description: Create new schedule - [Admin, Stylist]
+  tags:
+    - Schedule
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: params
+      in: body
+      description: Schedule data
+      schema:
+        $ref: '#/components/schemas/Schedule'
+get:
+  description: Get all schedules - [Admin, Client, Stylist]
+  tags:
+    - Schedule
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+components:
+  schemas:
+    Schedule:
+      type: object
+      properties:
+        date:
+          type: string
+        stylist_id:
+          type: integer
+        service_id:
+          type: integer

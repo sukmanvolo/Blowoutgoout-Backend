@@ -1,0 +1,42 @@
+# post:
+#   description: Create new service_type - [Admin]
+#   tags:
+#     - Service
+#   parameters:
+#     - name: authorization
+#       in: header
+#       description: Admin authentication token
+#       required: true
+#       type: string
+#     - name: params
+#       in: body
+#       description: Service data
+#       schema:
+#         $ref: '#/components/schemas/Service'
+get:
+  description: Get all service_types - [Admin, Client, Stylist]
+  tags:
+    - Service Type
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+# components:
+#   schemas:
+#     Service:
+#       type: object
+#       properties:
+#         name:
+#           type: string
+#         status:
+#           enum:
+#             - inactive
+#             - active
+#         service_type_id:
+#           type: integer
+#         stylist_id:
+#           type: integer
+#         amount:
+#           type: string

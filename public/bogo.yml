@@ -27,9 +27,19 @@ paths:
   stylists/nearest_stylists:
     $ref: '/api/v1/stylist/stylist_collection_actions.yml'
   services:
-    $ref: '/api/v1/stylist/services.yml'
+    $ref: '/api/v1/service/services.yml'
   services/{id}:
-    $ref: '/api/v1/stylist/service_by_id.yml'
+    $ref: '/api/v1/service/service_by_id.yml'
+  services/nearest_services:
+    $ref: '/api/v1/service/service_collection_actions.yml'
+  service_types:
+    $ref: '/api/v1/service_type/service_types.yml'
+  service_types/{id}:
+    $ref: '/api/v1/service_type/service_type_by_id.yml'
+  schedules:
+    $ref: '/api/v1/schedule/schedules.yml'
+  schedules/{id}:
+    $ref: '/api/v1/schedule/schedule_by_id.yml'
 
 securityDefinitions:
   JWT:

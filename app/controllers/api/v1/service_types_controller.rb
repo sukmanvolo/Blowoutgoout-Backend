@@ -4,7 +4,7 @@ module Api::V1
 
     # GET /service_types
     def index
-      @service_types = ServiceType.actives
+      @service_types = ServiceType.active
       json_response(@service_types)
     end
 
