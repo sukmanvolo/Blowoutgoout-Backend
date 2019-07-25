@@ -23,10 +23,11 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'activestorage-validator', '0.1.2'
 gem 'aws-sdk-s3', '1.9.1', require: false
 gem 'bcrypt', '~> 3.1.7'
-gem 'bootsnap', '>= 1.1.0', require: false
-gem 'breakpoint'
 gem 'bulma-extensions-rails'
-gem 'bulma-rails'
+gem 'bulma-rails', '~> 0.7.2'
+gem 'breakpoint'
+# https://github.com/FortAwesome/font-awesome-sass
+gem 'bootsnap', '>= 1.1.0', require: false
 gem 'font-awesome-sass', '~> 5.9.0'
 gem 'geokit-rails', '2.3.1'
 gem 'image_processing', '1.8.0'

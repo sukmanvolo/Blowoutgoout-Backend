@@ -4,7 +4,7 @@
 
     <%= form_with(model: @stylist, local: true, url: wizard_path, method: :put) do |form| %>
 
-    <div class="file">
+    <div class="file field">
       <label class="file-label">
         <%= form.file_field :image, class: 'file-input', accept: 'image/png,image/jpg,image/jpeg', required: true %>
         <span class="file-cta">
@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div class="file">
+    <div class="file field">
       <label class="file-label">
         <%= form.file_field :cosmetology_license, class: 'file-input', accept: 'image/png,image/jpg,image/jpeg,application/pdf', required: true %>
         <span class="file-cta">
@@ -59,7 +59,7 @@
       </label>
     </div>
 
-    <div class="file">
+    <div class="file field">
       <label class="file-label">
         <%= form.file_field :liability_insurance, class: 'file-input', accept: 'image/png,image/jpg,image/jpeg,application/pdf', required: true %>
         <span class="file-cta">
@@ -73,7 +73,7 @@
       </label>
     </div>
 
-    <div class="control">
+    <div class="control field">
       <label class="label">Are you legally eligible for work in the U.S.A.?</label>
       <label class="radio">
         <%= form.radio_button :is_eligible_to_work_in_us, 'true' %>
@@ -85,7 +85,7 @@
       </label>
     </div>
 
-    <div class="file">
+    <div class="file field">
       <label class="file-label">
         <%= form.file_field :eligibility_document, class: 'file-input', accept: 'image/png,image/jpg,image/jpeg,application/pdf', required: true %>
         <span class="file-cta">
@@ -99,7 +99,7 @@
       </label>
     </div>
 
-    <div class="control">
+    <div class="control field">
       <label class="label">Do you agree to obtain any and all licenses that may be required to do business as an independent contractor or self-employed person?</label>
       <label class="radio">
         <%= form.radio_button :license_agreement, 'true' %>
@@ -111,68 +111,68 @@
       </label>
     </div>
 
-    <div class="control">
+    <div class="control field">
       <label class="label">Do you have trasportation?</label>
       <label class="radio">
         <%= form.radio_button :has_transportation, 'true' %>
         Yes
       </label>
-      <label class="radio">
+      <label class="radio field">
         <%= form.radio_button :has_transportation, 'false' %>
         No
       </label>
     </div>
 
-    <div class="control">
+    <div class="control field">
       <label class="label">If you've ever been contracted with BlowOutGoOut, LLC. before, please provide the most recent date?</label>
       <div class="control">
         <%= form.date_field :previous_contractor_date %>
       </div>
     </div>
 
-    <div class="control">
+    <div class="control field">
       <label class="label">Have you ever been convicted of sexual crimes, violent assault, or stalking?</label>
       <label class="radio">
         <%= form.radio_button :has_conviction, 'true' %>
         Yes
       </label>
-      <label class="radio">
+      <label class="radio field">
         <%= form.radio_button :has_conviction, 'false' %>
         No
       </label>
     </div>
 
-    <div class="control">
+    <div class="control field">
       <label class="label">Do you understand that as an independent contractor, you would not be eligible for unemployment benefits at the end of any contract with BlowOutGoOut LLC?</label>
       <label class="radio">
         <%= form.radio_button :agrees_to_unemployment_understanding, 'true' %>
         Yes
       </label>
-      <label class="radio">
+      <label class="radio field">
         <%= form.radio_button :agrees_to_unemployment_understanding, 'false' %>
         No
       </label>
     </div>
 
-    <div class="control">
+    <div class="control field">
       <label class="label">Do you understand that, as an independent contractor, you would be responsible for payment of any and all state and/or federal income, Social Security, self-employment taxes, sales and use taxes, unemployment taxes, and payroll
         taxes and you will receive a form 1099 for service provided to BlowOutGoOut LLC. by you?</label>
       <label class="radio">
         <%= form.radio_button :agrees_to_taxation_understanding, 'true' %>
         Yes
       </label>
-      <label class="radio">
+      <label class="radio field">
         <%= form.radio_button :agrees_to_taxation_understanding, 'false' %>
         No
       </label>
     </div>
 
-    <div class="field is-grouped">
+    <div class="field is-grouped field">
       <div class="control">
         <!-- <button class="button is-link">Submit</button> -->
-        <%= form.submit 'Next', class: 'button is-link' %>
+        <%= form.submit 'Next', class: 'button is-link form-submit-btn' %>
       </div>
-      <div class="control">
+      <div class="control field">
         <%= link_to 'Skip', next_wizard_path, class: 'button is-text' %>
         <!-- <button class="button is-text">Cancel</button> -->
       </div>

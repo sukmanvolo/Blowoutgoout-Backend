@@ -70,7 +70,37 @@
 
     .columns {
       .column {
-        background-color: $pink;
+        .content-1, .content-2, .content-3 {
+          background: linear-gradient(78deg, $pink 0%, $purple 100%);
+          border-radius: 8px;
+          box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+          padding: 4%;
+          margin-bottom: 4%;
+          color: white;
+          font-weight: bold;
+          border-left: solid 20px white;
+        }
+
+        .ghost-btn {
+          border-color: $purple;
+          min-width: 12em;
+          text-transform: uppercase;
+          letter-spacing: 0.69px;
+          border-radius: 8px;
+          background-color: rgba(255,255,255,0);
+          transition: 0.4s;
+          margin-top: 3%;
+
+          @include breakpoint($mobile-bp) {
+            width: 100%;
+          }
+
+          &:hover {
+            background-color: $purple;
+            border-color: #fff;
+            color: #fff;
+          }
+        }
       }
     }
   }

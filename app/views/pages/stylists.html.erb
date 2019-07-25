@@ -49,7 +49,25 @@
 
   <div class="container is-fluid why-section">
     <h3 class="title has-text-centered is-4 why-section-title">Why Partner with Blow Out Go Out?</h3>
-
+      <div class="container columns is-fluid why-content">
+        <div class="column">
+          <%= image_tag 'stylist-stock.png' %>
+        </div>
+        <div class="column">
+          <div class="content-1">
+            Earn $40+ per hour
+          </div>
+          <div class="content-2">
+            Choose your own schedule
+          </div>
+          <div class="content-3">
+            Work anywhere-anytime
+          </div>
+          <%= link_to stylists_signup_path do %>
+          <span class="button is-large is-purple ghost-btn">Apply Now</span>
+          <% end %>
+        </div>
+      </div>
   </div>
 </section>
 
