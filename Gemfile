@@ -27,11 +27,7 @@ gem 'bulma-extensions-rails'
 gem 'bulma-rails', '~> 0.7.2'
 gem 'breakpoint'
 # https://github.com/FortAwesome/font-awesome-sass
-gem 'font-awesome-sass', '~> 5.5.0'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'breakpoint'
-gem 'bulma-extensions-rails'
-gem 'bulma-rails'
 gem 'font-awesome-sass', '~> 5.9.0'
 gem 'geokit-rails', '2.3.1'
 gem 'image_processing', '1.8.0'

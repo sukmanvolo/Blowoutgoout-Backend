@@ -106,6 +106,10 @@
   .stylist-cta {
     margin-top: 1.5em;
 
+    @include breakpoint($mobile-bp) {
+      text-align: center;
+    }
+
     .ghost-btn {
       border-color: $purple;
       min-width: 12em;
