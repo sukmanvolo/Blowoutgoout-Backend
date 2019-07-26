@@ -7,6 +7,13 @@
     padding-top: 2rem;
     padding-bottom: 12rem;
 
+    @include breakpoint($mobile-bp) {
+      background-position-y: 0vw;
+      background-position-x: -100vw;
+      padding-top: 0;
+      padding-bottom: 9rem;
+    }
+
     .bg-container {
 
       .bg-hero-title {
@@ -103,5 +110,17 @@
         }
       }
     }
+  }
+}
+
+.section {
+  @include breakpoint($mobile-bp) {
+    padding: 3rem 0.5rem;
+  }
+}
+
+.container {
+  @include breakpoint($mobile-bp) {
+    padding: 10vw 10vw;
   }
 }
