@@ -41,12 +41,6 @@ class AuthenticateUser
            .routes
            .url_helpers
            .rails_representation_url(user.send(user.role).image.variant(resize: "100x100").processed)
-    else
-      if user.role = 'client'
-        'https://i.pravatar.cc/150?img=1'
-      else
-        'https://i.pravatar.cc/150?img=9'
-      end
     end
   end
 end

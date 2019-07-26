@@ -7,8 +7,6 @@ class ClientSerializer < ActiveModel::Serializer
            .routes
            .url_helpers
            .rails_representation_url(object.image.variant(resize: "100x100").processed)
-    else
-      'https://i.pravatar.cc/150?img=1'
     end
   end
 end
