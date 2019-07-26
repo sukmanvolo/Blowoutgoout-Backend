@@ -1,7 +1,7 @@
 get:
   description: Show service type by ID
   tags:
-    - Service Type
+    - Schedule
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -16,7 +16,7 @@ get:
 patch:
   description: Update service type by ID
   tags:
-    - Service Type
+    - Schedule
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -36,7 +36,7 @@ patch:
 delete:
   description: Delete service type by ID
   tags:
-    - Service Type
+    - Schedule
   parameters:
     - name: id
       in: path
@@ -49,9 +49,14 @@ components:
     service_type_data:
       type: object
       properties:
-        name:
-          type: string
-        status:
-          enum:
-            - inactive
-            - active
+        schedules:
+          type: object
+          properties:
+            name:
+              type: string
+            date:
+              type: string
+            status:
+              enum:
+                - inactive
+                - active
