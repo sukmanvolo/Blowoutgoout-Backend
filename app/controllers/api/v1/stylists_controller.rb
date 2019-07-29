@@ -26,7 +26,14 @@ module Api::V1
     # PUT /stylists/:id
     def update
       authorize @stylist
-      @stylist.update(stylist_params)
+      stylist_data = stylist_params
+      user_data = stylist_data.delete :user_attributes
+      @stylist.user.update(user_data) if user_data
+      if @stylist.update(stylist_data)
+        json_response(@stylist, :accepted)
+      else
+        json_response(@stylist.errors.messages, :unprocessable_entity)
+      end
       head :no_content
     end
 
@@ -53,7 +60,12 @@ module Api::V1
                                        :agrees_to_unemployment_understanding,
                                        :agrees_to_taxation_understanding,
                                        :status, :description, :welcome_kit,
-                                       :lat, :long, :user_id, :radius, :image)
+                                       :lat, :long, :user_id, :radius, :image,
+                                       user_attributes: [
+                                        :first_name, :last_name, :phone,
+                                        :email, :password, :gcm_id,
+                                        :device_type, :device_id]
+                                       )
     end
 
     def set_stylist

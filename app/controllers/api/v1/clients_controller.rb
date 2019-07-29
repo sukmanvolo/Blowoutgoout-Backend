@@ -27,7 +27,7 @@ module Api::V1
       authorize @client
       client_data = client_params
       user_data = client_data.delete :user_attributes
-      @client.user.update(user_data)
+      @client.user.update(user_data) if user_data
       if @client.update(client_data)
         json_response(@client, :accepted)
       else
