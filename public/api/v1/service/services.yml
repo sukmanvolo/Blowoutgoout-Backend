@@ -12,7 +12,7 @@ post:
       in: body
       description: Service data
       schema:
-        $ref: '#/components/schemas/Service'
+        $ref: '#/components/schemas/service_data'
 get:
   description: Get all services - [Admin, Client, Stylist]
   tags:
@@ -23,20 +23,24 @@ get:
       description: Admin authentication token
       required: true
       type: string
+
 components:
   schemas:
-    Service:
+    service_data:
       type: object
       properties:
-        name:
-          type: string
-        status:
-          enum:
-            - inactive
-            - active
-        service_type_id:
-          type: integer
-        stylist_id:
-          type: integer
-        amount:
-          type: string
+        services:
+          type: object
+          properties:
+            name:
+              type: string
+            status:
+              enum:
+                - inactive
+                - active
+            service_type_id:
+              type: integer
+            stylist_id:
+              type: integer
+            amount:
+              type: string

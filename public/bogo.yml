@@ -40,10 +40,10 @@ paths:
     $ref: '/api/v1/schedule/schedules.yml'
   schedules/{id}:
     $ref: '/api/v1/schedule/schedule_by_id.yml'
-  availibilities:
-    $ref: '/api/v1/availibility/availibilities.yml'
-  availibilities/{id}:
-    $ref: '/api/v1/schedule/availibility_by_id.yml'
+  availabilities:
+    $ref: '/api/v1/availability/availabilities.yml'
+  availabilities/{id}:
+    $ref: '/api/v1/availability/availability_by_id.yml'
 
 securityDefinitions:
   JWT:

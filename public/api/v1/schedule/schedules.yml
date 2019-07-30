@@ -12,7 +12,7 @@ post:
       in: body
       description: Schedule data
       schema:
-        $ref: '#/components/schemas/Schedule'
+        $ref: '#/components/schemas/schedule_data'
 get:
   description: Get all schedules - [Admin, Client, Stylist]
   tags:
@@ -25,12 +25,15 @@ get:
       type: string
 components:
   schemas:
-    Schedule:
+    schedule_data:
       type: object
       properties:
-        date:
-          type: string
-        stylist_id:
-          type: integer
-        service_id:
-          type: integer
+        schedules:
+          type: object
+          properties:
+            date:
+              type: string
+            stylist_id:
+              type: integer
+            service_id:
+              type: integer
