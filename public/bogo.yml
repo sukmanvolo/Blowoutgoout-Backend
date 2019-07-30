@@ -12,9 +12,9 @@ paths:
     $ref: '/api/v1/password/forgot.yml'
   password/reset:
     $ref: '/api/v1/password/reset.yml'
-  client/signup:
+  clients/signup:
     $ref: '/api/v1/client/signup.yml'
-  stylist/signup:
+  stylists/signup:
     $ref: '/api/v1/stylist/signup.yml'
   clients:
     $ref: '/api/v1/admin/clients.yml'
@@ -40,6 +40,10 @@ paths:
     $ref: '/api/v1/schedule/schedules.yml'
   schedules/{id}:
     $ref: '/api/v1/schedule/schedule_by_id.yml'
+  availibilities:
+    $ref: '/api/v1/availibility/availibilities.yml'
+  availibilities/{id}:
+    $ref: '/api/v1/schedule/availibility_by_id.yml'
 
 securityDefinitions:
   JWT:
