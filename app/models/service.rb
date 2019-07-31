@@ -13,4 +13,6 @@ class Service < ApplicationRecord
 
   # scopes
   scope :actives, -> { where(status: :active) }
+
+  delegate :name, to: :service_type, prefix: true
 end
