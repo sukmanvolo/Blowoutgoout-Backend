@@ -23,6 +23,11 @@ get:
       description: Admin authentication token
       required: true
       type: string
+    - name: service_type
+      in: query
+      description: Service Type name
+      required: false
+      type: string
 
 components:
   schemas:
