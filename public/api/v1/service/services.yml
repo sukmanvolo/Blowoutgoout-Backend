@@ -25,9 +25,9 @@ get:
       type: string
     - name: service_type
       in: query
-      description: Service Type name
+      description: Service Type ID
       required: false
-      type: string
+      type: integer
 
 components:
   schemas:
