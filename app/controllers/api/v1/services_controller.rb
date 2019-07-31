@@ -1,12 +1,11 @@
 module Api::V1
   class ServicesController < BaseController
     before_action :set_service, only: [:show, :update, :destroy]
-    before_action :set_service_type, only: :index
 
     # GET /services
     def index
       @services = Service.all
-      @services = @services.where(service_type: @service_type) if params[:service_type]
+      @services = @services.where(service_type_id: service_type_id) if service_type_id
       json_response(@services)
     end
 
@@ -56,8 +55,8 @@ module Api::V1
       @service = Service.find_by_id(params[:id])
     end
 
-    def set_service_type
-      @service_type = ServiceType.find_by_name(params[:service_type])
+    def service_type_id
+      params[:service_type]
     end
   end
 end
