@@ -1,7 +1,7 @@
 # post:
 #   description: Create new service_type - [Admin]
 #   tags:
-#     - Service
+#     - Service Type
 #   parameters:
 #     - name: authorization
 #       in: header
