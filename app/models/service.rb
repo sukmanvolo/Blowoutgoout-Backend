@@ -15,4 +15,8 @@ class Service < ApplicationRecord
   scope :actives, -> { where(status: :active) }
 
   delegate :name, to: :service_type, prefix: true
+
+  def image_attached?
+    image.attached?
+  end
 end
