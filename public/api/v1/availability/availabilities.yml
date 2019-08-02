@@ -12,7 +12,7 @@ post:
       in: body
       description: Availability data
       schema:
-        $ref: '#/definitions/schemas/availability_data'
+        $ref: '#/components/schemas/availability_data'
 
 get:
   description: Get all availability - [Admin, Client, Stylist]
@@ -30,7 +30,7 @@ get:
       required: true
       type: integer
 
-definitions:
+components:
   schemas:
     availability_data:
       type: object

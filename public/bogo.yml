@@ -44,6 +44,14 @@ paths:
     $ref: '/api/v1/availability/availabilities.yml'
   availabilities/{id}:
     $ref: '/api/v1/availability/availability_by_id.yml'
+  favorites:
+    $ref: '/api/v1/favorite/favorites.yml'
+  favorites/{id}:
+    $ref: '/api/v1/favorite/favorite_by_id.yml'
+  bookings:
+    $ref: '/api/v1/booking/bookings.yml'
+  bookings/{id}:
+    $ref: '/api/v1/booking/booking_by_id.yml'
 
 securityDefinitions:
   JWT:

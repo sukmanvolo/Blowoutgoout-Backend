@@ -1,0 +1,43 @@
+post:
+  description: Create new favorite - [Client]
+  tags:
+    - Favorite
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: params
+      in: body
+      description: Favorite data
+      schema:
+        $ref: '#/components/schemas/favorite_data'
+get:
+  description: Get all schedules - [Admin, Client]
+  tags:
+    - Favorite
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: client_id
+      in: path
+      description: Client ID
+      required: true
+      type: string
+
+components:
+  schemas:
+    favorite_data:
+      type: object
+      properties:
+        favorites:
+          type: object
+          properties:
+            client_id:
+              type: integer
+            stylist_id:
+              type: integer

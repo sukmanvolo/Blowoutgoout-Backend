@@ -35,7 +35,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    [last_name, first_name].join(' ')
+    [first_name, last_name].join(' ').titleize
   end
 
   private

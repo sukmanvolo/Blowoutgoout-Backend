@@ -2,15 +2,15 @@ module Api::V1
   class FavoritesController < BaseController
     before_action :set_favorite, only: [:destroy]
 
-    # GET /stylists
+    # GET /favorites
     def index
       @favorites = Favorite.all
-      @favorites = @favorites.by_client(client) if client
-      @favorites = Stylist.where(id: @favorites.pluck(:stylist_id))
-      json_response(@favorites)
+      @favorites = @favorites.by_client(params[:client_id]) if params[:client_id]
+      @stylists = Stylist.where(id: @favorites.pluck(:stylist_id))
+      json_response(@stylists)
     end
 
-    # POST /stylists
+    # POST /favorites
     def create
       @favorite = Favorite.new(favorite_params)
       authorize @favorite
@@ -18,7 +18,7 @@ module Api::V1
       json_response(@favorite, :created)
     end
 
-    # DELETE /stylists/:id
+    # DELETE /favorites/:id
     def destroy
       authorize @favorite
       @favorite.destroy
@@ -33,11 +33,6 @@ module Api::V1
 
     def set_favorite
       @favorite = Favorite.find_by_id(params[:id])
-    end
-
-    def client
-      id = params[:favorites] && params[:favorites][:client_id]
-      @client ||= Client.find_by_id(id)
     end
   end
 end

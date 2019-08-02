@@ -1,7 +1,7 @@
 get:
-  description: Show availability by ID
+  description: Show booking by ID
   tags:
-    - Availability
+    - Booking
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -14,9 +14,9 @@ get:
       type: integer
       format: int64
 patch:
-  description: Update availability by ID
+  description: Update booking by ID
   tags:
-    - Availability
+    - Booking
   parameters:
     - name: Authorization
       description: "JWT token"
@@ -30,13 +30,13 @@ patch:
       format: int64
     - name: params
       in: body
-      description: Availability data
+      description: Service data
       schema:
-        $ref: '#/components/schemas/availability_data'
+        $ref: '#/components/schemas/booking_data'
 delete:
-  description: Delete availability by ID
+  description: Delete booking by ID
   tags:
-    - Availability
+    - Booking
   parameters:
     - name: id
       in: path

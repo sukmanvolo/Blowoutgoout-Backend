@@ -4,7 +4,9 @@ module Api::V1
 
     # GET /bookings
     def index
-      @bookings = Bookings.all
+      @bookings = Booking.all
+      @bookings = Booking.by_client(params[:client_id]) if params[:client_id]
+      @bookings = Booking.by_stylist(params[:stylist_id]) if params[:stylist_id]
       json_response(@bookings)
     end
 
@@ -83,8 +85,7 @@ module Api::V1
     def booking_params
       params.require(:bookings).permit(:client_id, :stylist_id, :service_id,
                                        :time_from, :time_to, :fee, :service_lat,
-                                       :service_long, :date, :status, :availability_id,
-                                       :availability_id)
+                                       :service_long, :date, :status, :availability_id)
     end
 
     def set_booking
