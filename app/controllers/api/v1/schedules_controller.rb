@@ -6,10 +6,10 @@ module Api::V1
     # GET /schedules
     def index
       @schedules = Schedule.all
-      @schedules = @schedules.filter_by_stylist(@stylist) if @stylist
-      @schedules = @schedules.filter_by_service(@service) if @service
-      @schedules = @schedules.from_date(@from_date) if @from_date
-      @schedules = @schedules.to_date(@to_date) if @to_date
+      @schedules = @schedules.filter_by_stylist(@stylist) if params[:stylist_id]
+      @schedules = @schedules.filter_by_service(@service) if params[:service_id]
+      @schedules = @schedules.from_date(@from_date) if params[:from_date]
+      @schedules = @schedules.to_date(@to_date) if params[:to_date]
       json_response(@schedules)
     end
 
