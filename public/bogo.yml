@@ -52,6 +52,14 @@ paths:
     $ref: '/api/v1/booking/bookings.yml'
   bookings/{id}:
     $ref: '/api/v1/booking/booking_by_id.yml'
+  bookings/{id}/confirm:
+    $ref: '/api/v1/booking/booking_confirm.yml'
+  bookings/{id}/reject:
+    $ref: '/api/v1/booking/booking_reject.yml'
+  bookings/upcoming_appointments:
+    $ref: '/api/v1/booking/booking_upcoming_appointments.yml'
+  bookings/past_appointments:
+    $ref: '/api/v1/booking/booking_past_appointments.yml'
 
 securityDefinitions:
   JWT:

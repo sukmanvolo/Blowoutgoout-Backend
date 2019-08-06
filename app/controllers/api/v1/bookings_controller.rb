@@ -47,7 +47,7 @@ module Api::V1
       @booking.status = 'confirmed'
       if ChangeBookingStatus.call(@booking).result
         availability.update(status: 'used')
-        json_response(@booking, status: :accepted)
+        json_response(@booking, :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)
       end
@@ -68,14 +68,14 @@ module Api::V1
 
     # PUT /bookings/upcoming_appointments
     def upcoming_appointments
-      @bookings = Booking.by_client(client_id) if client_id
-      @bookings = Booking.by_stylist(stylist_id) if stylist_id
+      @bookings = Booking.by_client(params[:client_id]) if params[:client_id]
+      @bookings = Booking.by_stylist(params[:stylist_id]) if params[:stylist_id]
       @bookings = @bookings.upcoming
       json_response(@bookings)
     end
 
     def past_appointments
-      @bookings = Booking.by_client(client_id) if client_id
+      @bookings = Booking.by_client(params[:client_id]) if params[:client_id]
       @bookings = @bookings.past
       json_response(@bookings)
     end
@@ -90,14 +90,6 @@ module Api::V1
 
     def set_booking
       @booking = Booking.find_by_id(params[:id])
-    end
-
-    def client_id
-      params[:bookings] && params[:bookings][:client_id]
-    end
-
-    def stylist_id
-      params[:bookings] && params[:bookings][:stylist_id]
     end
 
     def cancel_notification

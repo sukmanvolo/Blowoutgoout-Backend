@@ -1,0 +1,15 @@
+put:
+  description: Reject booking
+  tags:
+    - Booking
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
