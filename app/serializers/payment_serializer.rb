@@ -3,7 +3,7 @@ class PaymentSerializer < ActiveModel::Serializer
   :appointment_date, :created_at
 
   def created_at
-    object.created_at.strftime('%m-%d-%Y %H:%M')
+    object.created_at.strftime('%Y-%m-%d %H:%M')
   end
 
   def service_name
@@ -11,6 +11,6 @@ class PaymentSerializer < ActiveModel::Serializer
   end
 
   def appointment_date
-    object.booking.date && object.booking.date.strftime('%m-%d-%Y %H:%M')
+    object.booking.date && object.booking.date.strftime('%Y-%m-%d %H:%M')
   end
 end
