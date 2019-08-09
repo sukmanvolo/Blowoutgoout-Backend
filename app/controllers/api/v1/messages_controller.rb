@@ -5,8 +5,8 @@ module Api::V1
     # GET /messages
     def index
       @messages = Message.all
-      @messages = @messages.by_booking(booking) if booking
-      @messages = @messages.conversation(client, stylist) if client && stylist
+      @messages = @messages.by_booking(params[:booking_id]) if params[:booking_id]
+      @messages = @messages.conversation(params[:client_id], params[:stylist_id]) if params[:client_id] && params[:stylist_id]
       json_response(@messages)
     end
 
@@ -45,21 +45,6 @@ module Api::V1
 
     def set_message
       @message ||= Message.find_by_id(params[:id])
-    end
-
-    def booking
-      id = params[:messages] && params[:messages][:booking_id]
-      @booking ||= Booking.find_by_id(id)
-    end
-
-    def client
-      id = params[:messages] && params[:messages][:client_id]
-      @client ||= Client.find_by_id(id)
-    end
-
-    def stylist
-      id = params[:messages] && params[:messages][:stylist_id]
-      @stylist ||= Stylist.find_by_id(id)
     end
   end
 end
