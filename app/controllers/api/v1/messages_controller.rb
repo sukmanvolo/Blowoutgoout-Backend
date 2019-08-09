@@ -4,7 +4,7 @@ module Api::V1
 
     # GET /messages
     def index
-      @messages = Message.all
+      @messages = filters_exists? ? Message.all : []
       @messages = @messages.by_booking(params[:booking_id]) if params[:booking_id]
       @messages = @messages.conversation(params[:client_id], params[:stylist_id]) if params[:client_id] && params[:stylist_id]
       json_response(@messages)
@@ -45,6 +45,10 @@ module Api::V1
 
     def set_message
       @message ||= Message.find_by_id(params[:id])
+    end
+
+    def filters_exists?
+      params[:booking_id] || params[:client_id] || params[:stylist_id]
     end
   end
 end

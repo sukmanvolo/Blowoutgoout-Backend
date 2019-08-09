@@ -1,0 +1,57 @@
+post:
+  description: Create new message - [Admin, Client, Stylist]
+  tags:
+    - Message
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: params
+      in: body
+      description: Message data
+      schema:
+        $ref: '#/components/schemas/message_data'
+get:
+  description: Get all messages - [Admin, Client, Stylist]
+  tags:
+    - Message
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: booking_id
+      in: query
+      description: Booking ID
+      required: false
+      type: integer
+    - name: client_id
+      in: query
+      description: Client ID
+      required: false
+      type: integer
+    - name: stylist_id
+      in: query
+      description: Stylist ID
+      required: false
+      type: integer
+
+components:
+  schemas:
+    message_data:
+      type: object
+      properties:
+        messages:
+          type: object
+          properties:
+            booking_id:
+              type: integer
+            client_id:
+              type: integer
+            stylist_id:
+              type: integer
+            text:
+              type: string

@@ -1,0 +1,11 @@
+delete:
+  description: Delete card by ID
+  tags:
+    - Card
+  parameters:
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64

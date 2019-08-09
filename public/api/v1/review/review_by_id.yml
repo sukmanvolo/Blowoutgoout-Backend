@@ -1,0 +1,11 @@
+delete:
+  description: Delete review by ID [Admin]
+  tags:
+    - Review
+  parameters:
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64

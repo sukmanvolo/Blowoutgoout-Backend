@@ -1,0 +1,15 @@
+get:
+  description: Get all cards - [Client]
+  tags:
+    - Card
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: client_id
+      in: path
+      description: Client ID
+      required: false
+      type: string

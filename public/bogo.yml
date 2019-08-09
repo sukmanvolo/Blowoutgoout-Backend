@@ -3,8 +3,8 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: 'Bogo API'
-# host: localhost:3000/api/v1/
-host: bogo-staging.herokuapp.com/api/v1/
+host: localhost:3000/api/v1/
+# host: bogo-staging.herokuapp.com/api/v1/
 paths:
   authenticate:
     $ref: '/api/v1/authenticate.yml'
@@ -64,6 +64,18 @@ paths:
     $ref: '/api/v1/payment/payments.yml'
   payments/{id}:
     $ref: '/api/v1/payment/payment_by_id.yml'
+  messages:
+    $ref: '/api/v1/message/messages.yml'
+  messages/{id}:
+    $ref: '/api/v1/message/message_by_id.yml'
+  cards:
+    $ref: '/api/v1/card/cards.yml'
+  cards/{id}:
+    $ref: '/api/v1/card/card_by_id.yml'
+  reviews:
+    $ref: '/api/v1/review/reviews.yml'
+  reviews/{id}:
+    $ref: '/api/v1/review/review_by_id.yml'
 
 
 securityDefinitions:

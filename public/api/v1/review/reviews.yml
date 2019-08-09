@@ -1,0 +1,47 @@
+post:
+  description: Create new review - [Client]
+  tags:
+    - Review
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: params
+      in: body
+      description: Review data
+      schema:
+        $ref: '#/components/schemas/review_data'
+get:
+  description: Get all schedules - [Admin, Client]
+  tags:
+    - Review
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: stylist_id
+      in: query
+      description: Stylist ID
+      required: true
+      type: integer
+
+components:
+  schemas:
+    review_data:
+      type: object
+      properties:
+        reviews:
+          type: object
+          properties:
+            client_id:
+              type: integer
+            stylist_id:
+              type: integer
+            text:
+              type: string
+            rate:
+              type: integer

@@ -5,7 +5,7 @@ module Api::V1
     # GET /stylists
     def index
       @reviews = Review.all
-      @reviews = @reviews.by_stylist(client) if client
+      @reviews = @reviews.by_stylist(params[:stylist_id]) if params[:stylist_id]
       @reviews = Stylist.where(id: @reviews.pluck(:stylist_id))
       json_response(@reviews)
     end
@@ -28,16 +28,11 @@ module Api::V1
     private
 
     def favorite_params
-      params.require(:favorites).permit(:client_id, :stylist_id)
+      params.require(:reviews).permit(:client_id, :stylist_id, :text, :rate)
     end
 
     def set_review
       @favorite = Review.find_by_id(params[:id])
-    end
-
-    def client
-      id = params[:favorites] && params[:favorites][:client_id]
-      @client ||= Client.find_by_id(id)
     end
   end
 end
