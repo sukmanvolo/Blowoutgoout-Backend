@@ -60,6 +60,7 @@ Rails.application.routes.draw do
       resources :cards
       resources :contacts, only: [:create]
       resources :reviews
+      resources :notifications, only: :index
     end
   end
 end
