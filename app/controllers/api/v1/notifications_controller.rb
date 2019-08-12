@@ -15,8 +15,8 @@ module Api::V1
     end
 
     def user_id
-      user_id = Client.find_by_id(params[:client_id])&.id if params[:client_id].present?
-      user_id = Stylist.find_by_id(params[:stylist_id])&.id if params[:stylist_id].present?
+      user_id = Client.find_by_id(params[:client_id])&.user_id if params[:client_id].present?
+      user_id = Stylist.find_by_id(params[:stylist_id])&.user_id if params[:stylist_id].present?
       user_id
     end
   end
