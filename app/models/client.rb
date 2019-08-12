@@ -11,7 +11,7 @@ class Client < ApplicationRecord
 
   validates :image, presence: false, blob: { content_type: :image }
 
-  delegate :first_name, :last_name, :phone, :id, to: :user, prefix: false
+  delegate :first_name, :last_name, :phone, to: :user, prefix: false
 
   def image_attached?
     image.attached?

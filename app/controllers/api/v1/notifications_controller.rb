@@ -5,6 +5,7 @@ module Api::V1
     def index
       @notifications = filters_exists? ? Notification.all : []
       @notifications = @notifications.by_user(user_id) if filters_exists?
+      @notifications = params[:page].present? ? @notifications.page(params[:page]).per(per_page) : @notifications
       json_response(@notifications)
     end
 
@@ -15,8 +16,8 @@ module Api::V1
     end
 
     def user_id
-      user_id = Client.find_by_id(params[:client_id])&.user_id if params[:client_id].present?
-      user_id = Stylist.find_by_id(params[:stylist_id])&.user_id if params[:stylist_id].present?
+      user_id = Client.find_by_id(params[:client_id])&.user&.id if params[:client_id].present?
+      user_id = Stylist.find_by_id(params[:stylist_id])&.user&.id if params[:stylist_id].present?
       user_id
     end
   end
