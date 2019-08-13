@@ -70,7 +70,7 @@ module Api::V1
     def upcoming_appointments
       @bookings = Booking.by_client(params[:client_id]) if params[:client_id]
       @bookings = Booking.by_stylist(params[:stylist_id]) if params[:stylist_id]
-      @bookings = @bookings.upcoming
+      @bookings = @bookings&.upcoming
       json_response(@bookings)
     end
 

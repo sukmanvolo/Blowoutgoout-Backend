@@ -12,7 +12,7 @@ class Booking < ApplicationRecord
 
   scope :by_client, ->(id) { where(client_id: id) }
   scope :by_stylist, ->(id) { where(stylist_id: id) }
-  scope :upcoming, -> { where(status: 'confirmed', date: Date.today..3.days.from_now) }
+  scope :upcoming, -> { where(status: ['confirmed', 'pending']).where('date > ?',  Date.today) }
   scope :past, -> { where(status: ['confirmed', 'completed']).where('date < ?',  Date.today) }
 
   delegate :amount, :name, to: :service, prefix: true
