@@ -10,10 +10,10 @@ get:
     - name: client_id
       in: path
       description: Client ID
-      required: true
+      required: false
       type: integer
     - name: stylist_id
       in: path
       description: Stylist ID
-      required: true
+      required: false
       type: integer
