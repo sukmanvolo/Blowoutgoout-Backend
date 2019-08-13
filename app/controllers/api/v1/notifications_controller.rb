@@ -5,7 +5,7 @@ module Api::V1
     def index
       @notifications = filters_exists? ? Notification.all : []
       @notifications = @notifications.by_user(user_id) if filters_exists?
-      @notifications = params[:page].present? ? @notifications.page(params[:page]).per(per_page) : @notifications
+      @notifications = @notifications.page(page_number).per(per_page)
       json_response(@notifications)
     end
 

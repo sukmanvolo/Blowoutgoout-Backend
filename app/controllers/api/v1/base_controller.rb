@@ -28,5 +28,13 @@ module Api::V1
     def user_not_authorized(exception)
       json_response({ message: 'You are not authorized to perform this action.' }, :unauthorized)
     end
+
+    def per_page
+      params[:per_page].presence || 20
+    end
+
+    def page_number
+      params[:page].presence || 1
+    end
   end
 end
