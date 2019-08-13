@@ -1,9 +1,9 @@
 module Api::V1
   class ContactsController < BaseController
 
-    # POST /cards
+    # POST /contacts
     def create
-      if UserMailer.send_message(current_user, message, subject).deliver_now
+      if UserMailer.send_message(current_user, message).deliver_now
         CreateNotification.call(current_user, notification_message)
         render json: { status: 'ok' }, status: :ok
       else
@@ -22,7 +22,7 @@ module Api::V1
     end
 
     def notification_message
-      "Your message #{subject} was sent at #{Time.now.strftime('%m-%d-%Y %H:%M')}"
+      "Your message to contact support was sent at #{Time.now.strftime('%m-%d-%Y %H:%M')}"
     end
   end
 end

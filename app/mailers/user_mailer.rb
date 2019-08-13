@@ -18,7 +18,7 @@ class UserMailer < ApplicationMailer
          subject: 'Your password has been reset')
   end
 
-  def send_message(user, message, subject)
+  def send_message(user, message)
     @user = user
     @name = user.full_name
     @name = 'No name' if @name.empty?
@@ -26,6 +26,6 @@ class UserMailer < ApplicationMailer
     return nil unless @user && message.present?
     mail to: ADMIN_EMAIL,
          from: user.email,
-         subject: "#{subject} from #{@name}"
+         subject: "Contact support from #{@name}"
   end
 end
