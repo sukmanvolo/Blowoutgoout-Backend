@@ -55,4 +55,13 @@ class Stylist < ApplicationRecord
   def full_name
     [first_name, last_name].join(' ').titleize
   end
+
+  def reviews_count
+    reviews.count
+  end
+
+  def reviews_rating
+    return 0 unless reviews_count > 0
+    reviews.sum(&:rate) / reviews_count
+  end
 end

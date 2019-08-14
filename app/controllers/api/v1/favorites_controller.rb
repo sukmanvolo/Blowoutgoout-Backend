@@ -7,7 +7,8 @@ module Api::V1
       @favorites = Favorite.all
       @favorites = @favorites.by_client(params[:client_id]) if params[:client_id]
       @stylists = Stylist.where(id: @favorites.pluck(:stylist_id))
-      json_response(@stylists)
+      render json: @stylists, each_serializer: FavoriteSerializer, status: :ok
+      # json_response(@stylists)
     end
 
     # POST /favorites

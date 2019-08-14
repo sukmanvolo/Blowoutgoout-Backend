@@ -17,10 +17,6 @@ module Api::V1
       params[:contacts] && params[:contacts][:message]
     end
 
-    def subject
-      params[:contacts] && params[:contacts][:subject]
-    end
-
     def notification_message
       "Your message to contact support was sent at #{Time.now.strftime('%m-%d-%Y %H:%M')}"
     end
