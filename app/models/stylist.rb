@@ -62,6 +62,6 @@ class Stylist < ApplicationRecord
 
   def reviews_rating
     return 0 unless reviews_count > 0
-    reviews.sum(&:rate) / reviews_count
+    (reviews.sum(&:rate) / reviews_count).round(1)
   end
 end
