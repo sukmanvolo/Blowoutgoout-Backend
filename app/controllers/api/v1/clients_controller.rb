@@ -73,7 +73,7 @@ module Api::V1
       params.require(:stylists).permit(:years_of_experience, :license_agreement,
                                       :has_smartphone, :has_transportation,
                                       user_attributes: [
-                                        :first_name, :email, :phone,
+                                        :first_name, :email, :phone
                                         ]
                                       )
     end

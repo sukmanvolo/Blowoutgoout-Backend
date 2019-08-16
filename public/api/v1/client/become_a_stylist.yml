@@ -1,0 +1,39 @@
+post:
+  description: Become a Stylist
+  tags:
+    - Client
+  parameters:
+    - name: Authorization
+      in: header
+      description: "JWT token"
+      type: string
+    - name: params
+      in: body
+      description: Stylist data
+      schema:
+        $ref: '#/components/schemas/become_stylist_data'
+components:
+  schemas:
+    become_stylist_data:
+      type: object
+      properties:
+        stylists:
+          type: object
+          properties:
+            years_of_experience:
+              type: string
+            license_agreement:
+              type: string
+            has_smartphone:
+              type: string
+            has_transportation:
+              type: string
+            user_attributes:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
