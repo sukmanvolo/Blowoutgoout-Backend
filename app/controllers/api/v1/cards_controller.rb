@@ -4,14 +4,14 @@ module Api::V1
 
     # GET cards
     def index
-      @cards = CardService.new(client).list.data
+      @cards = CardService.new(@client)&.list&.data
       json_response(@cards)
     end
 
     # DELETE cards/:id
     def destroy
       authorize @card
-      CardService.new(client).delete(params[:card_token])
+      CardService.new(@client)&.delete(params[:card_token])
       head :no_content
     end
 

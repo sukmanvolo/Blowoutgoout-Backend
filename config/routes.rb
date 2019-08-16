@@ -30,7 +30,11 @@ Rails.application.routes.draw do
 
       post 'clients/signup', to: 'clients_signup#create'
       post 'stylists/signup', to: 'stylists_signup#create'
-      resources :clients
+      resources :clients do
+        collection do
+          post 'become_a_stylist', to: 'clients#become_a_stylist'
+        end
+      end
       resources :stylists do
         collection do
           get 'nearest_stylists', to: 'stylists#nearest_stylists'

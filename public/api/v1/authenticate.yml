@@ -20,3 +20,5 @@ definitions:
         type: string
       password:
         type: string
+      role:
+        type: string

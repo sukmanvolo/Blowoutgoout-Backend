@@ -42,6 +42,22 @@ module Api::V1
       head :no_content
     end
 
+    def become_a_stylist
+      @client = Client.find_by_id(params[:client_id])
+      if @client
+        @stylist = Stylist.new(stylist_params)
+        @stylist.user.last_name = @client.user.last_name
+        @stylist.user.password_digest = @client.user.password_digest
+        @stylist.user.role = 'stylist'
+        @stylist.user.gcm_id = @client.user.gcm_id
+        @stylist.user.device_type = @client.user.device_type
+        @stylist.user.device_id = @client.user.device_id
+        @stylist.save
+      else
+        json_response(@client, :unprocessable_entity)
+      end
+    end
+
     private
 
     def client_params
@@ -50,6 +66,15 @@ module Api::V1
                                         :first_name, :last_name, :phone,
                                         :email, :password, :gcm_id,
                                         :device_type, :device_id]
+                                      )
+    end
+
+    def stylist_params
+      params.require(:stylists).permit(:years_of_experience, :license_agreement,
+                                      :has_smartphone, :has_transportation,
+                                      user_attributes: [
+                                        :first_name, :email, :phone,
+                                        ]
                                       )
     end
 

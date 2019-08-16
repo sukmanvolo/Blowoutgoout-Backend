@@ -12,4 +12,4 @@ get:
       in: path
       description: Client ID
       required: false
-      type: string
+      type: integer

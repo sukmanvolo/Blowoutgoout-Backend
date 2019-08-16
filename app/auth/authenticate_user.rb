@@ -1,9 +1,10 @@
 class AuthenticateUser
   prepend SimpleCommand
 
-  def initialize(email, password)
+  def initialize(email, password, role)
     @email = email
     @password = password
+    @role = role
   end
 
   # Service entry point
@@ -13,11 +14,11 @@ class AuthenticateUser
 
   private
 
-  attr_reader :email, :password
+  attr_reader :email, :password, :role
 
   # verify user credentials
   def user
-    user = User.find_by(email: email)
+    user = User.find_by(email: email, role: role)
     return user if user&.authenticate(password)
 
     # raise Authentication error if credentials are invalid
