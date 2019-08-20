@@ -1,6 +1,6 @@
 module Api::V1
   class ClientsController < BaseController
-    before_action :set_client, only: [:show, :update, :destroy]
+    before_action :set_client, only: [:show, :update, :destroy, :save_gateway_token, :become_a_stylist]
 
     # GET /clients
     def index
@@ -43,16 +43,20 @@ module Api::V1
     end
 
     def become_a_stylist
-      @client = Client.find_by_id(params[:client_id])
-      if @client
-        @stylist = Stylist.new(stylist_params)
-        @stylist.user.last_name = @client.user.last_name
-        @stylist.user.password_digest = @client.user.password_digest
-        @stylist.user.role = 'stylist'
-        @stylist.user.gcm_id = @client.user.gcm_id
-        @stylist.user.device_type = @client.user.device_type
-        @stylist.user.device_id = @client.user.device_id
+      @stylist = Stylist.new(stylist_params)
+      copy_user_attributes(@stylist)
+      if @stylist.valid?
         @stylist.save
+        json_response(@stylist, :ok)
+      else
+        json_response(@stylist.errors.messages, :unprocessable_entity)
+      end
+    end
+
+    def save_gateway_token
+      if @client
+        @client.update!(customer_id: params[:customer_token])
+        json_response(@client, :ok)
       else
         json_response(@client, :unprocessable_entity)
       end
@@ -79,11 +83,23 @@ module Api::V1
     end
 
     def set_client
-      @client = Client.find(params[:id])
+      @client = Client.find_by_id(params[:id])
     end
 
     def user_attributes
       client_params.delete :user_attributes
     end
+
+    def copy_user_attributes(stylist)
+      if @client
+        stylist.user.last_name = @client.user.last_name
+        stylist.user.password_digest = @client.user.password_digest
+        stylist.user.role = 'stylist'
+        stylist.user.gcm_id = @client.user.gcm_id
+        stylist.user.device_type = @client.user.device_type
+        stylist.user.device_id = @client.user.device_id
+      end
+    end
+
   end
 end

@@ -1,5 +1,5 @@
 class ClientSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :email, :phone, :image
+  attributes :id, :first_name, :last_name, :email, :phone, :customer_id, :image
 
   def image
     if object.image_attached?

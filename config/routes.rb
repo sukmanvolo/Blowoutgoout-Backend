@@ -31,8 +31,9 @@ Rails.application.routes.draw do
       post 'clients/signup', to: 'clients_signup#create'
       post 'stylists/signup', to: 'stylists_signup#create'
       resources :clients do
-        collection do
+        member do
           post 'become_a_stylist', to: 'clients#become_a_stylist'
+          patch 'save_gateway_token', to: 'save_gateway_token'
         end
       end
       resources :stylists do

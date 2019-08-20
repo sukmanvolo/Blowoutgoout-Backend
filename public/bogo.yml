@@ -22,7 +22,7 @@ paths:
     $ref: '/api/v1/admin/stylists.yml'
   clients/{id}:
     $ref: '/api/v1/client/client_by_id.yml'
-  clients/become_a_stylist:
+  clients/{id}/become_a_stylist:
     $ref: '/api/v1/client/become_a_stylist.yml'
   stylists/{id}:
     $ref: '/api/v1/stylist/stylist_by_id.yml'
