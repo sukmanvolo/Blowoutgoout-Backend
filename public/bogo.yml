@@ -24,6 +24,8 @@ paths:
     $ref: '/api/v1/client/client_by_id.yml'
   clients/{id}/become_a_stylist:
     $ref: '/api/v1/client/become_a_stylist.yml'
+  clients/{id}/save_gateway_token:
+    $ref: '/api/v1/client/save_gateway_token.yml'
   stylists/{id}:
     $ref: '/api/v1/stylist/stylist_by_id.yml'
   stylists/nearest_stylists:

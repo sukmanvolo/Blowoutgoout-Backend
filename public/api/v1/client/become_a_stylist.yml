@@ -7,6 +7,12 @@ post:
       in: header
       description: "JWT token"
       type: string
+    - name: id
+      in: path
+      description: Client ID
+      required: true
+      type: integer
+      format: int64
     - name: params
       in: body
       description: Stylist data

@@ -1,0 +1,26 @@
+patch:
+  description: Save gateway token
+  tags:
+    - Client
+  parameters:
+    - name: Authorization
+      in: header
+      description: "JWT token"
+      type: string
+    - name: id
+      in: path
+      description: Client ID
+      required: true
+      type: integer
+    - name: params
+      in: body
+      description: Stripe customer token
+      schema:
+        $ref: '#/components/schemas/customer_token'
+components:
+  schemas:
+    customer_token:
+      type: object
+      properties:
+        customer_token:
+          type: string
