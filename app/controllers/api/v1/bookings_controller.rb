@@ -70,20 +70,20 @@ module Api::V1
     def upcoming_appointments
       @bookings = Booking.by_client(params[:client_id]) if params[:client_id]
       @bookings = Booking.by_stylist(params[:stylist_id]) if params[:stylist_id]
-      @bookings = @bookings&.upcoming
+      @bookings = @bookings&.upcoming || []
       json_response(@bookings)
     end
 
     def past_appointments
       @bookings = Booking.by_client(params[:client_id]) if params[:client_id]
-      @bookings = @bookings.past
+      @bookings = @bookings&.past || []
       json_response(@bookings)
     end
 
     private
 
     def booking_params
-      params.require(:bookings).permit(:client_id, :stylist_id, :service_id,
+      params.require(:bookings).permit(:client_id, :stylist_id, :service_ids,
                                        :time_from, :time_to, :fee, :service_lat,
                                        :service_long, :date, :status, :availability_id)
     end

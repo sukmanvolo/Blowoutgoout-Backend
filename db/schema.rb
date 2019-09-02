@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030588) do
+ActiveRecord::Schema.define(version: 2019_12_18_030590) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2019_12_18_030588) do
   create_table "bookings", force: :cascade do |t|
     t.bigint "client_id"
     t.bigint "stylist_id"
-    t.bigint "service_id"
     t.time "time_from"
     t.time "time_to"
     t.decimal "fee", default: "0.0"
@@ -60,9 +59,9 @@ ActiveRecord::Schema.define(version: 2019_12_18_030588) do
     t.datetime "updated_at", null: false
     t.date "date"
     t.bigint "availability_id"
+    t.bigint "service_ids", default: [], array: true
     t.index ["availability_id"], name: "index_bookings_on_availability_id"
     t.index ["client_id"], name: "index_bookings_on_client_id"
-    t.index ["service_id"], name: "index_bookings_on_service_id"
     t.index ["stylist_id"], name: "index_bookings_on_stylist_id"
   end
 
@@ -144,11 +143,10 @@ ActiveRecord::Schema.define(version: 2019_12_18_030588) do
 
   create_table "schedules", force: :cascade do |t|
     t.bigint "stylist_id"
-    t.bigint "service_id"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["service_id"], name: "index_schedules_on_service_id"
+    t.bigint "service_ids", default: [], array: true
     t.index ["stylist_id"], name: "index_schedules_on_stylist_id"
   end
 
@@ -237,7 +235,6 @@ ActiveRecord::Schema.define(version: 2019_12_18_030588) do
 
   add_foreign_key "availabilities", "schedules"
   add_foreign_key "bookings", "clients"
-  add_foreign_key "bookings", "services"
   add_foreign_key "bookings", "stylists"
   add_foreign_key "favorites", "clients"
   add_foreign_key "favorites", "stylists"
@@ -247,7 +244,6 @@ ActiveRecord::Schema.define(version: 2019_12_18_030588) do
   add_foreign_key "payments", "bookings"
   add_foreign_key "reviews", "clients"
   add_foreign_key "reviews", "stylists"
-  add_foreign_key "schedules", "service_types", column: "service_id"
   add_foreign_key "schedules", "stylists"
   add_foreign_key "services", "service_types"
   add_foreign_key "services", "stylists"
