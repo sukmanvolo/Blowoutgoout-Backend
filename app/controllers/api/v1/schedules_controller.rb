@@ -43,7 +43,7 @@ module Api::V1
     private
 
     def schedule_params
-      params.require(:schedules).permit(:stylist_id, :service_id, :date)
+      params.require(:schedules).permit(:stylist_id, :service_ids, :date)
     end
 
     def set_schedule
@@ -51,8 +51,8 @@ module Api::V1
     end
 
     def set_data_params
-      @stylist = Stylist.find_by_id(params[:stylist_id])
-      @service = Service.find_by_id(params[:service_id])
+      @stylist = params[:stylist_id]
+      @service = params[:service_id]
       @from_date = params[:from_date]
       @to_date = params[:to_date]
     end

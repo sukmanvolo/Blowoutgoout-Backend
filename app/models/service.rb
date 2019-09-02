@@ -3,7 +3,7 @@ class Service < ApplicationRecord
 
   belongs_to :service_type
   belongs_to :stylist
-  has_many :schedules
+  # has_many :schedules
 
   # validations
   validates :name, :amount, presence: true

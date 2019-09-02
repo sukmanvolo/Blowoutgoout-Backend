@@ -1,7 +1,7 @@
 class BookingSerializer < ActiveModel::Serializer
   attributes :id, :client_id, :client_full_name, :stylist_id,
              :stylist_full_name, :time_from, :time_to, :service_lat,
-             :service_long, :date, :status, :availability_id
+             :service_long, :date, :status, :availability_id, :service_ids
 
   def client_full_name
     object&.client&.full_name

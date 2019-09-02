@@ -56,5 +56,9 @@ components:
               type: string
             stylist_id:
               type: integer
-            service_id:
-              type: integer
+            service_ids:
+              type: array
+              items:
+                type: integer
+                format: int64
+              example: [1, 3]
