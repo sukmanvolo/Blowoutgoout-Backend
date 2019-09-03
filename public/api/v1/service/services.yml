@@ -45,7 +45,7 @@ components:
                 - active
             service_type_id:
               type: integer
-            stylist_id:
-              type: integer
             amount:
-              type: string
+              type: integer
+            duration:
+              type: integer
