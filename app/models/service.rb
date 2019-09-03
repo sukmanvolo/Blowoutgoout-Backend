@@ -2,7 +2,8 @@ class Service < ApplicationRecord
   has_one_attached :image
 
   belongs_to :service_type
-  # belongs_to :stylist
+  has_many :stylist_services
+  has_many :stylists, through: :stylist_services
   # has_many :schedules
 
   # validations
