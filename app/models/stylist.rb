@@ -6,7 +6,7 @@ class Stylist < ApplicationRecord
 
   # relantionships
   belongs_to :user, dependent: :destroy
-  has_many :services
+  # has_many :services
   has_many :schedules
   has_many :reviews
   has_many :favorites, dependent: :destroy

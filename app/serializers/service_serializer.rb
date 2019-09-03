@@ -1,6 +1,6 @@
 class ServiceSerializer < ActiveModel::Serializer
-  attributes :id, :name, :service_type_id, :service_type, :stylist_id, :amount,
-             :status, :image
+  attributes :id, :name, :service_type_id, :service_type, :amount,
+             :duration, :status, :image
 
   def service_type
     object.service_type_name
