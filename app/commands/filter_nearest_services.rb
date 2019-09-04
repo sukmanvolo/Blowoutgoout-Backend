@@ -11,6 +11,6 @@ class FilterNearestServices
 
   def call
     stylists = Stylist.nearest_stylists(lat, long)
-    Service.actives.where(service_type: service_type_id, stylist: stylists)
+    Service.actives.where(service_type: service_type_id).joins(:stylist_services).where( stylist_services: {stylist: stylists})
   end
 end

@@ -40,7 +40,7 @@ module Api::V1
     def nearest_services
       @services = FilterNearestServices.call(params[:lat],
                                              params[:long],
-                                             params[:service_type_id]).result
+                                             params[:service_type_id]).result.uniq
       json_response(@services)
     end
 
