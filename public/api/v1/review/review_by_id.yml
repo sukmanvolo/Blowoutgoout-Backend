@@ -3,6 +3,10 @@ delete:
   tags:
     - Review
   parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
     - name: id
       in: path
       description: ID

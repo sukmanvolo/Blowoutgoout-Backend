@@ -14,7 +14,7 @@ get:
       type: integer
       format: int64
 patch:
-  description: Update availability by ID
+  description: Update availability by ID [Admin, Stylist]
   tags:
     - Availability
   parameters:
@@ -34,10 +34,14 @@ patch:
       schema:
         $ref: '#/components/schemas/availability_data'
 delete:
-  description: Delete availability by ID
+  description: Delete availability by ID [Admin, Stylist]
   tags:
     - Availability
   parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
     - name: id
       in: path
       description: ID
