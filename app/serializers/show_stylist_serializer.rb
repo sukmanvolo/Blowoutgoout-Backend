@@ -6,11 +6,19 @@ class ShowStylistSerializer < ActiveModel::Serializer
   has_many :reviews
 
   def image
-    return nil unless object.image_attached?
-      Rails.application
-           .routes
-           .url_helpers
-           .rails_representation_url(object.image.variant(resize: "100x100").processed)
+    if object.image_attached?
+      if object.image.variable?
+        Rails.application
+             .routes
+             .url_helpers
+             .rails_representation_url(object.image.variant(resize: "100x100").processed)
+      else
+        Rails.application
+             .routes
+             .url_helpers
+             .url_for(object.image)
+      end
+    end
   end
 
   def cosmetology_license
