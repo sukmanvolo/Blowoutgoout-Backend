@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030592) do
+ActiveRecord::Schema.define(version: 2019_12_18_030594) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,12 +142,10 @@ ActiveRecord::Schema.define(version: 2019_12_18_030592) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.bigint "stylist_id"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "service_ids", default: [], array: true
-    t.index ["stylist_id"], name: "index_schedules_on_stylist_id"
   end
 
   create_table "service_types", force: :cascade do |t|
@@ -166,6 +164,16 @@ ActiveRecord::Schema.define(version: 2019_12_18_030592) do
     t.integer "status", default: 1
     t.integer "duration"
     t.index ["service_type_id"], name: "index_services_on_service_type_id"
+  end
+
+  create_table "stylist_schedules", force: :cascade do |t|
+    t.bigint "stylist_id"
+    t.bigint "schedule_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedule_id"], name: "index_stylist_schedules_on_schedule_id"
+    t.index ["stylist_id", "schedule_id"], name: "index_stylist_schedules_on_stylist_id_and_schedule_id", unique: true
+    t.index ["stylist_id"], name: "index_stylist_schedules_on_stylist_id"
   end
 
   create_table "stylist_services", force: :cascade do |t|
@@ -250,8 +258,9 @@ ActiveRecord::Schema.define(version: 2019_12_18_030592) do
   add_foreign_key "payments", "bookings"
   add_foreign_key "reviews", "clients"
   add_foreign_key "reviews", "stylists"
-  add_foreign_key "schedules", "stylists"
   add_foreign_key "services", "service_types"
+  add_foreign_key "stylist_schedules", "schedules"
+  add_foreign_key "stylist_schedules", "stylists"
   add_foreign_key "stylist_services", "services"
   add_foreign_key "stylist_services", "stylists"
 end

@@ -1,5 +1,5 @@
 class ScheduleSerializer < ActiveModel::Serializer
-  attributes :id, :stylist_id ,:service_ids ,:date
+  attributes :id, :service_ids, :date #, :stylist_id
 
   def date
     object.date.strftime('%Y-%m-%d')

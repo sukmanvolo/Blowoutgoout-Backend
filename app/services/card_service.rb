@@ -1,4 +1,4 @@
-class CardService < Service
+class CardService
   attr_accessor :client
 
   def initialize(client)
