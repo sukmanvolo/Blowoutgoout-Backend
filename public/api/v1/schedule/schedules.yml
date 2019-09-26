@@ -23,11 +23,16 @@ get:
       description: Admin authentication token
       required: true
       type: string
-    - name: stylist_id
+    - name: lat
       in: query
-      description: Stylist ID
-      required: false
-      type: integer
+      description: latitud
+      required: true
+      type: string
+    - name: long
+      in: query
+      description: latitud
+      required: true
+      type: string
     - name: service_id
       in: query
       description: Service ID
@@ -54,8 +59,6 @@ components:
           properties:
             date:
               type: string
-            stylist_id:
-              type: integer
             service_ids:
               type: array
               items:

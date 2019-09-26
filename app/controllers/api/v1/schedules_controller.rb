@@ -1,15 +1,15 @@
 module Api::V1
   class SchedulesController < BaseController
     before_action :set_schedule, only: [:show, :update, :destroy]
-    before_action :set_data_params, only: [:index]
 
     # GET /schedules
     def index
       @schedules = Schedule.all
-      @schedules = @schedules.filter_by_stylist(@stylist) if params[:stylist_id]
-      @schedules = @schedules.filter_by_service(@service) if params[:service_id]
-      @schedules = @schedules.from_date(@from_date) if params[:from_date]
-      @schedules = @schedules.to_date(@to_date) if params[:to_date]
+      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+      @schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylists })
+      @schedules = @schedules.filter_by_service(params[:service_id]) if params[:service_id]
+      @schedules = @schedules.from_date(params[:from_date]) if params[:from_date]
+      @schedules = @schedules.to_date(params[:to_date]) if params[:to_date]
       json_response(@schedules)
     end
 
@@ -17,7 +17,7 @@ module Api::V1
     def create
       @schedule = Schedule.new(schedule_params)
       authorize @schedule
-      @schedule.save!
+      CreateScheduleService.new(schedule_params, stylist_id).call
       json_response(@schedule, :created)
     end
 
@@ -43,18 +43,15 @@ module Api::V1
     private
 
     def schedule_params
-      params.require(:schedules).permit(:stylist_id, :service_ids, :date)
+      params.require(:schedules).permit(:date, service_ids: [])
     end
 
     def set_schedule
       @schedule = Schedule.find(params[:id])
     end
 
-    def set_data_params
-      @stylist = params[:stylist_id]
-      @service = params[:service_id]
-      @from_date = params[:from_date]
-      @to_date = params[:to_date]
+    def stylist_id
+      current_user.id
     end
   end
 end
