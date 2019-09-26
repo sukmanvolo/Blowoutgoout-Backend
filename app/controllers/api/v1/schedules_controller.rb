@@ -5,8 +5,6 @@ module Api::V1
     # GET /schedules
     def index
       @schedules = Schedule.all
-      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
-      @schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylists })
       @schedules = @schedules.filter_by_service(params[:service_id]) if params[:service_id]
       @schedules = @schedules.from_date(params[:from_date]) if params[:from_date]
       @schedules = @schedules.to_date(params[:to_date]) if params[:to_date]
@@ -38,6 +36,15 @@ module Api::V1
       authorize @schedule
       @schedule.destroy
       head :no_content
+    end
+
+    def nearest_schedules
+      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+      @schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylists })
+      @schedules = @schedules.filter_by_service(params[:service_id]) if params[:service_id]
+      @schedules = @schedules.from_date(params[:from_date]) if params[:from_date]
+      @schedules = @schedules.to_date(params[:to_date]) if params[:to_date]
+      json_response(@schedules)
     end
 
     private

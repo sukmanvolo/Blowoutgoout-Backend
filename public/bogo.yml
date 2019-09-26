@@ -44,6 +44,8 @@ paths:
     $ref: '/api/v1/schedule/schedules.yml'
   schedules/{id}:
     $ref: '/api/v1/schedule/schedule_by_id.yml'
+  schedules/nearest_schedules:
+    $ref: '/api/v1/schedule/schedule_collection_actions.yml'
   availabilities:
     $ref: '/api/v1/availability/availabilities.yml'
   availabilities/{id}:

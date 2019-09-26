@@ -47,7 +47,11 @@ Rails.application.routes.draw do
         end
       end
       resources :service_types
-      resources :schedules
+      resources :schedules do
+        collection do
+          get 'nearest_schedules', to: 'schedules#nearest_schedules'
+        end
+      end
       resources :availabilities
       resources :favorites
       resources :bookings do
