@@ -18,7 +18,7 @@ class AuthenticateUser
 
   # verify user credentials
   def user
-    user = User.find_by(email: email, role: role)
+    user = User.find_by(email: email, role: role) if User::ROLE_OPTIONS.include? role
     return user if user&.authenticate(password)
 
     # raise Authentication error if credentials are invalid
