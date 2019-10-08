@@ -1,19 +1,22 @@
 class User < ApplicationRecord
   has_secure_password
 
+  ROLE_OPTIONS = %w(client stylist admin)
+
   # validations
   validates :password, presence: true, on: :create, allow_nil: true
   validates :role, presence: true, on: :create
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, uniqueness: { scope: :role }
   validates :first_name, presence: true
+  validates :role, :inclusion => {:in => ROLE_OPTIONS }
 
   has_one :client, inverse_of: :user, dependent: :destroy
   has_one :stylist, inverse_of: :user, dependent: :destroy
   has_many :notifications
 
   # enum
-  enum role: [:client, :stylist, :admin]
+  enum role: ROLE_OPTIONS
   enum status: [:inactive, :active]
 
   # callbacks

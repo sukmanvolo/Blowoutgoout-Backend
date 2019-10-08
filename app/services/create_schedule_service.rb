@@ -8,13 +8,20 @@ class CreateScheduleService
 
   def call
     begin
-      services.each do |id|
-        schedule = Schedule.filter_by_service(id).where(date: schedule_date)&.first
-        if schedule.nil?
-          schedule = Schedule.create(service_ids: [id], date: schedule_date)
-        end
-        associate_to_stylist(schedule)
+      services_count = params[:service_ids].count
+      schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylist_id })
+      params[:service_ids].each do |service_id|
+        schedules = schedules.filter_by_service(service_id).where(date: schedule_date)
       end
+
+      # check services count
+      schedules = schedules.reject{ |s| s.service_ids.count != services_count }
+
+      schedule = schedules.first
+      if schedule.nil?
+        schedule = Schedule.create(service_ids: services, date: schedule_date)
+      end
+      associate_to_stylist(schedule)
     rescue => e
       puts "*** CreateScheduleService error: #{e}"
       false

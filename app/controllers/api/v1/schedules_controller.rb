@@ -4,8 +4,18 @@ module Api::V1
 
     # GET /schedules
     def index
-      @schedules = Schedule.all
-      @schedules = @schedules.filter_by_service(params[:service_id]) if params[:service_id]
+      services_count = params[:service_ids] && params[:service_ids].count
+
+      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+      @schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylists })
+
+      params[:service_ids] && params[:service_ids].each do |service_id|
+        @schedules = @schedules.filter_by_service(service_id)
+      end
+
+      # check services count
+      @schedules = @schedules.reject{ |s| s.service_ids.count != services_count } if params[:service_ids]
+
       @schedules = @schedules.from_date(params[:from_date]) if params[:from_date]
       @schedules = @schedules.to_date(params[:to_date]) if params[:to_date]
       json_response(@schedules)
@@ -41,7 +51,7 @@ module Api::V1
     def nearest_schedules
       stylists = Stylist.nearest_stylists(params[:lat], params[:long])
       @schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylists })
-      @schedules = @schedules.filter_by_service(params[:service_id]) if params[:service_id]
+      @schedules = @schedules.filter_by_service(params[:service_ids]) if params[:service_ids]
       @schedules = @schedules.from_date(params[:from_date]) if params[:from_date]
       @schedules = @schedules.to_date(params[:to_date]) if params[:to_date]
       json_response(@schedules)

@@ -33,11 +33,11 @@ get:
       description: latitud
       required: true
       type: string
-    - name: service_id
+    - name: service_ids
       in: query
       description: Service ID
       required: false
-      type: integer
+      type: array
     - name: from_date
       in: query
       description: Date from
