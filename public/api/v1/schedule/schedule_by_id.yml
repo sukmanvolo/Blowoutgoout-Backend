@@ -48,19 +48,3 @@ delete:
       required: true
       type: integer
       format: int64
-components:
-  schemas:
-    service_type_data:
-      type: object
-      properties:
-        schedules:
-          type: object
-          properties:
-            name:
-              type: string
-            date:
-              type: string
-            status:
-              enum:
-                - inactive
-                - active

@@ -49,9 +49,11 @@ components:
     service_type_data:
       type: object
       properties:
-        name:
+        date:
           type: string
         status:
           enum:
             - inactive
             - active
+        service_ids:
+          type: array
