@@ -8,23 +8,25 @@ class CreateScheduleService
 
   def call
     begin
-      services_count = params[:service_ids].count
+      services_count = schedule_data[:service_ids].count
       schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylist_id })
-      params[:service_ids].each do |service_id|
+      # filter by service_ids array
+      schedule_data[:service_ids].each do |service_id|
         schedules = schedules.filter_by_service(service_id).where(date: schedule_date)
       end
-
       # check services count
       schedules = schedules.reject{ |s| s.service_ids.count != services_count }
 
       schedule = schedules.first
       if schedule.nil?
-        schedule = Schedule.create(service_ids: services, date: schedule_date)
+        schedule = Schedule.new(service_ids: services, date: schedule_date)
+        schedule.save!
       end
       associate_to_stylist(schedule)
+      return schedule
     rescue => e
       puts "*** CreateScheduleService error: #{e}"
-      false
+      return schedule
     end
   end
 
@@ -39,6 +41,13 @@ class CreateScheduleService
   end
 
   def associate_to_stylist(schedule)
-    StylistSchedule.create(stylist_id: stylist_id, schedule_id: schedule.id)
+    sc = StylistSchedule.new(stylist_id: stylist_id, schedule_id: schedule.id, start_time: schedule_data[:start_time])
+    if sc.valid?
+      sc.save
+    else
+      sc.errors.messages.each do |k,v|
+        schedule.errors.add(:base, "Schedule creation error => #{k}: #{v.join(';')}")
+      end
+    end
   end
 end

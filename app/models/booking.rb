@@ -1,9 +1,8 @@
 class Booking < ApplicationRecord
   belongs_to :client
   belongs_to :stylist
-  # belongs_to :service
   has_many :messages
-  belongs_to :availability
+  belongs_to :schedule
 
   before_create :check_status_default
 

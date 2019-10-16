@@ -66,5 +66,5 @@ components:
               type: string
             status:
               type: string
-            availability_id:
+            schedule_id:
               type: integer

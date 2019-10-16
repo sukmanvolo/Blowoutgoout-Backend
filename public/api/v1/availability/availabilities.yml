@@ -29,6 +29,36 @@ get:
       description: Schedule ID
       required: true
       type: integer
+    - name: lat
+      in: query
+      description: latitud
+      required: true
+      type: string
+    - name: long
+      in: query
+      description: latitud
+      required: true
+      type: string
+    - name: service_ids
+      in: query
+      description: Service ID's
+      required: false
+      type: array
+    - name: start_time
+      in: query
+      description: Start Service time
+      required: false
+      type: string
+    # - name: from_date
+    #   in: query
+    #   description: Date from
+    #   required: false
+    #   type: string
+    # - name: to_date
+    #   in: query
+    #   description: Date to
+    #   required: false
+    #   type: string
 
 components:
   schemas:

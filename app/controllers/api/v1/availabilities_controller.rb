@@ -1,13 +1,44 @@
 module Api::V1
   class AvailabilitiesController < BaseController
     before_action :set_availability, only: [:show, :update, :destroy]
-    before_action :set_data_params, only: [:index]
 
     # GET /availabilities
     def index
-      @availabilities =
-      @availabilities = @schedule.availabilities if @schedule
-      json_response(@availabilities)
+      services_count = service_ids && service_ids.count
+
+      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+
+      # puts "*** stylists: #{stylists.inspect}"
+
+      stylist_schedules = StylistSchedule
+                                          .joins(:schedule)
+                                          .where(stylist_id: stylists,
+                                                 start_time: params[:start_time],
+                                                 schedule: params[:schedule_id]
+                                                 )
+
+      puts "*** stylist_schedules: #{stylist_schedules.inspect}"
+      puts "*** Schedule: #{Schedule.find(params[:schedule_id]).inspect}"
+      service_ids && service_ids.each do |service_id|
+        stylist_schedules = StylistSchedule.joins(:schedule).where("schedules.service_ids @> ?", "{#{service_id}}")
+      end
+
+      # check services count
+      stylist_schedules = stylist_schedules.reject{ |sc| sc.schedule.service_ids.count != services_count } if service_ids
+
+      # filter by date range
+      # stylist_schedules = stylist_schedules.reject{ |sc| sc.schedule.date > params[:from_date] } if params[:from_date]
+      # stylist_schedules = stylist_schedules.reject{ |sc| sc.schedule.date <= params[:to_date] } if params[:to_date]
+
+      # check if the schedule slot is available
+      @available_schedules = []
+      stylist_schedules.each do |sc|
+        @available_schedules << sc if Booking.where(stylist_id: sc.stylist_id,
+                                                    schedule_id: sc.schedule_id,
+                                                    time_from: sc.start_time).empty?
+      end
+
+      render json: @available_schedules, each_serializer: AvailabilitySerializer, status: :ok
     end
 
     # POST /availabilities
@@ -51,8 +82,9 @@ module Api::V1
       @availability = Availability.find_by_id(params[:id])
     end
 
-    def set_data_params
-      @schedule = Schedule.find_by_id(params[:schedule_id])
+    def service_ids
+      return params[:service_ids] unless params[:service_ids].is_a? String
+      JSON.parse(params[:service_ids])
     end
   end
 end
