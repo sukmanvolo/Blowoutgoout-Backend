@@ -1,5 +1,6 @@
 class Schedule < ApplicationRecord
-  # belongs_to :stylist
+  attr_accessor :start_time
+
   has_many :availabilities
 
   validates :date, presence: true
