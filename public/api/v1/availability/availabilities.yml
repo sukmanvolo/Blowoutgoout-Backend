@@ -24,9 +24,9 @@ get:
       description: Admin or Stylist authentication token
       required: true
       type: string
-    - name: schedule_id
+    - name: date
       in: query
-      description: Schedule ID
+      description: Schedule Date
       required: true
       type: integer
     - name: lat

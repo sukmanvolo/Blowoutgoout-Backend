@@ -8,27 +8,20 @@ module Api::V1
 
       stylists = Stylist.nearest_stylists(params[:lat], params[:long])
 
-      # puts "*** stylists: #{stylists.inspect}"
-
       stylist_schedules = StylistSchedule
                                           .joins(:schedule)
-                                          .where(stylist_id: stylists,
-                                                 start_time: params[:start_time],
-                                                 schedule: params[:schedule_id]
+                                          .where(schedules: { date: params[:date] })
+                                          .where(stylist_schedules: {
+                                                   stylist_id: stylists,
+                                                   start_time: params[:start_time]
+                                                  }
                                                  )
 
-      puts "*** stylist_schedules: #{stylist_schedules.inspect}"
-      puts "*** Schedule: #{Schedule.find(params[:schedule_id]).inspect}"
-      service_ids && service_ids.each do |service_id|
-        stylist_schedules = StylistSchedule.joins(:schedule).where("schedules.service_ids @> ?", "{#{service_id}}")
-      end
+      # filter by service_ids array
+      stylist_schedules = stylist_schedules.reject { |sc| sc.schedule.service_ids != service_ids } if service_ids
 
       # check services count
       stylist_schedules = stylist_schedules.reject{ |sc| sc.schedule.service_ids.count != services_count } if service_ids
-
-      # filter by date range
-      # stylist_schedules = stylist_schedules.reject{ |sc| sc.schedule.date > params[:from_date] } if params[:from_date]
-      # stylist_schedules = stylist_schedules.reject{ |sc| sc.schedule.date <= params[:to_date] } if params[:to_date]
 
       # check if the schedule slot is available
       @available_schedules = []

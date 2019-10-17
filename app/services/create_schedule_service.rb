@@ -10,10 +10,10 @@ class CreateScheduleService
     begin
       services_count = schedule_data[:service_ids].count
       schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylist_id })
+
       # filter by service_ids array
-      schedule_data[:service_ids].each do |service_id|
-        schedules = schedules.filter_by_service(service_id).where(date: schedule_date)
-      end
+      schedules = schedules.reject{ |s| s.service_ids != schedule_data[:service_ids] }
+
       # check services count
       schedules = schedules.reject{ |s| s.service_ids.count != services_count }
 
