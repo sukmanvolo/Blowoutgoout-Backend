@@ -9,18 +9,18 @@ module Api::V1
       stylists = Stylist.nearest_stylists(params[:lat], params[:long])
       @schedules = Schedule
                            .joins(:stylist_schedules)
+                           .where(shedules: {})
                            .where(stylist_schedules: { stylist_id: stylists })
                            .distinct
-
-      # filter by service_ids array
-      schedules = schedules.reject{ |s| s.service_ids != schedule_data[:service_ids] } if service_ids
-
-      # check services count
-      @schedules = @schedules.reject{ |s| s.service_ids.count != services_count } if service_ids
-
       # filter by date range
       @schedules = @schedules.from_date(params[:from_date]) if params[:from_date]
       @schedules = @schedules.to_date(params[:to_date]) if params[:to_date]
+
+      # filter by service_ids array
+      @schedules = @schedules.reject{ |s| s.service_ids != service_ids } if service_ids
+
+      # check services count
+      @schedules = @schedules.reject{ |s| s.service_ids.count != services_count } if service_ids
 
       json_response(@schedules)
     end
