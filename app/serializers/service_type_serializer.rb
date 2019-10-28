@@ -1,4 +1,4 @@
-class ServiceSerializer < ActiveModel::Serializer
+class ServiceTypeSerializer < ActiveModel::Serializer
   attributes :id, :name, :status, :image
 
   def image
