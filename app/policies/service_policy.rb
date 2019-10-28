@@ -1,11 +1,11 @@
 class ServicePolicy < ApplicationPolicy
 
   def create?
-    user.admin? || user.stylist?
+    user.admin?
   end
 
   def update?
-    user.admin? || user.stylist?
+    user.admin?
   end
 
   def destroy?

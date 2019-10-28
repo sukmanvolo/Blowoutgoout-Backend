@@ -9,7 +9,6 @@ module Api::V1
       stylists = Stylist.nearest_stylists(params[:lat], params[:long])
       @schedules = Schedule
                            .joins(:stylist_schedules)
-                           .where(shedules: {})
                            .where(stylist_schedules: { stylist_id: stylists })
                            .distinct
       # filter by date range
