@@ -18,10 +18,7 @@ module Api::V1
                                                  )
 
       # filter by service_ids array
-      stylist_schedules = stylist_schedules.reject { |sc| sc.schedule.service_ids != service_ids } if service_ids
-
-      # check services count
-      stylist_schedules = stylist_schedules.reject{ |sc| sc.schedule.service_ids.count != services_count } if service_ids
+      stylist_schedules = stylist_schedules.reject { |sc| (sc.schedule.service_ids & service_ids).empty? } if service_ids
 
       # check if the schedule slot is available
       @available_schedules = []

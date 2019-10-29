@@ -16,10 +16,7 @@ module Api::V1
       @schedules = @schedules.to_date(params[:to_date]) if params[:to_date]
 
       # filter by service_ids array
-      @schedules = @schedules.reject{ |s| s.service_ids != service_ids } if service_ids
-
-      # check services count
-      @schedules = @schedules.reject{ |s| s.service_ids.count != services_count } if service_ids
+      @schedules = @schedules.reject{ |s| (s.service_ids & service_ids).empty? } if service_ids
 
       json_response(@schedules)
     end
