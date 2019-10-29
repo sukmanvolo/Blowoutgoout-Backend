@@ -11,11 +11,9 @@ module Api::V1
       stylist_schedules = StylistSchedule
                                           .joins(:schedule)
                                           .where(schedules: { date: params[:date] })
-                                          .where(stylist_schedules: {
-                                                   stylist_id: stylists,
-                                                   start_time: params[:start_time]
-                                                  }
-                                                 )
+                                          .where(stylist_schedules: { stylist_id: stylists })
+
+      stylist_schedules = stylist_schedules.where(start_time: params[:start_time]) if params[:start_time]
 
       # filter by service_ids array
       stylist_schedules = stylist_schedules.reject { |sc| (sc.schedule.service_ids & service_ids).empty? } if service_ids
