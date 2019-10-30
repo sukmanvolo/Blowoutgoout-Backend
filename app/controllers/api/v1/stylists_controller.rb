@@ -50,6 +50,32 @@ module Api::V1
       json_response(@stylists)
     end
 
+    def available_stylists
+      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+
+      stylist_schedules = StylistSchedule
+                                          .joins(:schedule)
+                                          .where(schedules: { date: params[:date] })
+                                          .where(stylist_schedules: {
+                                                   stylist_id: stylists
+                                                  }
+                                                 )
+
+      stylist_schedules = stylist_schedules.where(start_time: params[:start_time]) if params[:start_time]
+
+      # filter by service_ids array
+      stylist_schedules = stylist_schedules.reject { |sc| (sc.schedule.service_ids & service_ids).empty? } if service_ids
+
+      # get stylist ids
+      stylist_ids = []
+      stylist_schedules.each do |sc|
+        stylist_ids << sc.stylist_id
+      end
+
+      @stylists = stylists.where(id: stylist_ids.uniq)
+      json_response(@stylists)
+    end
+
     private
 
     def stylist_params
@@ -70,6 +96,11 @@ module Api::V1
 
     def set_stylist
       @stylist = Stylist.find(params[:id])
+    end
+
+    def service_ids
+      return params[:service_ids] unless params[:service_ids].is_a? String
+      JSON.parse(params[:service_ids])
     end
   end
 end

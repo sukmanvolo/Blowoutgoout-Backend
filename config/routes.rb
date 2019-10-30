@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       resources :stylists do
         collection do
           get 'nearest_stylists', to: 'stylists#nearest_stylists'
+          get 'available_stylists', to: 'stylists#available_stylists'
         end
       end
       resources :services do

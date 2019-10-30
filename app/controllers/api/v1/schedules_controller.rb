@@ -72,7 +72,7 @@ module Api::V1
     end
 
     def stylist_id
-      current_user.id
+      current_user.client.id
     end
 
     def service_ids

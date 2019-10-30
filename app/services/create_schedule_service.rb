@@ -8,14 +8,12 @@ class CreateScheduleService
 
   def call
     begin
-      services_count = schedule_data[:service_ids].count
-      schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylist_id })
+      schedules = Schedule.joins(:stylist_schedules)
+                          .where(stylist_schedules: { stylist_id: stylist_id })
+                          .where(schedules: { date: schedule_data[:date] })
 
       # filter by service_ids array
       schedules = schedules.reject{ |s| s.service_ids != schedule_data[:service_ids] }
-
-      # check services count
-      schedules = schedules.reject{ |s| s.service_ids.count != services_count }
 
       schedule = schedules.first
       if schedule.nil?
