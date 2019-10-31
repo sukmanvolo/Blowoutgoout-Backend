@@ -1,5 +1,7 @@
 class Stylist < ApplicationRecord
   has_one_attached :image
+  has_many_attached :gallery_images
+
   has_one_attached :cosmetology_license
   has_one_attached :liability_insurance
   has_one_attached :eligibility_document
@@ -42,6 +44,10 @@ class Stylist < ApplicationRecord
 
   def image_attached?
     image.attached?
+  end
+
+  def gallery_images_attached?
+    gallery_images.attached?
   end
 
   def cosmetology_license_attached?

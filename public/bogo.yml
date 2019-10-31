@@ -32,6 +32,10 @@ paths:
     $ref: '/api/v1/stylist/stylist_collection_actions.yml'
   stylists/available_stylists:
     $ref: '/api/v1/stylist/available_stylists.yml'
+  stylists/{id}/gallery_images:
+    $ref: '/api/v1/stylist/add_gallery_images.yml'
+  stylists/{id}/gallery_images/{image_id}:
+    $ref: '/api/v1/stylist/remove_gallery_images.yml'
   services:
     $ref: '/api/v1/service/services.yml'
   services/{id}:

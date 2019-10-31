@@ -1,5 +1,5 @@
 get:
-  description: Get availables stylists [Not functional]
+  description: Get availables stylists (No functional)
   tags:
     - Stylist
   parameters:

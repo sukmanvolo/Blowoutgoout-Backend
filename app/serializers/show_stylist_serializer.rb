@@ -1,7 +1,7 @@
 class ShowStylistSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :description, :phone, :lat,
             :long, :image, :cosmetology_license, :liability_insurance,
-            :eligibility_document
+            :eligibility_document, :gallery_images
 
   has_many :reviews
 
@@ -19,6 +19,31 @@ class ShowStylistSerializer < ActiveModel::Serializer
              .url_for(object.image)
       end
     end
+  end
+
+  def gallery_images
+    images = []
+    object.gallery_images.each do |image|
+      if image.variable?
+        images << {
+                    id: image.id,
+                    url: Rails.application
+                              .routes
+                              .url_helpers
+                              .rails_representation_url(image.variant(resize: "100x100").processed)
+                  }
+      else
+        images << {
+                    id: image.id,
+                    url: Rails.application
+                              .routes
+                              .url_helpers
+                              .url_for(image)
+                   }
+
+      end
+    end
+    return images
   end
 
   def cosmetology_license

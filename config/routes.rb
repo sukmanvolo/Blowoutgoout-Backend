@@ -41,6 +41,10 @@ Rails.application.routes.draw do
           get 'nearest_stylists', to: 'stylists#nearest_stylists'
           get 'available_stylists', to: 'stylists#available_stylists'
         end
+        member do
+          post 'gallery_images', to: 'stylists#gallery_images'
+          delete 'gallery_images/:image_id', to: 'stylists#remove_gallery_image'
+        end
       end
       resources :services do
         collection do

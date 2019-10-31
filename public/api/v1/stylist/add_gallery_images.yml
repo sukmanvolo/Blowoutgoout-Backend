@@ -1,0 +1,33 @@
+post:
+  description: Add stylist gallery images [Stylist, Admin] (No functional)
+  tags:
+    - Stylist
+  parameters:
+    - name: Authorization
+      in: header
+      description: "JWT token"
+      type: string
+    - name: id
+      in: path
+      description: Stylist ID
+      required: true
+      type: integer
+      format: int64
+    - name: params
+      in: body
+      description: Stylist data
+      schema:
+        $ref: '#/definitions/gallery_image_data'
+  responses:
+    201:
+      description: Successful response
+
+definitions:
+  gallery_image_data:
+    type: object
+    properties:
+      stylists:
+        type: object
+        properties:
+          gallery_images:
+            type: object

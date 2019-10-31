@@ -1,6 +1,7 @@
 module Api::V1
   class StylistsController < BaseController
-    before_action :set_stylist, only: [:show, :update, :destroy]
+    before_action :set_stylist, only: [:show, :update, :destroy,
+                                       :gallery_images, :remove_gallery_image]
 
     # GET /stylists
     def index
@@ -76,6 +77,20 @@ module Api::V1
       json_response(@stylists)
     end
 
+    def gallery_images
+        # authorize @stylist
+      if @stylist.update(gallery_images_params)
+        render json: @stylist, serializer: GalleryImagesStylistSerializer, status: status
+      else
+        json_response(@stylist.errors.messages, :unprocessable_entity)
+      end
+    end
+
+    def remove_gallery_image
+      @stylist.gallery_images.where(id: params[:image_id]).purge
+      head :no_content
+    end
+
     private
 
     def stylist_params
@@ -92,6 +107,10 @@ module Api::V1
                                         :email, :password, :gcm_id,
                                         :device_type, :device_id]
                                        )
+    end
+
+    def gallery_images_params
+      params.require(:stylists).permit(gallery_images: [])
     end
 
     def set_stylist

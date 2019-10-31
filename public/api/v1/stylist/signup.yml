@@ -1,5 +1,5 @@
 post:
-  description: Stilist signup
+  description: Stylist signup
   tags:
     - Stylist
   parameters:
