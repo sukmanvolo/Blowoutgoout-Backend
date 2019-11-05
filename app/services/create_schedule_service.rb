@@ -41,8 +41,7 @@ class CreateScheduleService
   def associate_to_stylist(schedule)
     sc = StylistSchedule.new(stylist_id: stylist_id,
                              schedule_id: schedule.id,
-                             start_time: schedule_data[:start_time],
-                             end_time: calculated_end_time
+                             start_time: schedule_data[:start_time]
                              )
     if sc.valid?
       sc.save
@@ -51,10 +50,6 @@ class CreateScheduleService
         schedule.errors.add(:base, "Schedule creation error => #{k}: #{v.join(';')}")
       end
     end
-  end
-
-  def calculated_end_time
-    Service.where(id: schedule_data[:service_ids]).pluck(:duration).max
   end
 
 end
