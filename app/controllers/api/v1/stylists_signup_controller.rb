@@ -7,6 +7,7 @@ module Api::V1
       @stylist = Stylist.new(stylist_params)
       @stylist.user.role = 'stylist'
       if @stylist.save
+        AssociateServices.call(@stylist)
         CreateNotification.call(@stylist.user, notification_message)
         json_response(@stylist, :created)
       else
