@@ -8,6 +8,8 @@ host: bogo-staging.herokuapp.com/api/v1/
 paths:
   authenticate:
     $ref: '/api/v1/authenticate.yml'
+  facebook_authenticate:
+    $ref: '/api/v1/facebook_authenticate.yml'
   password/forgot:
     $ref: '/api/v1/password/forgot.yml'
   password/reset:

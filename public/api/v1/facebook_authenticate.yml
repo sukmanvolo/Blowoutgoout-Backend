@@ -1,0 +1,20 @@
+post:
+  description: Sign in or Sign up client users
+  tags:
+    - Facebook Authentication
+  parameters:
+    - name: params
+      in: body
+      description: Access Token
+      schema:
+        $ref: '#/definitions/acces_token'
+  responses:
+    201:
+      description: Successful response
+
+definitions:
+  acces_token:
+    type: object
+    properties:
+      access_token:
+        type: string
