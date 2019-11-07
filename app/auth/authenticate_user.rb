@@ -1,10 +1,12 @@
 class AuthenticateUser
   prepend SimpleCommand
+  attr_reader :email, :password, :role, :facebook
 
-  def initialize(email, password, role)
+  def initialize(email, password, role, facebook=false)
     @email = email
     @password = password
     @role = role
+    @facebook = facebook
   end
 
   # Service entry point
@@ -14,12 +16,10 @@ class AuthenticateUser
 
   private
 
-  attr_reader :email, :password, :role
-
   # verify user credentials
   def user
     user = User.find_by(email: email, role: role) if User::ROLE_OPTIONS.include? role
-    return user if user&.authenticate(password)
+    return user if user&.authenticate(password) || facebook
 
     # raise Authentication error if credentials are invalid
     raise(Api::ExceptionHandler::AuthenticationError, ErrorMessage.invalid_credentials)

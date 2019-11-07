@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'authenticate', to: 'authentication#authenticate'
+      post 'facebook_authenticate' => 'facebook_authentication#create'
       resources :users
       post 'password/forgot', to: 'password#forgot'
       post 'password/reset', to: 'password#reset'
