@@ -4,7 +4,8 @@ module Api::V1
 
     # GET cards
     def index
-      @cards = CardService.new(@client)&.list&.data
+      @cards = @client && CardService.new(@client).list
+      @cards = @cards && @cards.data || []
       json_response(@cards)
     end
 

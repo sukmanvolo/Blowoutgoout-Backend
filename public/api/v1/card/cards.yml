@@ -1,5 +1,5 @@
 get:
-  description: Get all cards - [Client]
+  description: Get all cards - [Client] (No functional)
   tags:
     - Card
   parameters:
@@ -8,8 +8,16 @@ get:
       description: Admin authentication token
       required: true
       type: string
-    - name: client_id
-      in: path
-      description: Client ID
-      required: false
-      type: integer
+    - name: params
+      in: body
+      description: Card data
+      schema:
+        $ref: '#/components/schemas/card_data'
+
+components:
+  schemas:
+    card_data:
+      type: object
+      properties:
+        client_id:
+          type: integer

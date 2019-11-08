@@ -12,10 +12,10 @@ class CardService
         card_token
       )
     rescue Stripe::CardError => e
-      errors.add('StripeCharge', e)
+      puts "*** StripeCharge: #{e}"
       false
     rescue => e
-      errors.add('StripeCharge', e)
+      puts "*** StripeCharge: #{e}"
       false
     end
   end
@@ -30,10 +30,10 @@ class CardService
         }
       )
     rescue Stripe::CardError => e
-      errors.add('StripeCharge', e)
+      puts "*** StripeCharge: #{e}"
       false
     rescue => e
-      errors.add('StripeCharge', e)
+      puts "*** StripeCharge: #{e}"
       false
     end
   end
