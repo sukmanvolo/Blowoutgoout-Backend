@@ -70,6 +70,8 @@ paths:
     $ref: '/api/v1/booking/booking_confirm.yml'
   bookings/{id}/reject:
     $ref: '/api/v1/booking/booking_reject.yml'
+  bookings/{id}/complete:
+    $ref: '/api/v1/booking/booking_complete.yml'
   bookings/upcoming_appointments:
     $ref: '/api/v1/booking/booking_upcoming_appointments.yml'
   bookings/past_appointments:

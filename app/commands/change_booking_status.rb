@@ -19,6 +19,10 @@ class ChangeBookingStatus
         booking.errors.add(:status, 'You can not change to rejected this booking')
       end
 
+      if booking.status == 'completed' && booking.status_was != 'confirmed'
+        booking.errors.add(:status, 'You can not change to completed this booking')
+      end
+
       booking.errors.empty? && booking.save
     end
   end

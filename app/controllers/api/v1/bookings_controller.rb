@@ -1,6 +1,7 @@
 module Api::V1
   class BookingsController < BaseController
-    before_action :set_booking, only: [:show, :update, :destroy, :confirm, :reject]
+    before_action :set_booking, only: [:show, :update, :destroy, :confirm,
+                                       :reject, :complete]
 
     # GET /bookings
     def index
@@ -46,7 +47,16 @@ module Api::V1
       authorize @booking
       @booking.status = 'confirmed'
       if ChangeBookingStatus.call(@booking).result
-        availability.update(status: 'used')
+        json_response(@booking, :accepted)
+      else
+        json_response(@booking.errors.messages, :unprocessable_entity)
+      end
+    end
+
+    def complete
+      authorize @booking
+      @booking.status = 'completed'
+      if ChangeBookingStatus.call(@booking).result
         json_response(@booking, :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)

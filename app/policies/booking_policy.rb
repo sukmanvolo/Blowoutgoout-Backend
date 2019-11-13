@@ -19,4 +19,8 @@ class BookingPolicy < ApplicationPolicy
   def reject?
     update?
   end
+
+  def complete?
+    user.admin? || user.stylist?
+  end
 end
