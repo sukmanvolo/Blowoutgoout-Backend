@@ -74,6 +74,7 @@ module Api::V1
       end
 
       @stylists = stylists.where(id: stylist_ids.uniq)
+      @stylists = @stylists.update(tmp_client_id: current_user.client.id)
       json_response(@stylists)
     end
 

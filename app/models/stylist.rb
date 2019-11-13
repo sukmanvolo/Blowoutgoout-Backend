@@ -1,4 +1,6 @@
 class Stylist < ApplicationRecord
+  attr_accessor :tmp_client_id
+
   has_one_attached :image
   has_many_attached :gallery_images
 
@@ -73,5 +75,9 @@ class Stylist < ApplicationRecord
   def reviews_rating
     return 0 unless reviews_count > 0
     (reviews.sum(&:rate) / reviews_count).round(1)
+  end
+
+  def is_favorite?(client_id)
+    favorites.where(client: client_id).present?
   end
 end
