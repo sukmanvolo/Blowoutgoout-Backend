@@ -12,10 +12,10 @@ class CardService
         card_token
       )
     rescue Stripe::CardError => e
-      puts "*** StripeCharge: #{e}"
+      puts "*** Stripe Delete error: #{e}"
       false
     rescue => e
-      puts "*** StripeCharge: #{e}"
+      puts "*** Stripe Delete error: #{e}"
       false
     end
   end
@@ -30,10 +30,27 @@ class CardService
         }
       )
     rescue Stripe::CardError => e
-      puts "*** StripeCharge: #{e}"
+      puts "*** Stripe List error: #{e}"
       false
     rescue => e
-      puts "*** StripeCharge: #{e}"
+      puts "*** Stripe List error: #{e}"
+      false
+    end
+  end
+
+  def create(card_token)
+    begin
+      card = Stripe::Customer.create_source(
+        client.customer_id,
+        {
+          source: card_token,
+        }
+      )
+    rescue Stripe::CardError => e
+      puts "*** Card Creation error: #{e}"
+      false
+    rescue => e
+      puts "*** Card Creation error: #{e}"
       false
     end
   end

@@ -9,6 +9,15 @@ module Api::V1
       json_response(@cards)
     end
 
+    def create
+      @card = @client && CardService.new(@client).create
+      if @card
+        json_response(@card)
+      else
+        ## show errors
+      end
+    end
+
     # DELETE cards/:id
     def destroy
       authorize @card
@@ -19,7 +28,7 @@ module Api::V1
     private
 
     def set_client
-      @client = Client.find_by_id(params[:client_id])
+      current_user.client.id
     end
   end
 end
