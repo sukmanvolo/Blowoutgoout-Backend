@@ -11,7 +11,7 @@ class Client < ApplicationRecord
 
   validates :image, presence: false, blob: { content_type: :image }
 
-  delegate :first_name, :last_name, :phone, to: :user, prefix: false
+  delegate :email, :first_name, :last_name, :phone, to: :user, prefix: false
 
   def image_attached?
     image.attached?
@@ -19,5 +19,21 @@ class Client < ApplicationRecord
 
   def full_name
     [first_name, last_name].join(' ').titleize
+  end
+
+  def customer_id
+    stripe_customer_id = self[:customer_id]
+    unless stripe_customer_id.present?
+      begin
+        stripe_customer_id = Stripe::Customer.create({
+                                                      email: self.user.email,
+                                                      description: "Customer for #{self.user.email}"})
+
+        update_attributes!(customer_id: stripe_customer_id)
+      rescue StandardError => e
+        puts "**** Stripe create customer error: #{e}"
+      end
+    end
+    stripe_customer_id
   end
 end
