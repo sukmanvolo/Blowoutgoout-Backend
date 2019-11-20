@@ -1,6 +1,6 @@
 module Api::V1
   class CardsController < BaseController
-    before_action :set_client, only: [:index, :destroy]
+    before_action :set_client
 
     # GET cards
     def index
@@ -10,11 +10,11 @@ module Api::V1
     end
 
     def create
-      @card = @client && CardService.new(@client).create
-      if @card
+      @card = @client && CardService.new(@client).create(params[:card_token])
+      if card_has_error?
         json_response(@card)
       else
-        ## show errors
+        json_response(@card, :unprocessable_entity)
       end
     end
 
@@ -28,7 +28,11 @@ module Api::V1
     private
 
     def set_client
-      current_user.client.id
+      @client = current_user.client
+    end
+
+    def card_has_error?
+      @card.class.name.downcase.include?('error')
     end
   end
 end

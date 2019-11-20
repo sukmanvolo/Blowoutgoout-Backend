@@ -8,9 +8,20 @@ get:
       description: Admin authentication token
       required: true
       type: string
+
+post:
+  description: Create a Card - [Client]
+  tags:
+    - Card
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
     - name: params
       in: body
-      description: Card data
+      description: Booking data
       schema:
         $ref: '#/components/schemas/card_data'
 
@@ -19,5 +30,5 @@ components:
     card_data:
       type: object
       properties:
-        client_id:
-          type: integer
+        card_token:
+          type: string
