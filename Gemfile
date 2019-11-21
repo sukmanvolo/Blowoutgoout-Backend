@@ -42,6 +42,7 @@ gem 'wicked', '~> 1.3'
 gem 'grape-swagger-rails', '~> 0.3'
 gem 'kaminari', '~> 1.1'
 gem "down", '~> 5.0'
+gem 'rollbar'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
