@@ -29,7 +29,7 @@ class Client < ApplicationRecord
                                                       email: self.user.email,
                                                       description: "Customer for #{self.user.email}"})
 
-        update_attributes!(customer_id: stripe_customer_id)
+        update_attributes!(customer_id: stripe_customer_id.id)
       rescue StandardError => e
         puts "**** Stripe create customer error: #{e}"
       end
