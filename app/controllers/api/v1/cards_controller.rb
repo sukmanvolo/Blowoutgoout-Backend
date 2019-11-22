@@ -11,7 +11,7 @@ module Api::V1
 
     def create
       @card = @client && CardService.new(@client).create(params[:card_token])
-      if card_has_error?
+      if !card_has_error?
         json_response(@card)
       else
         json_response(@card, :unprocessable_entity)
