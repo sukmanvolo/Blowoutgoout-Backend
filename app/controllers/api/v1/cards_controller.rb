@@ -20,7 +20,7 @@ module Api::V1
 
     # DELETE cards/:id
     def destroy
-      authorize @card
+      # authorize @card
       CardService.new(@client)&.delete(params[:card_token])
       head :no_content
     end
