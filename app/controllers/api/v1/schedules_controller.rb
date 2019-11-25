@@ -76,7 +76,7 @@ module Api::V1
     end
 
     def service_ids
-      return params[:service_ids] unless params[:service_ids].is_a? String
+      return params[:service_ids].map(&:to_i) unless params[:service_ids].is_a? String
       JSON.parse(params[:service_ids])
     end
   end

@@ -52,6 +52,8 @@ module Api::V1
     end
 
     def available_stylists
+      puts "**** param service_ids: #{params[:service_ids]}"
+      puts "**** method service_ids: #{service_ids}"
       stylists = Stylist.nearest_stylists(params[:lat], params[:long])
 
       stylist_schedules = StylistSchedule
@@ -119,7 +121,7 @@ module Api::V1
     end
 
     def service_ids
-      return params[:service_ids] unless params[:service_ids].is_a? String
+      return params[:service_ids].map(&:to_i) unless params[:service_ids].is_a? String
       JSON.parse(params[:service_ids])
     end
   end
