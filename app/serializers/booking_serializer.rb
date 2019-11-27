@@ -19,4 +19,8 @@ class BookingSerializer < ActiveModel::Serializer
     object.time_to&.to_s(:time)
   end
 
+  def service_ids
+    object&.schedule&.service_ids
+  end
+
 end
