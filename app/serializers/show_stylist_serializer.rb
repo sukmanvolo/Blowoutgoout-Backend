@@ -1,7 +1,7 @@
 class ShowStylistSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :description, :phone, :lat,
             :long, :image, :is_favorite, :cosmetology_license, :liability_insurance,
-            :eligibility_document, :gallery_images, :rating
+            :eligibility_document, :gallery_images, :ratings
 
   has_many :reviews
 

@@ -1,7 +1,6 @@
 module Api::V1
   class StylistsController < BaseController
-    before_action :set_stylist, only: %i[showupdatedestroy
-                                         gallery_images remove_gallery_image]
+    before_action :set_stylist, only: %i[show update destroy gallery_images remove_gallery_image]
 
     # GET /stylists
     def index
