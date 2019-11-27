@@ -16,7 +16,9 @@ module Api::V1
       @favorite = Favorite.new(favorite_params)
       authorize @favorite
       @favorite.save!
-      json_response(@favorite, :created)
+      # json_response(@favorite, :created)
+      @stylists = Stylist.where(id: @favorite.stylist_id)
+      render json: @stylists, each_serializer: FavoriteSerializer, status: :created
     end
 
     # DELETE /favorites/:id
@@ -33,7 +35,7 @@ module Api::V1
     end
 
     def set_favorite
-      @favorite = Favorite.find_by_id(params[:id])
+      @favorite = Favorite.find_by(client_id: current_user.client.id, stylist_id: params[:id])
     end
   end
 end

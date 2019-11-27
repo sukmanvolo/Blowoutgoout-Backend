@@ -1,9 +1,13 @@
 class ShowStylistSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :description, :phone, :lat,
-            :long, :image, :cosmetology_license, :liability_insurance,
+            :long, :image, :is_favorite, :cosmetology_license, :liability_insurance,
             :eligibility_document, :gallery_images
 
   has_many :reviews
+
+  def is_favorite
+    current_user&.client&.favorites&.map(&:stylist_id)&.include?(object.id)
+  end
 
   def image
     if object.image_attached?
