@@ -1,27 +1,34 @@
 class ShowStylistSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :description, :phone, :lat,
             :long, :image, :is_favorite, :cosmetology_license, :liability_insurance,
-            :eligibility_document, :gallery_images
+            :eligibility_document, :gallery_images, :rating
 
   has_many :reviews
+
+  def ratings
+    {
+      count: object&.reviews_count,
+      rating: object&.reviews_rating
+    }
+  end
 
   def is_favorite
     current_user&.client&.favorites&.map(&:stylist_id)&.include?(object.id)
   end
 
   def image
-    if object.image_attached?
-      if object.image.variable?
-        Rails.application
-             .routes
-             .url_helpers
-             .rails_representation_url(object.image.variant(resize: "100x100").processed)
-      else
-        Rails.application
-             .routes
-             .url_helpers
-             .url_for(object.image)
-      end
+    return nil unless object.image_attached?
+
+    if object.image.variable?
+      Rails.application
+           .routes
+           .url_helpers
+           .rails_representation_url(object.image.variant(resize: "100x100").processed)
+    else
+      Rails.application
+           .routes
+           .url_helpers
+           .url_for(object.image)
     end
   end
 

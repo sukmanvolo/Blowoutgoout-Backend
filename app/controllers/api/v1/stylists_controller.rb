@@ -1,7 +1,7 @@
 module Api::V1
   class StylistsController < BaseController
-    before_action :set_stylist, only: [:show, :update, :destroy,
-                                       :gallery_images, :remove_gallery_image]
+    before_action :set_stylist, only: %i[showupdatedestroy
+                                         gallery_images remove_gallery_image]
 
     # GET /stylists
     def index
@@ -57,12 +57,11 @@ module Api::V1
       stylists = Stylist.nearest_stylists(params[:lat], params[:long])
 
       stylist_schedules = StylistSchedule
-                                          .joins(:schedule)
-                                          .where(schedules: { date: params[:date] })
-                                          .where(stylist_schedules: {
-                                                   stylist_id: stylists
-                                                  }
-                                                 )
+                          .joins(:schedule)
+                          .where(schedules: { date: params[:date] })
+                          .where(stylist_schedules: {
+                                   stylist_id: stylists
+                                 })
 
       stylist_schedules = stylist_schedules.where(start_time: params[:start_time]) if params[:start_time]
 
@@ -81,7 +80,7 @@ module Api::V1
     end
 
     def gallery_images
-        # authorize @stylist
+      # authorize @stylist
       if @stylist.update(gallery_images_params)
         render json: @stylist, serializer: GalleryImagesStylistSerializer, status: status
       else
@@ -105,11 +104,11 @@ module Api::V1
                                        :agrees_to_taxation_understanding,
                                        :status, :description, :welcome_kit,
                                        :lat, :long, :user_id, :radius, :image,
-                                       user_attributes: [
-                                        :first_name, :last_name, :phone,
-                                        :email, :password, :gcm_id,
-                                        :device_type, :device_id]
-                                       )
+                                       user_attributes: %i[
+                                         first_name last_name phone
+                                         email password gcm_id
+                                         device_type device_id
+                                       ])
     end
 
     def gallery_images_params

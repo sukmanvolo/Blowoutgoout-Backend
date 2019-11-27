@@ -18,7 +18,7 @@ module Api::V1
 
       # check if the schedule slot is available
       @available_schedules = []
-      duration = Service.where(id: service_ids).pluck(:duration).max || 0
+      duration = Service.where(id: service_ids).pluck(:duration).sum || 0
       stylist_schedules.each do |sc|
         sc.tmp_end_time = sc.start_time + duration.hours
         @available_schedules << sc if Booking.where(stylist_id: sc.stylist_id,

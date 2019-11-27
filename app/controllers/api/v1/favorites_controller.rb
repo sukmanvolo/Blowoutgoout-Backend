@@ -5,7 +5,7 @@ module Api::V1
     # GET /favorites
     def index
       @favorites = Favorite.all
-      @favorites = @favorites.by_client(params[:client_id]) if params[:client_id]
+      @favorites = current_user.client.favorites #@favorites.by_client(params[:client_id]) if params[:client_id]
       @stylists = Stylist.where(id: @favorites.pluck(:stylist_id))
       render json: @stylists, each_serializer: FavoriteSerializer, status: :ok
       # json_response(@stylists)
@@ -13,12 +13,11 @@ module Api::V1
 
     # POST /favorites
     def create
-      @favorite = Favorite.new(favorite_params)
+      @favorite = current_user.client.favorites.find_or_create_by(stylist_id: favorite_params[:stylist_id])
       authorize @favorite
       @favorite.save!
       # json_response(@favorite, :created)
-      @stylists = Stylist.where(id: @favorite.stylist_id)
-      render json: @stylists, each_serializer: FavoriteSerializer, status: :created
+      render json: @favorite, each_serializer: FavoriteSerializer, status: :created
     end
 
     # DELETE /favorites/:id
