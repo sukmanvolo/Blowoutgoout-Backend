@@ -1,6 +1,5 @@
 module Api::V1
   class AvailabilitiesController < BaseController
-    before_action :set_availability, only: [:show, :update, :destroy]
 
     # GET /availabilities
     def index
@@ -29,46 +28,7 @@ module Api::V1
       render json: @available_schedules, each_serializer: AvailabilitySerializer, status: :ok
     end
 
-    # POST /availabilities
-    def create
-      @availability = Availability.new(availability_params)
-      authorize @availability
-      @availability.save!
-      json_response(@availability, :created)
-    end
-
-    # GET /availabilities/:id
-    def show
-      json_response(@availability)
-    end
-
-    # PUT /availabilities/:id
-    def update
-      authorize @availability
-      @availability.update(availability_params)
-      head :no_content
-    end
-
-    # DELETE /availabilities/:id
-    def destroy
-      authorize @availability
-      if @availability.can_delete?
-        @availability.destroy
-        head :no_content
-      else
-        render json: { error: ['You can not remove current and next day schedules'] }, status: :unprocessable_entity
-      end
-    end
-
     private
-
-    def availability_params
-      params.require(:availabilities).permit(:schedule_id, :time_from, :time_to)
-    end
-
-    def set_availability
-      @availability = Availability.find_by_id(params[:id])
-    end
 
     def service_ids
       return params[:service_ids].map(&:to_i) unless params[:service_ids].is_a? String

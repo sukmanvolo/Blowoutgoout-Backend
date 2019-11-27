@@ -51,8 +51,6 @@ module Api::V1
     end
 
     def available_stylists
-      puts "**** param service_ids: #{params[:service_ids]}"
-      puts "**** method service_ids: #{service_ids}"
       stylists = Stylist.nearest_stylists(params[:lat], params[:long])
 
       stylist_schedules = StylistSchedule

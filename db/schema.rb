@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030596) do
+ActiveRecord::Schema.define(version: 2019_12_18_030598) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,16 +36,6 @@ ActiveRecord::Schema.define(version: 2019_12_18_030596) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "availabilities", force: :cascade do |t|
-    t.bigint "schedule_id"
-    t.time "time_from"
-    t.time "time_to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0
-    t.index ["schedule_id"], name: "index_availabilities_on_schedule_id"
-  end
-
   create_table "bookings", force: :cascade do |t|
     t.bigint "client_id"
     t.bigint "stylist_id"
@@ -60,6 +50,8 @@ ActiveRecord::Schema.define(version: 2019_12_18_030596) do
     t.date "date"
     t.bigint "service_ids", default: [], array: true
     t.bigint "schedule_id"
+    t.string "card_token"
+    t.decimal "service_amount", precision: 10, scale: 2
     t.index ["client_id"], name: "index_bookings_on_client_id"
     t.index ["schedule_id"], name: "index_bookings_on_schedule_id"
     t.index ["stylist_id"], name: "index_bookings_on_stylist_id"
@@ -248,7 +240,6 @@ ActiveRecord::Schema.define(version: 2019_12_18_030596) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "availabilities", "schedules"
   add_foreign_key "bookings", "clients"
   add_foreign_key "bookings", "schedules"
   add_foreign_key "bookings", "stylists"

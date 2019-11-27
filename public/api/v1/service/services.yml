@@ -46,6 +46,6 @@ components:
             service_type_id:
               type: integer
             amount:
-              type: integer
+              type: number
             duration:
               type: integer

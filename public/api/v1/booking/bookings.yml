@@ -68,3 +68,7 @@ components:
               type: string
             schedule_id:
               type: integer
+            service_amount:
+              type: number
+            card_token:
+              type: string

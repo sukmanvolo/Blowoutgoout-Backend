@@ -58,7 +58,7 @@ Rails.application.routes.draw do
           get 'nearest_schedules', to: 'schedules#nearest_schedules'
         end
       end
-      resources :availabilities
+      resources :availabilities, only: :index
       resources :favorites
       resources :bookings do
         member do
