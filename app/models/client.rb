@@ -3,9 +3,10 @@ class Client < ApplicationRecord
 
   belongs_to :user, dependent: :destroy
   has_many :favorites,
-    dependent: :destroy
+           dependent: :destroy
   has_many :favorite_stylists,
-    through: :favorites, source: :stylist
+           through: :favorites, source: :stylist
+  has_many :bookings, dependent: :destroy
 
   accepts_nested_attributes_for :user
 
@@ -25,9 +26,10 @@ class Client < ApplicationRecord
     stripe_customer_id = self[:customer_id]
     unless stripe_customer_id.present?
       begin
-        stripe_customer_id = Stripe::Customer.create({
-                                                      email: self.user.email,
-                                                      description: "Customer for #{self.user.email}"})
+        stripe_customer_id = Stripe::Customer.create(
+          email: user.email,
+          description: "Customer for #{user.email}"
+        )
 
         update_attributes!(customer_id: stripe_customer_id.id)
       rescue StandardError => e

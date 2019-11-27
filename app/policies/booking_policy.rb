@@ -1,5 +1,9 @@
 class BookingPolicy < ApplicationPolicy
 
+  def index?
+  	user.admin?
+  end
+
   def create?
     user.client?
   end
@@ -13,7 +17,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def confirm?
-    update?
+    user.admin? || user.stylist?
   end
 
   def reject?

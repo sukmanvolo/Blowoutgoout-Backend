@@ -78,15 +78,12 @@ module Api::V1
 
     # PUT /bookings/upcoming_appointments
     def upcoming_appointments
-      @bookings = Booking.by_client(params[:client_id]) if params[:client_id]
-      @bookings = Booking.by_stylist(params[:stylist_id]) if params[:stylist_id]
-      @bookings = @bookings&.upcoming || []
+      @bookings = appointments&.upcoming || []
       json_response(@bookings)
     end
 
     def past_appointments
-      @bookings = Booking.by_client(params[:client_id]) if params[:client_id]
-      @bookings = @bookings&.past || []
+      @bookings = appointments&.past || []
       json_response(@bookings)
     end
 
@@ -99,7 +96,7 @@ module Api::V1
     end
 
     def set_booking
-      @booking = Booking.find_by_id(params[:id])
+      @booking = appointments.find_by_id(params[:id])
     end
 
     def cancel_notification
@@ -110,6 +107,14 @@ module Api::V1
 
     def availability
       Availability.find_by_id(@booking.availability_id)
+    end
+
+    def appointments
+      if current_user.client?
+        Booking.by_client(current_user&.client&.id)
+      elsif current_user.stylist?
+        Booking.by_stylist(current_user&.stylist&.id)
+      end
     end
   end
 end
