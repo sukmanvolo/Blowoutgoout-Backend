@@ -1,7 +1,7 @@
 class BookingSerializer < ActiveModel::Serializer
   attributes :id, :client_id, :client_full_name, :stylist_id,
              :stylist_full_name, :time_from, :time_to, :service_lat,
-             :service_long, :date, :status, :service_ids
+             :service_long, :date, :status, :service_ids, :card
 
   def client_full_name
     object&.client&.full_name
@@ -21,6 +21,10 @@ class BookingSerializer < ActiveModel::Serializer
 
   def service_ids
     object&.schedule&.service_ids
+  end
+
+  def card
+    CardService.new(current_user.client).show(object&.card_token)
   end
 
 end
