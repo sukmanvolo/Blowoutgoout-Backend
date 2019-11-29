@@ -7,7 +7,7 @@ class Booking < ApplicationRecord
   before_create :check_status_default
 
   # enum
-  enum status: %i[confirmed completed rejected pending paid]
+  enum status: %i[confirmed completed rejected pending paid cancelled]
 
   scope :by_client, ->(id) { where(client_id: id) }
   scope :by_stylist, ->(id) { where(stylist_id: id) }

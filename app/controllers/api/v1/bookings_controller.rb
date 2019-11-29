@@ -37,9 +37,13 @@ module Api::V1
 
     # DELETE /bookings/:id
     def destroy
-      authorize @booking
-      @booking.destroy
-      head :no_content
+      @booking.status = 'cancelled'
+      if ChangeBookingStatus.call(@booking).result
+        CreateNotification.call(current_user, cancel_notification)
+        json_response(@booking, :no_content)
+      else
+        json_response(@booking.errors.messages, :unprocessable_entity)
+      end
     end
 
     # PUT /bookings/:id/confirm
@@ -68,7 +72,6 @@ module Api::V1
       authorize @booking
       @booking.status = 'rejected'
       if ChangeBookingStatus.call(@booking).result
-        availability.update(status: 'free')
         CreateNotification.call(current_user, cancel_notification)
         json_response(@booking, status: :accepted)
       else
@@ -101,13 +104,9 @@ module Api::V1
     end
 
     def cancel_notification
-      "Your booking for the service #{@booking.service_name} " \
+      "Your booking " \
       "on #{@booking.date} at #{@booking.time_from.strftime('%m-%d-%Y %H:%M')} " \
       "has been canceled"
-    end
-
-    def availability
-      Availability.find_by_id(@booking.availability_id)
     end
 
     def appointments

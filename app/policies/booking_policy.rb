@@ -13,7 +13,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    user.admin? || user.client? || user.stylist?
   end
 
   def confirm?

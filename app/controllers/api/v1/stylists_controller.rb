@@ -73,7 +73,8 @@ module Api::V1
 
       @stylists = stylists.where(id: stylist_ids.uniq)
       @stylists = @stylists.update(tmp_client_id: current_user.client.id)
-      json_response(@stylists)
+      render json: @stylists, each_serializer: ShowStylistSerializer, status: :ok
+      # json_response(@stylists)
     end
 
     def gallery_images
