@@ -20,4 +20,10 @@ class Service < ApplicationRecord
   def image_attached?
     image.attached?
   end
+
+  def as_json(options = {})
+    super(options).merge({
+      'service_type' => service_type.name
+    })
+  end
 end

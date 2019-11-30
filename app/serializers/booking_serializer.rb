@@ -1,14 +1,16 @@
 class BookingSerializer < ActiveModel::Serializer
-  attributes :id, :client_id, :client_full_name, :stylist_id,
-             :stylist_full_name, :time_from, :time_to, :service_lat,
-             :service_long, :date, :status, :service_ids, :card
+  attributes :id, :client_id, :client_full_name,
+             :date, :time_from, :time_to, :service_lat,
+             :service_long, :status, :services, :stylist, :card
+
+  belongs_to :stylist, serializer: ShowStylistSerializer
 
   def client_full_name
     object&.client&.full_name
   end
 
-  def stylist_full_name
-    object&.stylist&.full_name
+  def date
+    object&.schedule&.date
   end
 
   def time_from
@@ -19,8 +21,12 @@ class BookingSerializer < ActiveModel::Serializer
     object.time_to&.to_s(:time)
   end
 
-  def service_ids
-    object&.schedule&.service_ids
+  def services
+    srvs = []
+    object&.schedule&.service_ids&.each do |service_id|
+      srvs << Service.find(service_id).as_json
+    end
+    srvs
   end
 
   def card
