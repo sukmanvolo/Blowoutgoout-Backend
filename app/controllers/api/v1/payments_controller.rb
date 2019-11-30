@@ -12,8 +12,18 @@ module Api::V1
     # POST payments
     def create
       if customer_id && booking
-        amount = booking.service_amount + tip_fee
-        stripe_charge = StripeCharge.call(customer_id, amount)
+        amount = booking.fee + tip_fee
+        card_token = booking.card_token
+        receipt_email = booking.client.user.email
+        # TODO: Update description to include service names
+        description = "Charges for Blowout Go Out"
+        stripe_charge = StripeCharge.call(
+          customer_id,
+          amount,
+          card_token,
+          description,
+          receipt_email
+        )
         if stripe_charge.result
           @payment = Payment.new
           authorize @payment
@@ -74,7 +84,7 @@ module Api::V1
     end
 
     def customer_id
-      @customer_id ||= booking&.client_customer_id
+      @customer_id ||= booking&.client&.customer_id
     end
   end
 end
