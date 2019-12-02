@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class BookingSerializer < ActiveModel::Serializer
   attributes :id, :client_id, :client_full_name,
              :date, :time_from, :time_to, :service_lat,
-             :service_long, :status, :services, :stylist, :card
+             :service_long, :status, :fee, :services, :stylist, :card
 
   belongs_to :stylist, serializer: ShowStylistSerializer
 
@@ -21,6 +23,14 @@ class BookingSerializer < ActiveModel::Serializer
     object.time_to&.to_s(:time)
   end
 
+  def fee
+    f = 0.0
+    object&.schedule&.service_ids&.each do |service_id|
+      f += Service.find(service_id).amount
+    end
+    f
+  end
+
   def services
     srvs = []
     object&.schedule&.service_ids&.each do |service_id|
@@ -32,5 +42,4 @@ class BookingSerializer < ActiveModel::Serializer
   def card
     CardService.new(current_user.client).show(object&.card_token)
   end
-
 end

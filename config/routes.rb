@@ -75,7 +75,12 @@ Rails.application.routes.draw do
       resources :messages
       resources :cards
       resources :contacts, only: [:create]
-      resources :reviews
+      resources :reviews do
+        collection do
+          get 'by_stylist'
+          get 'by_client'
+        end
+      end
       resources :notifications, only: :index
     end
   end
