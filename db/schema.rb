@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030598) do
+ActiveRecord::Schema.define(version: 2019_12_18_030599) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_030598) do
     t.bigint "schedule_id"
     t.string "card_token"
     t.decimal "service_amount", precision: 10, scale: 2
+    t.string "notes"
     t.index ["client_id"], name: "index_bookings_on_client_id"
     t.index ["schedule_id"], name: "index_bookings_on_schedule_id"
     t.index ["stylist_id"], name: "index_bookings_on_stylist_id"

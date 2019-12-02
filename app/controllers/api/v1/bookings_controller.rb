@@ -96,7 +96,7 @@ module Api::V1
       params.require(:bookings).permit(:client_id, :stylist_id, :service_ids,
                                        :time_from, :time_to, :fee, :service_lat,
                                        :service_long, :date, :status, :schedule_id,
-                                       :card_token, :service_amount)
+                                       :card_token, :service_amount, :notes)
     end
 
     def set_booking
