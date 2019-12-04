@@ -9,6 +9,8 @@ class Booking < ApplicationRecord
   # enum
   enum status: %i[confirmed completed rejected pending paid cancelled]
 
+  validates :service_ids, :time_from, :time_to, :card_token, presence: true
+
   scope :by_client, ->(id) { where(client_id: id) }
   scope :by_stylist, ->(id) { where(stylist_id: id) }
   scope :upcoming, -> { where(status: %w[confirmed pending]).joins(:schedule).merge(Schedule.upcoming) }

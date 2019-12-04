@@ -15,8 +15,15 @@ module Api::V1
     def create
       @booking = Booking.new(booking_params)
       authorize @booking
-      @booking.save!
-      json_response(@booking, :created)
+      if stylist_available? && @booking.save
+        json_response(@booking, :created)
+      else
+        if stylist_available?
+          json_response(@booking.errors.messages, :unprocessable_entity)
+        else
+          json_response({ "error": stylist_error_msg}, :unprocessable_entity)
+        end
+      end
     end
 
     # GET /bookings/:id
@@ -99,6 +106,14 @@ module Api::V1
                                        :card_token, :service_amount, :notes)
     end
 
+    def stylist_available?
+      data = params[:bookings]
+
+      @exists ||= Booking.where(stylist_id: data[:stylist_id],
+                    schedule_id: data[:schedule_id],
+                    time_from: data[:start_time]).empty?
+    end
+
     def set_booking
       @booking = appointments.find_by_id(params[:id])
     end
@@ -107,6 +122,11 @@ module Api::V1
       "Your booking " \
       "on #{@booking.date} at #{@booking.time_from.strftime('%m-%d-%Y %H:%M')} " \
       "has been canceled"
+    end
+
+    def stylist_error_msg
+      "The stylist is not longer available on " \
+      "#{@booking&.date} at #{@booking&.time_from&.strftime('%m-%d-%Y %H:%M')}"
     end
 
     def appointments
