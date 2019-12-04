@@ -110,8 +110,10 @@ module Api::V1
       data = params[:bookings]
 
       @exists ||= Booking.where(stylist_id: data[:stylist_id],
-                    schedule_id: data[:schedule_id],
-                    time_from: data[:start_time]).empty?
+                                schedule_id: data[:schedule_id],
+                                time_from: data[:time_from]).empty?
+
+      return @exists
     end
 
     def set_booking
