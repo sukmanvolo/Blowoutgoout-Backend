@@ -65,7 +65,7 @@ module Api::V1
     private
 
     def schedule_params
-      params.require(:schedules).permit(:date, :start_time, service_ids: [])
+      params.require(:schedules).permit(:stylist_id, :date, :start_time, service_ids: [])
     end
 
     def set_schedule
@@ -73,7 +73,11 @@ module Api::V1
     end
 
     def stylist_id
-      current_user.stylist.id
+      if current_user.admin?
+        Stylist.where(id: schedule_params[:stylist_id]).first&.pluck(:id)
+      else
+        current_user.stylist.id
+      end
     end
 
     def service_ids
