@@ -74,7 +74,7 @@ module Api::V1
 
     def stylist_id
       if current_user.admin?
-        Stylist.where(id: schedule_params[:stylist_id]).first&.pluck(:id)
+        Stylist.where(id: schedule_params[:stylist_id])&.pluck(:id)&.first
       else
         current_user.stylist.id
       end
