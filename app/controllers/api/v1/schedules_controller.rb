@@ -23,7 +23,7 @@ module Api::V1
 
     # POST /schedules
     def create
-      @schedule = Schedule.new(schedule_params)
+      @schedule = Schedule.new(schedule_params.except(:stylist_id))
       authorize @schedule
       schedule = CreateScheduleService.new(schedule_params, stylist_id).call
       if schedule.errors.empty?
