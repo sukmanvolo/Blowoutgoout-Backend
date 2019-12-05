@@ -73,7 +73,11 @@ module Api::V1
     end
 
     def stylist_id
-      current_user.stylist.id
+      if current_user.admin?
+        Stylist.where(id: params[:stylist_id]).first&.pluck(:id)
+      else
+        current_user.stylist.id
+      end
     end
 
     def service_ids
