@@ -3,7 +3,8 @@ module Api::V1
 
     # GET /availabilities
     def index
-      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+      distance = params[:distance] || 25
+      stylists = Stylist.nearest_stylists(distance, params[:lat], params[:long])
 
       stylist_schedules = StylistSchedule
                                           .joins(:schedule)

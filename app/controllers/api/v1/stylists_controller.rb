@@ -46,12 +46,14 @@ module Api::V1
 
     # GET /stylists/nearest_stylists
     def nearest_stylists
-      @stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+      distance = params[:distance] || 25
+      @stylists = Stylist.nearest_stylists(distance, params[:lat], params[:long])
       json_response(@stylists)
     end
 
     def available_stylists
-      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+      distance = params[:distance] || 25
+      stylists = Stylist.nearest_stylists(distance, params[:lat], params[:long])
 
       stylist_schedules = StylistSchedule
                           .joins(:schedule)

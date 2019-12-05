@@ -38,10 +38,8 @@ class Stylist < ApplicationRecord
   validates :liability_insurance, presence: false, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
   validates :eligibility_document, presence: false, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'] }
 
-  DISTANCE = 20
-
   scope :actives, -> { joins(:user).where( users: { status: :active } )}
-  scope :nearest_stylists, ->(lat, long) { actives.within(DISTANCE, origin: [lat, long]) }
+  scope :nearest_stylists, ->(distance, lat, long) { actives.within(distance, origin: [lat, long]) }
   delegate :first_name, :last_name, :phone, to: :user, prefix: false
 
   def image_attached?

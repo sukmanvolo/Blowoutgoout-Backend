@@ -4,9 +4,9 @@ module Api::V1
 
     # GET /schedules
     def index
-      services_count = service_ids && service_ids.count
-
-      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+      # services_count = service_ids && service_ids.count
+      distance = params[:distance] || 25
+      stylists = Stylist.nearest_stylists(distance, params[:lat], params[:long])
       @schedules = Schedule
                            .joins(:stylist_schedules)
                            .where(stylist_schedules: { stylist_id: stylists })
@@ -53,7 +53,8 @@ module Api::V1
     end
 
     def nearest_schedules
-      stylists = Stylist.nearest_stylists(params[:lat], params[:long])
+      distance = params[:distance] || 25
+      stylists = Stylist.nearest_stylists(distance, params[:lat], params[:long])
       @schedules = Schedule.joins(:stylist_schedules).where(stylist_schedules: { stylist_id: stylists })
       @schedules = @schedules.filter_by_service(service_ids) if service_ids
       @schedules = @schedules.from_date(params[:from_date]) if params[:from_date]
