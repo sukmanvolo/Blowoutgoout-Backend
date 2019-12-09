@@ -3,7 +3,6 @@ class Payment < ApplicationRecord
 
   has_one :client, through: :booking
   has_one :stylist, through: :booking
-  has_one :service, through: :booking
 
   validates :amount, presence: true
 

@@ -1,16 +1,16 @@
 class PaymentSerializer < ActiveModel::Serializer
-  attributes :id, :discount_percent, :tip_fee, :discount, :amount, :service_name,
-  :appointment_date, :created_at
+  attributes :id, :discount_percent, :tip_fee, :discount, :amount, :services,
+  :appointment_date, :payment_date
 
-  def created_at
+  def payment_date
     object.created_at.strftime('%Y-%m-%d %H:%M')
   end
 
-  def service_name
-    object.service.name
+  def services
+    object.booking.services
   end
 
   def appointment_date
-    object.booking.date && object.booking.date.strftime('%Y-%m-%d %H:%M')
+    object&.booking&.schedule&.date && object&.booking&.schedule&.date&.strftime('%Y-%m-%d %H:%M')
   end
 end

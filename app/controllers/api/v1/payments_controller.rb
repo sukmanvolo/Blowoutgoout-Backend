@@ -12,11 +12,14 @@ module Api::V1
     # POST payments
     def create
       if customer_id && booking
-        amount = booking.fee + tip_fee
+        amount = booking.fee + (tip_fee || 0)
+        # TODO: Handle discounts
         card_token = booking.card_token
         receipt_email = booking.client.user.email
         # TODO: Update description to include service names
-        description = "Charges for Blowout Go Out"
+
+        service_names = booking.services.map{|s| s['name']}.join(',').chomp(',')
+        description = "Charges for #{service_names} with Blowout Go Out"
         stripe_charge = StripeCharge.call(
           customer_id,
           amount,
@@ -24,15 +27,16 @@ module Api::V1
           description,
           receipt_email
         )
+
         if stripe_charge.result
           @payment = Payment.new
           authorize @payment
-
-          booking.update(status: 'completed')
           @payment.booking = booking
           @payment.tip_fee = tip_fee
           @payment.amount = amount
+          @payment.charge_id = stripe_charge.result.id
           @payment.save!
+          booking.update(status: 'completed')
 
           json_response(@payment, :created)
         else

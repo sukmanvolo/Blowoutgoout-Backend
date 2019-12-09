@@ -19,6 +19,17 @@ class Booking < ApplicationRecord
   delegate :amount, :name, to: :service, prefix: true
   delegate :customer_id, to: :client, prefix: true
 
+  def services
+    return [] unless service_ids.present?
+
+    response = []
+    service_ids.each do |service_id|
+      response << Service.find(service_id).as_json
+    end
+
+    response
+  end
+
   private
 
   def check_status_default
