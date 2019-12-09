@@ -4,8 +4,20 @@ module Api::V1
 
     # GET payments
     def index
+      @payments = Payment.all
+      authorize @payments
+      json_response(@payments)
+    end
+
+    def by_client
       @payments = []
-      @payments = Payment.by_stylist(params[:stylist_id]) if params[:stylist_id]
+      @payments = current_user.client.payments&.sort_by { |p| p['created_at']}.reverse if current_user&.client?
+      json_response(@payments)
+    end
+
+    def by_stylist
+      @payments = []
+      @payments = current_user.stylist.payments&.sort_by { |p| p['created_at']}.reverse if current_user&.stylist?
       json_response(@payments)
     end
 
@@ -36,11 +48,11 @@ module Api::V1
           @payment.amount = amount
           @payment.charge_id = stripe_charge.result.id
           @payment.save!
-          booking.update(status: 'completed')
+          booking.update(status: 'paid')
 
           json_response(@payment, :created)
         else
-          msg = 'Some card or booking data are incorrect, please check and try again.'
+          # msg = 'Some card or booking data are incorrect, please check and try again.'
           json_response(stripe_charge.errors, :unprocessable_entity)
         end
       else
@@ -56,16 +68,16 @@ module Api::V1
 
     # PUT payments/:id
     def update
-      authorize @payment
-      @payment.update(payment_params)
-      head :no_content
+      # authorize @payment
+      # @payment.update(payment_params)
+      # head :no_content
     end
 
     # DELETE payments/:id
     def destroy
-      authorize @payment
-      @payment.destroy
-      head :no_content
+      # authorize @payment
+      # @payment.destroy
+      # head :no_content
     end
 
     private
@@ -84,7 +96,7 @@ module Api::V1
 
     def booking
       return nil unless params[:payments]
-      @booking ||= Booking.confirmed.find_by_id(params[:payments][:booking_id])
+      @booking ||= Booking.completed.find_by_id(params[:payments][:booking_id])
     end
 
     def customer_id

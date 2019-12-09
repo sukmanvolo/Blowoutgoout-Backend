@@ -71,7 +71,12 @@ Rails.application.routes.draw do
           get 'past_appointments', to: 'bookings#past_appointments'
         end
       end
-      resources :payments
+      resources :payments do
+        collection do
+          get 'by_stylist'
+          get 'by_client'
+        end
+      end
       resources :messages
       resources :cards
       resources :contacts, only: [:create]

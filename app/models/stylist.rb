@@ -19,6 +19,7 @@ class Stylist < ApplicationRecord
   has_many :reviews
   has_many :favorites, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :bookings, dependent: :destroy
 
   # emun welcome_kit: [] ask for values
   enum service_type: [:hair, :makeup, :hair_and_makeup]
@@ -78,5 +79,9 @@ class Stylist < ApplicationRecord
 
   def is_favorite?(client_id)
     favorites.where(client: client_id).present?
+  end
+
+  def payments
+    bookings.paid.map { |b| b.payment.as_json }
   end
 end

@@ -3,6 +3,7 @@ class Booking < ApplicationRecord
   belongs_to :stylist
   has_many :messages, dependent: :destroy
   belongs_to :schedule
+  has_one :payment
 
   before_create :check_status_default
 

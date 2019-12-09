@@ -41,4 +41,8 @@ class Client < ApplicationRecord
     end
     stripe_customer_id
   end
+
+  def payments
+    bookings.paid.map { |b| b.payment.as_json }
+  end
 end
