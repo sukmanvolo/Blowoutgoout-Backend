@@ -4,13 +4,13 @@ module Api::V1
 
     # GET /stylists
     def index
-      # @reviews = Review.all
+      @reviews = reviews
       json_response(@reviews)
     end
 
     # GET /stylists/by_stylist
     def by_stylist
-      @reviews = Review.by_stylist(params[:stylist_id]) if params[:stylist_id]
+      @reviews = reviews.by_stylist(params[:stylist_id]) if params[:stylist_id]
       json_response(@reviews)
     end
 
@@ -34,6 +34,7 @@ module Api::V1
 
     # DELETE /stylists/:id
     def destroy
+      # return 'You are not authorized to perform that action'.as_json unless current_user.client? && @review.client_id == current_user&.client&.id
       authorize @review
       @review.destroy
       head :no_content
@@ -46,7 +47,15 @@ module Api::V1
     end
 
     def set_review
-      @favorite = Review.find(params[:id])
+      @review = Review.find(params[:id])
+    end
+
+    def reviews
+      if current_user.client?
+        Review.by_client(current_user&.client&.id)
+      elsif current_user.stylist?
+        Review.by_stylist(current_user&.stylist&.id)
+      end
     end
   end
 end

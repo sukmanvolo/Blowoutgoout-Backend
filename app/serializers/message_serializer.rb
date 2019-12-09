@@ -1,5 +1,5 @@
 class MessageSerializer < ActiveModel::Serializer
-  attributes :id, :booking_id, :client_id, :stylist_id, :text, :status,
+  attributes :id, :booking_id, :client_id, :stylist_id, :text, :status, :sender,
              :created_at, :updated_at
 
   def created_at

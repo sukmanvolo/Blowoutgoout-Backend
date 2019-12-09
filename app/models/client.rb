@@ -7,6 +7,9 @@ class Client < ApplicationRecord
   has_many :favorite_stylists,
            through: :favorites, source: :stylist
   has_many :bookings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :messages, dependent: :destroy
+
 
   accepts_nested_attributes_for :user
 

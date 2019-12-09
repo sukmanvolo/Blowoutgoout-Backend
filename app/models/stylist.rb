@@ -18,6 +18,7 @@ class Stylist < ApplicationRecord
   has_many :schedules
   has_many :reviews
   has_many :favorites, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   # emun welcome_kit: [] ask for values
   enum service_type: [:hair, :makeup, :hair_and_makeup]
