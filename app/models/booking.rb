@@ -11,6 +11,7 @@ class Booking < ApplicationRecord
   enum status: %i[confirmed completed rejected pending paid cancelled]
 
   validates :service_ids, :time_from, :time_to, :card_token, presence: true
+  validate :check_valid_date
 
   scope :by_client, ->(id) { where(client_id: id) }
   scope :by_stylist, ->(id) { where(stylist_id: id) }
@@ -36,5 +37,11 @@ class Booking < ApplicationRecord
   def check_status_default
     return unless status.nil?
     self.status = 'pending'
+  end
+
+  def check_valid_date
+    if self.date < Date.today
+      self.errors.add(:date, :invalid, message: "you cannot make a booking for a past date")
+    end
   end
 end

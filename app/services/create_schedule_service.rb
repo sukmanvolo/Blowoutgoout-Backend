@@ -13,7 +13,7 @@ class CreateScheduleService
                           .where(schedules: { date: schedule_data[:date] })
 
       # filter by service_ids array
-      schedules = schedules.reject{ |s| s.service_ids != schedule_data[:service_ids] }
+      schedules = schedules.reject{ |s| s.service_ids.map(&:to_i) != schedule_data[:service_ids].map(&:to_i) }
 
       schedule = schedules.first
       if schedule.nil?

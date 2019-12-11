@@ -21,7 +21,7 @@ module Api::V1
         if stylist_available?
           json_response(@booking.errors.messages, :unprocessable_entity)
         else
-          json_response({ "error": stylist_error_msg}, :unprocessable_entity)
+          json_response({ "error": stylist_error_msg }, :unprocessable_entity)
         end
       end
     end
@@ -103,17 +103,21 @@ module Api::V1
       params.require(:bookings).permit(:client_id, :stylist_id, :service_ids,
                                        :time_from, :time_to, :fee, :service_lat,
                                        :service_long, :date, :status, :schedule_id,
-                                       :card_token, :service_amount, :notes)
+                                       :card_token, :service_amount, :notes, service_ids: [])
     end
 
     def stylist_available?
       data = params[:bookings]
 
-      @exists ||= Booking.where(stylist_id: data[:stylist_id],
+      @available_schedule ||= StylistSchedule.where(stylist_id: data[:stylist_id],
+                                        schedule_id: data[:schedule_id],
+                                        start_time: data[:time_from]).present?
+
+      @available ||= @available_schedule && Booking.where(stylist_id: data[:stylist_id],
                                 schedule_id: data[:schedule_id],
                                 time_from: data[:time_from]).empty?
 
-      return @exists
+      return @available
     end
 
     def set_booking
