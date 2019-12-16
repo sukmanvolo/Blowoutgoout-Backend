@@ -2,6 +2,7 @@ module Api::V1
   class BookingsController < BaseController
     before_action :set_booking, only: [:show, :update, :destroy, :confirm,
                                        :reject, :complete]
+    before_action :stylist_schedule, only: [:create, :reject]
 
     # GET /bookings
     def index
@@ -16,6 +17,7 @@ module Api::V1
       @booking = Booking.new(booking_params)
       authorize @booking
       if stylist_available? && @booking.save
+        @stylist_schedule.update(available: false)
         json_response(@booking, :created)
       else
         if stylist_available?
@@ -79,6 +81,7 @@ module Api::V1
       authorize @booking
       @booking.status = 'rejected'
       if ChangeBookingStatus.call(@booking).result
+        @stylist_schedule.update(available: true)
         CreateNotification.call(current_user, cancel_notification)
         json_response(@booking, status: :accepted)
       else
@@ -107,17 +110,24 @@ module Api::V1
     end
 
     def stylist_available?
-      data = params[:bookings]
+      # data = params[:bookings]
 
-      @available_schedule ||= StylistSchedule.where(stylist_id: data[:stylist_id],
-                                        schedule_id: data[:schedule_id],
-                                        start_time: data[:time_from]).present?
+      # @available_schedule ||= StylistSchedule.where(stylist_id: data[:stylist_id],
+      #                                   schedule_id: data[:schedule_id],
+      #                                   start_time: data[:time_from]).present?
 
-      @available ||= @available_schedule && Booking.where(stylist_id: data[:stylist_id],
-                                schedule_id: data[:schedule_id],
-                                time_from: data[:time_from]).empty?
+      # @available ||= @available_schedule && Booking.where(stylist_id: data[:stylist_id],
+      #                           schedule_id: data[:schedule_id],
+      #                           time_from: data[:time_from]).empty?
 
-      return @available
+      # return @available
+      @stylist_schedule.available?
+    end
+
+    def stylist_schedule
+      @stylist_schedule ||= StylistSchedule.where(stylist_id: data[:stylist_id],
+                                                  schedule_id: data[:schedule_id],
+                                                  start_time: data[:time_from])
     end
 
     def set_booking

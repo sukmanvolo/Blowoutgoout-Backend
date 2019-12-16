@@ -7,18 +7,18 @@ module Api::V1
       # services_count = service_ids && service_ids.count
       distance = params[:distance] || 25
       stylists = Stylist.nearest_stylists(distance, params[:lat], params[:long])
-      @schedules = Schedule
+      schedules = Schedule
                            .joins(:stylist_schedules)
-                           .where(stylist_schedules: { stylist_id: stylists })
+                           .where(stylist_schedules: { stylist_id: stylists, available: true })
                            .distinct
       # filter by date range
-      @schedules = @schedules.from_date(params[:from_date]) if params[:from_date]
-      @schedules = @schedules.to_date(params[:to_date]) if params[:to_date]
+      schedules = schedules.from_date(params[:from_date]) if params[:from_date]
+      schedules = schedules.to_date(params[:to_date]) if params[:to_date]
 
       # filter by service_ids array
-      @schedules = @schedules.reject{ |s| (s.service_ids & service_ids).empty? } if service_ids
+      schedules = schedules.reject{ |s| (s.service_ids & service_ids).empty? } if service_ids
 
-      json_response(@schedules)
+      json_response(schedules)
     end
 
     # POST /schedules

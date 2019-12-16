@@ -9,7 +9,7 @@ module Api::V1
       stylist_schedules = StylistSchedule
                                           .joins(:schedule)
                                           .where(schedules: { date: params[:date] })
-                                          .where(stylist_schedules: { stylist_id: stylists })
+                                          .where(stylist_schedules: { stylist_id: stylists, available: true })
 
       stylist_schedules = stylist_schedules.where(start_time: params[:start_time]) if params[:start_time]
 
@@ -21,9 +21,7 @@ module Api::V1
       duration = Service.where(id: service_ids).pluck(:duration).sum || 0
       stylist_schedules.each do |sc|
         sc.tmp_end_time = sc.start_time + duration.hours
-        @available_schedules << sc if Booking.where(stylist_id: sc.stylist_id,
-                                                    schedule_id: sc.schedule_id,
-                                                    time_from: sc.start_time).empty?
+        @available_schedules << sc
       end
 
       render json: @available_schedules, each_serializer: AvailabilitySerializer, status: :ok
