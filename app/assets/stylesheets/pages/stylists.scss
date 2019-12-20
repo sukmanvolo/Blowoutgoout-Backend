@@ -1,0 +1,126 @@
+.bg-stylist-hero {
+  background-image: linear-gradient(0deg, #3D1457 0%, #9855D0 100%);
+
+  .bg-hero-body {
+    background-image: image-url("stylist-hero.png");
+    background-repeat: no-repeat;
+    padding-top: 2rem;
+    padding-bottom: 12rem;
+
+    @include breakpoint($mobile-bp) {
+      background-position-y: 0vw;
+      background-position-x: -100vw;
+      padding-top: 0;
+      padding-bottom: 9rem;
+    }
+
+    .bg-container {
+
+      .bg-hero-title {
+        letter-spacing: 0.64px;
+        margin-top: 10rem;
+        margin-bottom: 1em;
+      }
+
+      .bg-hero-subtitle {
+        max-width: 40em;
+        margin: auto;
+        margin-bottom: 2em;
+      }
+
+      .button {
+        border-color: $white;
+        min-width: 12em;
+        text-transform: uppercase;
+        letter-spacing: 0.69px;
+        border-radius: 8px;
+        transition: 0.4s;
+
+        &:hover {
+          background-color: $pink;
+          color: $white;
+        }
+      }
+
+      .ghost-btn {
+        background-color: rgba(255,255,255,0);
+        color: $white;
+
+        &:hover {
+          background-color: $pink;
+        }
+      }
+    }
+  }
+}
+
+.qualification-section {
+
+  .bg-shadow-container {
+    background-color: $white;
+    margin-top: -6em;
+    padding: 2vw 10vw;
+    border-radius: 2em;
+    box-shadow: 0 0 6em rgba(0,0,0,0.3);
+
+    .qualification-columns {
+      .qualification-text {
+        margin-top: 18px;
+      }
+    }
+  }
+
+  .why-section {
+    .why-section-title {
+      margin-top: 2em;
+    }
+
+    .columns {
+      .column {
+        .content-1, .content-2, .content-3 {
+          background: linear-gradient(78deg, $pink 0%, $purple 100%);
+          border-radius: 8px;
+          box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+          padding: 4%;
+          margin-bottom: 4%;
+          color: white;
+          font-weight: bold;
+          border-left: solid 20px white;
+        }
+
+        .ghost-btn {
+          border-color: $purple;
+          min-width: 12em;
+          text-transform: uppercase;
+          letter-spacing: 0.69px;
+          border-radius: 8px;
+          background-color: rgba(255,255,255,0);
+          transition: 0.4s;
+          margin-top: 3%;
+
+          @include breakpoint($mobile-bp) {
+            width: 100%;
+          }
+
+          &:hover {
+            background-color: $purple;
+            border-color: #fff;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.section {
+  @include breakpoint($mobile-bp) {
+    padding: 3rem 0.5rem;
+  }
+}
+
+.container {
+  @include breakpoint($mobile-bp) {
+    padding: 10vw 10vw;
+  }
+}

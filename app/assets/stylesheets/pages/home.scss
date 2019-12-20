@@ -1,0 +1,136 @@
+#nav {
+  display: none;
+}
+.bg-home-hero {
+  background-image: linear-gradient(78deg, $pink 0%, $purple 100%);
+
+  .bg-hero-body {
+    background-image: image-url("curls-night-out.png");
+    background-position-y: -15vw;
+    background-repeat: no-repeat;
+    padding-top: 2rem;
+    padding-bottom: 16rem;
+
+    @include breakpoint($mobile-bp) {
+      background-position-y: -52vw;
+      background-position-x: -188vw;
+      padding-top: 0;
+      padding-bottom: 10rem;
+    }
+
+    .bg-container {
+
+      .bg-hero-title {
+        letter-spacing: 0.64px;
+        margin-top: 4rem;
+        margin-top: 10rem;
+        margin-bottom: 1em;
+      }
+
+      .bg-hero-subtitle {
+        margin-bottom: 2em;
+      }
+
+      .button {
+        border-color: $white;
+        min-width: 12em;
+        text-transform: uppercase;
+        letter-spacing: 0.69px;
+        border-radius: 8px;
+        transition: 0.4s;
+
+        &:hover {
+          background-color: $pink;
+          color: $white;
+        }
+      }
+      .stylist-cta {
+        a {
+          transition: 0.4s;
+          &:hover {
+            color: $pink;
+          }
+        }
+      }
+    }
+  }
+}
+
+.below-hero {
+  background: repeating-linear-gradient(45deg, #ffffff, #ffffff 16px, #f3f3f3 10px, #f3f3f3 20px);
+
+  .bg-shadow-container {
+    background-color: #ffffff;
+    margin-top: -6em;
+    padding: 2vw 10vw;
+    border-radius: 2em;
+    box-shadow: 0 0 6em rgba(0,0,0,0.3);
+
+    .columns {
+      .column {
+
+        .download-cta {
+          margin-top: 1.5em;
+        }
+
+        .app-links {
+
+          ul {
+            margin-top: 3em;
+            list-style: none;
+            margin-left: 0;
+            display: flex;
+            flex-wrap: nowrap;
+
+            li {
+              margin: 0 18px;
+              margin-left: 0;
+
+              &:last-child {
+                margin-right: 0;
+              }
+
+              a {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.stylist-section {
+  background-color: #e8e8e8;
+
+  .stylist-img {
+    img {
+      width: 75%;
+    }
+  }
+
+  .stylist-cta {
+    margin-top: 1.5em;
+
+    @include breakpoint($mobile-bp) {
+      text-align: center;
+    }
+
+    .ghost-btn {
+      border-color: $purple;
+      min-width: 12em;
+      text-transform: uppercase;
+      letter-spacing: 0.69px;
+      border-radius: 8px;
+      background-color: rgba(255,255,255,0);
+      transition: 0.4s;
+
+      &:hover {
+        background-color: $purple;
+        border-color: #fff;
+        color: #fff;
+      }
+    }
+  }
+}

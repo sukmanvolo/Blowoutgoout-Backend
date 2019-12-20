@@ -1,0 +1,74 @@
+post:
+  description: Create new booking - [Client]
+  tags:
+    - Booking
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: params
+      in: body
+      description: Booking data
+      schema:
+        $ref: '#/components/schemas/booking_data'
+get:
+  description: Get all bookings - [Admin, Client, Stylist]
+  tags:
+    - Booking
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: client_id
+      in: query
+      description: Client ID
+      required: false
+      type: integer
+    - name: stylist_id
+      in: query
+      description: Stylist ID
+      required: false
+      type: integer
+
+components:
+  schemas:
+    booking_data:
+      type: object
+      properties:
+        bookings:
+          type: object
+          properties:
+            client_id:
+              type: integer
+            stylist_id:
+              type: integer
+            service_ids:
+              type: array
+              items:
+                type: integer
+                format: int64
+              example: [1, 3]
+            time_from:
+              type: string
+            time_to:
+              type: string
+            fee:
+              type: string
+            service_lat:
+              type: string
+            service_long:
+              type: string
+            date:
+              type: string
+            status:
+              type: string
+            schedule_id:
+              type: integer
+            service_amount:
+              type: number
+            card_token:
+              type: string

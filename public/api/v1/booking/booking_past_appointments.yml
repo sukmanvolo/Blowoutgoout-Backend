@@ -1,0 +1,14 @@
+get:
+  description: Get upcomming appointments
+  tags:
+    - Booking
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: client_id
+      in: path
+      description: Client ID
+      required: true
+      type: integer

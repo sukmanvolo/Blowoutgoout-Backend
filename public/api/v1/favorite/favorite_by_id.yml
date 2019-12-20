@@ -1,0 +1,27 @@
+get:
+  description: Show favorite type by ID
+  tags:
+    - Favorite
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+
+delete:
+  description: Delete favorite type by ID
+  tags:
+    - Favorite
+  parameters:
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64

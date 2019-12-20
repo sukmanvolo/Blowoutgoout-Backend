@@ -1,0 +1,50 @@
+get:
+  description: Show service type by ID
+  tags:
+    - Schedule
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+patch:
+  description: Update service type by ID
+  tags:
+    - Schedule
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+    - name: params
+      in: body
+      description: Service Type data
+      schema:
+        $ref: '#/components/schemas/service_type_data'
+delete:
+  description: Delete service type by ID
+  tags:
+    - Schedule
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64

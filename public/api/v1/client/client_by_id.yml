@@ -1,0 +1,73 @@
+get:
+  description: Show client by ID
+  tags:
+    - Client
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+patch:
+  description: Update client by ID
+  tags:
+    - Client
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+    - name: params
+      in: body
+      description: Client data
+      schema:
+        $ref: '#/components/schemas/client_data'
+delete:
+  description: Delete client by ID
+  tags:
+    - Client
+  parameters:
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+components:
+  schemas:
+    client_data:
+      type: object
+      properties:
+        clients:
+          type: object
+          properties:
+            user_attributes:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                phone:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                gcm_id:
+                  type: string
+                device_type:
+                  type: string
+                device_id:
+                  type: string

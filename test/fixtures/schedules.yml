@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stylist: one
+  service_type: one
+  date: 2019-02-28
+
+two:
+  stylist: two
+  service_type: two
+  date: 2019-02-28

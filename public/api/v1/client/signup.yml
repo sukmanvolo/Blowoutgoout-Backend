@@ -1,0 +1,40 @@
+post:
+  description: Client signup
+  tags:
+    - Client
+  parameters:
+    - name: params
+      in: body
+      description: Client data
+      schema:
+        $ref: '#/definitions/client_data'
+  responses:
+    201:
+      description: Successful response
+
+definitions:
+  client_data:
+    type: object
+    properties:
+      clients:
+        type: object
+        properties:
+          user_attributes:
+            type: object
+            properties:
+              first_name:
+                type: string
+              last_name:
+                type: string
+              phone:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+              gcm_id:
+                type: string
+              device_type:
+                type: string
+              device_id:
+                type: string

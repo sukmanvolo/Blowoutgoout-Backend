@@ -1,0 +1,15 @@
+put:
+  description: Mark a booking as completed [Admin, Stylist]
+  tags:
+    - Booking
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64

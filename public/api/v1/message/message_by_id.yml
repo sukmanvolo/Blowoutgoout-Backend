@@ -1,0 +1,50 @@
+get:
+  description: Show message by ID
+  tags:
+    - Message
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+patch:
+  description: Update message by ID
+  tags:
+    - Message
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64
+    - name: params
+      in: body
+      description: Service data
+      schema:
+        $ref: '#/components/schemas/message_data'
+delete:
+  description: Delete message by ID
+  tags:
+    - Message
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: path
+      description: ID
+      required: true
+      type: integer
+      format: int64

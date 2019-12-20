@@ -1,0 +1,34 @@
+get:
+  description: Get all cards - [Client] (No functional)
+  tags:
+    - Card
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+
+post:
+  description: Create a Card - [Client]
+  tags:
+    - Card
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: params
+      in: body
+      description: Booking data
+      schema:
+        $ref: '#/components/schemas/card_data'
+
+components:
+  schemas:
+    card_data:
+      type: object
+      properties:
+        card_token:
+          type: string

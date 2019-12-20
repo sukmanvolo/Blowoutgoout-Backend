@@ -1,0 +1,27 @@
+post:
+  description: reset user password
+  tags:
+    - Password
+  parameters:
+    - name: params
+      in: body
+      description: credentials
+      schema:
+        $ref: '#/definitions/credentials'
+  responses:
+    201:
+      description: Successful response
+
+definitions:
+  credentials:
+    type: object
+    properties:
+      email:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+      token:
+        type: string
+        required: true

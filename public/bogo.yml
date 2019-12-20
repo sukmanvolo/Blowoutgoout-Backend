@@ -1,0 +1,100 @@
+---
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'Bogo API'
+# host: localhost:3000/api/v1/
+host: bogo-staging.herokuapp.com/api/v1/
+paths:
+  authenticate:
+    $ref: '/api/v1/authenticate.yml'
+  facebook_authenticate:
+    $ref: '/api/v1/facebook_authenticate.yml'
+  password/forgot:
+    $ref: '/api/v1/password/forgot.yml'
+  password/reset:
+    $ref: '/api/v1/password/reset.yml'
+  clients/signup:
+    $ref: '/api/v1/client/signup.yml'
+  stylists/signup:
+    $ref: '/api/v1/stylist/signup.yml'
+  clients:
+    $ref: '/api/v1/admin/clients.yml'
+  stylists:
+    $ref: '/api/v1/admin/stylists.yml'
+  clients/{id}:
+    $ref: '/api/v1/client/client_by_id.yml'
+  clients/{id}/become_a_stylist:
+    $ref: '/api/v1/client/become_a_stylist.yml'
+  clients/{id}/save_gateway_token:
+    $ref: '/api/v1/client/save_gateway_token.yml'
+  stylists/{id}:
+    $ref: '/api/v1/stylist/stylist_by_id.yml'
+  stylists/nearest_stylists:
+    $ref: '/api/v1/stylist/stylist_collection_actions.yml'
+  stylists/available_stylists:
+    $ref: '/api/v1/stylist/available_stylists.yml'
+  stylists/{id}/gallery_images:
+    $ref: '/api/v1/stylist/add_gallery_images.yml'
+  stylists/{id}/gallery_images/{image_id}:
+    $ref: '/api/v1/stylist/remove_gallery_images.yml'
+  services:
+    $ref: '/api/v1/service/services.yml'
+  services/{id}:
+    $ref: '/api/v1/service/service_by_id.yml'
+  services/nearest_services:
+    $ref: '/api/v1/service/service_collection_actions.yml'
+  service_types:
+    $ref: '/api/v1/service_type/service_types.yml'
+  service_types/{id}:
+    $ref: '/api/v1/service_type/service_type_by_id.yml'
+  schedules:
+    $ref: '/api/v1/schedule/schedules.yml'
+  schedules/{id}:
+    $ref: '/api/v1/schedule/schedule_by_id.yml'
+  schedules/nearest_schedules:
+    $ref: '/api/v1/schedule/schedule_collection_actions.yml'
+  availabilities:
+    $ref: '/api/v1/availability/availabilities.yml'
+  favorites:
+    $ref: '/api/v1/favorite/favorites.yml'
+  favorites/{id}:
+    $ref: '/api/v1/favorite/favorite_by_id.yml'
+  bookings:
+    $ref: '/api/v1/booking/bookings.yml'
+  bookings/{id}:
+    $ref: '/api/v1/booking/booking_by_id.yml'
+  bookings/{id}/confirm:
+    $ref: '/api/v1/booking/booking_confirm.yml'
+  bookings/{id}/reject:
+    $ref: '/api/v1/booking/booking_reject.yml'
+  bookings/{id}/complete:
+    $ref: '/api/v1/booking/booking_complete.yml'
+  bookings/upcoming_appointments:
+    $ref: '/api/v1/booking/booking_upcoming_appointments.yml'
+  bookings/past_appointments:
+    $ref: '/api/v1/booking/booking_past_appointments.yml'
+  payments:
+    $ref: '/api/v1/payment/payments.yml'
+  payments/{id}:
+    $ref: '/api/v1/payment/payment_by_id.yml'
+  messages:
+    $ref: '/api/v1/message/messages.yml'
+  messages/{id}:
+    $ref: '/api/v1/message/message_by_id.yml'
+  cards:
+    $ref: '/api/v1/card/cards.yml'
+  cards/{id}:
+    $ref: '/api/v1/card/card_by_id.yml'
+  reviews:
+    $ref: '/api/v1/review/reviews.yml'
+  reviews/{id}:
+    $ref: '/api/v1/review/review_by_id.yml'
+
+
+securityDefinitions:
+  JWT:
+    description: "Token token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJyb2xlIjoiY2xpZW50IiwiZXhwIjoxNTY1ODEzMzY2fQ.3SNznryLiq9p2N9Ts28F6RaB-ae0pPKh75ZET6klkOY"
+    type: string
+    name: Authorization
+    in: header

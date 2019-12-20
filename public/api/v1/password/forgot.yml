@@ -1,0 +1,20 @@
+post:
+  description: forgot user password
+  tags:
+    - Password
+  parameters:
+    - name: parameters
+      in: body
+      description: Email
+      schema:
+        $ref: '#/definitions/credentials'
+  responses:
+    201:
+      description: Successful response
+
+definitions:
+  credentials:
+    type: object
+    properties:
+      email:
+        type: string

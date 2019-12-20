@@ -1,0 +1,3 @@
+class AvailabilityPolicy < ApplicationPolicy
+
+end
