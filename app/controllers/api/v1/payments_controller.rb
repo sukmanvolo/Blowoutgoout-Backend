@@ -23,41 +23,46 @@ module Api::V1
 
     # POST payments
     def create
-      if customer_id && booking
-        amount = booking.fee + (tip_fee || 0)
-        # TODO: Handle discounts
-        card_token = booking.card_token
-        receipt_email = booking.client.user.email
-        # TODO: Update description to include service names
+      if booking.present?
+        if customer_id
+          amount = booking.fee + (tip_fee || 0)
+          # TODO: Handle discounts
+          card_token = booking.card_token
+          receipt_email = booking.client.user.email
+          # TODO: Update description to include service names
 
-        service_names = booking.services.map{|s| s['name']}.join(',').chomp(',')
-        description = "Charges for #{service_names} with Blowout Go Out"
-        stripe_charge = StripeCharge.call(
-          customer_id,
-          amount,
-          card_token,
-          description,
-          receipt_email
-        )
+          service_names = booking.services.map {|s| s['name']}.join(',').chomp(',')
+          description = "Charges for #{service_names} with Blowout Go Out"
+          stripe_charge = StripeCharge.call(
+              customer_id,
+              amount,
+              card_token,
+              description,
+              receipt_email
+          )
 
-        if stripe_charge.result
-          @payment = Payment.new
-          authorize @payment
-          @payment.booking = booking
-          @payment.tip_fee = tip_fee
-          @payment.amount = amount
-          @payment.charge_id = stripe_charge.result.id
-          @payment.save!
-          booking.update(status: 'paid')
+          if stripe_charge.result
+            @payment = Payment.new
+            authorize @payment
+            @payment.booking = booking
+            @payment.tip_fee = tip_fee
+            @payment.amount = amount
+            @payment.charge_id = stripe_charge.result.id
+            @payment.save!
+            booking.update(status: 'paid')
 
-          json_response(@payment, :created)
+            json_response(@payment, :created)
+          else
+            # msg = 'Some card or booking data are incorrect, please check and try again.'
+            json_response(stripe_charge.errors, :unprocessable_entity)
+          end
         else
-          # msg = 'Some card or booking data are incorrect, please check and try again.'
-          json_response(stripe_charge.errors, :unprocessable_entity)
+          msg = 'Some card or booking data are incorrect, please check and try again.'
+          json_response({message: msg}, :unprocessable_entity)
         end
       else
-        msg = 'Some card or booking data are incorrect, please check and try again.'
-        json_response({ message: msg }, :unprocessable_entity)
+        msg = 'No Completed Payment found for given booking data, please check and try again.'
+        json_response({message: msg}, :unprocessable_entity)
       end
     end
 
