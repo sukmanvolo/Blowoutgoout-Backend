@@ -24,7 +24,8 @@ module Api::V1
                                        :previous_contractor_date, :has_conviction,
                                        :agrees_to_unemployment_understanding,
                                        :agrees_to_taxation_understanding,
-                                       :image, user_attributes: [:id, :first_name, :last_name,
+                                       :image, :lat, :long,
+                                       user_attributes: [:id, :first_name, :last_name,
                                        :phone,:email, :password, :role, :gcm_id, :device_type,
                                        :device_id, :status])
     end
