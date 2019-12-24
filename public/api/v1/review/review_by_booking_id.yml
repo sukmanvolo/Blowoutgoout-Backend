@@ -1,22 +1,16 @@
 get:
-  description: show reviews by Booking ID
+  description: Get all review for Booking ID
   tags:
     - Review
   parameters:
-    - name: Authorization
-      description: "JWT token"
-      type: string
+    - name: authorization
       in: header
-    - name: params
-      in: body
-      description: Review data
-      schema:
-        $ref: '#/components/schemas/booking_param_data'
-
-components:
-  schemas:
-    booking_param_data:
-      type: object
-      properties:
-        booking_id:
-          type: integer
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: booking_id
+      in: query
+      description: Booking ID
+      required: true
+      type: integer
+      format: int64
