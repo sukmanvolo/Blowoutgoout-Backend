@@ -56,7 +56,7 @@ Rails.application.routes.draw do
       resources :schedules do
         collection do
           get 'nearest_schedules', to: 'schedules#nearest_schedules'
-          get 'by_stylist/:stylist_id', to: 'schedules#by_stylist'
+          get 'by_stylist', to: 'schedules#by_stylist'
         end
       end
       resources :availabilities, only: :index
@@ -83,9 +83,9 @@ Rails.application.routes.draw do
       resources :contacts, only: [:create]
       resources :reviews do
         collection do
-          get 'by_client/:client_id', to: 'reviews#by_client'
-          get 'by_booking/:booking_id', to: 'reviews#by_booking'
-          get 'by_stylist/:stylist_id', to: 'reviews#by_stylist'
+          get 'by_client', to: 'reviews#by_client'
+          get 'by_booking', to: 'reviews#by_booking'
+          get 'by_stylist', to: 'reviews#by_stylist'
         end
       end
       resources :notifications, only: :index

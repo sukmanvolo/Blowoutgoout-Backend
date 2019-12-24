@@ -7,9 +7,16 @@ get:
       description: "JWT token"
       type: string
       in: header
-    - name: client_id
-      in: path
-      description: Client ID
-      required: true
-      type: integer
-      format: int64
+    - name: params
+      in: body
+      description: Review data
+      schema:
+        $ref: '#/components/schemas/review_param_data'
+
+components:
+  schemas:
+    review_param_data:
+      type: object
+      properties:
+        client_id:
+          type: integer

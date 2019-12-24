@@ -1,15 +1,22 @@
 get:
-  description: Schedules by Stylist ID
+  description: Show schedule by Stylist ID
   tags:
-    - Schedules
+    - Schedule
   parameters:
     - name: Authorization
       description: "JWT token"
       type: string
       in: header
-    - name: stylist_id
-      in: path
-      description: Stylist ID
-      required: true
-      type: integer
-      format: int64
+    - name: params
+      in: body
+      description: Schedule data
+      schema:
+        $ref: '#/components/schemas/schedule_param_data'
+
+components:
+  schemas:
+    schedule_param_data:
+      type: object
+      properties:
+        stylist_id:
+          type: integer

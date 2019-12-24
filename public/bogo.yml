@@ -50,7 +50,7 @@ paths:
     $ref: '/api/v1/service_type/service_type_by_id.yml'
   schedules:
     $ref: '/api/v1/schedule/schedules.yml'
-  schedules/by_stylist/{id}:
+  schedules/by_stylist:
     $ref: '/api/v1/schedule/schedules_by_stylist_id.yml'
   schedules/{id}:
     $ref: '/api/v1/schedule/schedule_by_id.yml'
@@ -90,11 +90,11 @@ paths:
     $ref: '/api/v1/card/card_by_id.yml'
   reviews:
     $ref: '/api/v1/review/reviews.yml'
-  reviews/by_client/{id}:
+  reviews/by_client:
       $ref: '/api/v1/review/review_by_client_id.yml'
-  reviews/by_booking/{id}:
+  reviews/by_booking:
       $ref: '/api/v1/review/review_by_booking_id.yml'
-  reviews/by_stylist/{id}:
+  reviews/by_stylist:
       $ref: '/api/v1/review/review_by_stylist_id.yml'
   reviews/{id}:
     $ref: '/api/v1/review/review_by_id.yml'

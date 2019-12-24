@@ -7,13 +7,3 @@ get:
       description: "JWT token"
       type: string
       in: header
-    - name: client_id
-      in: path
-      description: Client ID
-      required: false
-      type: integer
-    - name: stylist_id
-      in: path
-      description: Stylist ID
-      required: false
-      type: integer
