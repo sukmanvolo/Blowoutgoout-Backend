@@ -114,9 +114,10 @@ module Api::V1
     end
 
     def stylist_schedule
-      @stylist_schedule ||= StylistSchedule.where(stylist_id: params[:stylist_id],
-                                                  schedule_id: params[:schedule_id],
-                                                  start_time: params[:time_from]).first
+      data = params[:bookings]
+      @stylist_schedule ||= StylistSchedule.where(stylist_id: data[:stylist_id],
+                                                  schedule_id: data[:schedule_id],
+                                                  start_time: data[:time_from]).first
     end
 
     def set_booking
