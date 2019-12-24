@@ -6,8 +6,8 @@ module Api::V1
     def index
       return [] unless filters_exists?
 
-      @messages = Message.by_booking(message_params[:booking_id]) if message_params[:booking_id]
-      @messages = Message.conversation(message_params[:client_id], message_params[:stylist_id]) if message_params[:client_id] && message_params[:stylist_id]
+      @messages = Message.by_booking(params[:booking_id]) if params[:booking_id]
+      @messages = Message.conversation(params[:client_id], params[:stylist_id]) if params[:client_id] && params[:stylist_id]
       json_response(@messages)
     end
 
@@ -49,7 +49,7 @@ module Api::V1
     end
 
     def filters_exists?
-      message_params[:booking_id] || message_params[:client_id] || message_params[:stylist_id]
+      params[:booking_id] || params[:client_id] || params[:stylist_id]
     end
   end
 end
