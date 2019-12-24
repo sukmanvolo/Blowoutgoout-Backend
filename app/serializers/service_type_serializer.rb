@@ -1,5 +1,7 @@
 class ServiceTypeSerializer < ActiveModel::Serializer
-  attributes :id, :name, :status, :image
+  attributes :id, :name, :status, :image, :stylist
+
+  belongs_to :stylist, serializer: ShowStylistSerializer
 
   def image
     if object.image_attached?

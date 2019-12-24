@@ -20,9 +20,10 @@ class Stylist < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :bookings, dependent: :destroy
+  has_one :service_type
 
   # emun welcome_kit: [] ask for values
-  enum service_type: [:hair, :makeup, :hair_and_makeup]
+  # enum service_type: [:hair, :makeup, :hair_and_makeup]
   enum register_by: [:normal, :facebook]
   enum years_of_experience: ['junior', 'semi-senior', 'senior']
   enum has_smartphone: [:no, :iphone, :android]

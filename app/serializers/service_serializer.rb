@@ -2,9 +2,7 @@ class ServiceSerializer < ActiveModel::Serializer
   attributes :id, :name, :service_type_id, :service_type, :amount,
              :duration, :status, :image
 
-  def service_type
-    object.service_type_name
-  end
+  belongs_to :service_type, serializer: ServiceTypeSerializer
 
   def image
     if object.image_attached?
