@@ -27,6 +27,15 @@ module Api::V1
       render json: @available_schedules, each_serializer: AvailabilitySerializer, status: :ok
     end
 
+    # GET /availabilities/by_stylist
+    def by_stylist
+      @stylist_schedules = StylistSchedule
+                              .joins(:schedule)
+                              .where(stylist_schedules: {stylist_id: params[:stylist_id], available: true})
+
+      json_response(@stylist_schedules)
+    end
+
     private
 
     def service_ids

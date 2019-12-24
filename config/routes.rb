@@ -59,7 +59,11 @@ Rails.application.routes.draw do
           get 'by_stylist', to: 'schedules#by_stylist'
         end
       end
-      resources :availabilities, only: :index
+      resources :availabilities do
+        collection do
+          get 'by_stylist', to: 'availabilities#by_stylist'
+        end
+      end
       resources :favorites
       resources :bookings do
         member do

@@ -1,0 +1,16 @@
+get:
+  description: Get all Availabilities for Stylist ID
+  tags:
+    - Availability
+  parameters:
+    - name: authorization
+      in: header
+      description: Admin authentication token
+      required: true
+      type: string
+    - name: stylist_id
+      in: query
+      description: Stylist ID
+      required: true
+      type: integer
+      format: int64
