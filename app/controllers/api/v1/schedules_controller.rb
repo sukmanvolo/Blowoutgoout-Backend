@@ -21,6 +21,14 @@ module Api::V1
       json_response(schedules)
     end
 
+    # GET /schedules/by_stylist
+    def by_stylist
+      @schedules = Schedule.joins(:stylist_schedules)
+                       .where(stylist_schedules: {stylist_id: params[:stylist_id], available: true})
+                       .distinct if params[:stylist_id]
+      json_response(@schedules)
+    end
+
     # POST /schedules
     def create
       @schedule = Schedule.new(schedule_params.except(:stylist_id))

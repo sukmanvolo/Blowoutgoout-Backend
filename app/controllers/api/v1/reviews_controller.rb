@@ -2,31 +2,31 @@ module Api::V1
   class ReviewsController < BaseController
     before_action :set_review, only: [:update, :destroy]
 
-    # GET /stylists
+    # GET /reviews
     def index
       @reviews = reviews
       json_response(@reviews)
     end
 
-    # GET /stylists/by_stylist
+    # GET /reviews/by_stylist
     def by_stylist
       @reviews = Review.by_stylist(params[:stylist_id]) if params[:stylist_id]
       json_response(@reviews)
     end
 
-    # GET /stylists/by_booking
+    # GET /reviews/by_booking
     def by_booking
       @reviews = Review.by_booking(params[:booking_id]) if params[:booking_id]
       json_response(@reviews)
     end
 
-    # GET /stylists/by_client
+    # GET /reviews/by_client
     def by_client
       @reviews = Review.by_client(params[:client_id]) if params[:client_id]
       json_response(@reviews)
     end
 
-    # POST /stylists
+    # POST /reviews
     def create
       @review = Review.new(review_params)
       authorize @review
@@ -38,7 +38,7 @@ module Api::V1
       # @review.update
     end
 
-    # DELETE /stylists/:id
+    # DELETE /reviews/:id
     def destroy
       # return 'You are not authorized to perform that action'.as_json unless current_user.client? && @review.client_id == current_user&.client&.id
       authorize @review

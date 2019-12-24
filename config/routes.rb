@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       resources :schedules do
         collection do
           get 'nearest_schedules', to: 'schedules#nearest_schedules'
+          get 'by_stylist/:stylist_id', to: 'schedules#by_stylist'
         end
       end
       resources :availabilities, only: :index

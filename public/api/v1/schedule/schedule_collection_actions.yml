@@ -12,6 +12,7 @@ get:
       description: Schedule data
       schema:
         $ref: '#/components/schemas/schedule_param_data'
+
 components:
   schemas:
     schedule_param_data:

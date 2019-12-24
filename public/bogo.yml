@@ -50,6 +50,8 @@ paths:
     $ref: '/api/v1/service_type/service_type_by_id.yml'
   schedules:
     $ref: '/api/v1/schedule/schedules.yml'
+  schedules/by_stylist/{id}:
+    $ref: '/api/v1/schedule/schedules_by_stylist_id.yml'
   schedules/{id}:
     $ref: '/api/v1/schedule/schedule_by_id.yml'
   schedules/nearest_schedules:
