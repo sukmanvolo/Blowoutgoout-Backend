@@ -110,6 +110,7 @@ module Api::V1
     end
 
     def stylist_available?
+      return nil unless @stylist_schedule.present?
       @stylist_schedule.available?
     end
 
