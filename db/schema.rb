@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_030602) do
+ActiveRecord::Schema.define(version: 2019_12_24_112737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,13 +117,13 @@ ActiveRecord::Schema.define(version: 2019_12_18_030602) do
   create_table "reviews", force: :cascade do |t|
     t.string "text"
     t.float "rate", default: 0.0
-    t.bigint "stylist_id"
     t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "client_id"
+    t.bigint "booking_id"
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
     t.index ["client_id"], name: "index_reviews_on_client_id"
-    t.index ["stylist_id"], name: "index_reviews_on_stylist_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -253,8 +253,8 @@ ActiveRecord::Schema.define(version: 2019_12_18_030602) do
   add_foreign_key "messages", "clients"
   add_foreign_key "messages", "stylists"
   add_foreign_key "payments", "bookings"
+  add_foreign_key "reviews", "bookings"
   add_foreign_key "reviews", "clients"
-  add_foreign_key "reviews", "stylists"
   add_foreign_key "services", "service_types"
   add_foreign_key "stylist_schedules", "schedules"
   add_foreign_key "stylist_schedules", "stylists"

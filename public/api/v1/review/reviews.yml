@@ -23,11 +23,6 @@ get:
       description: Admin authentication token
       required: true
       type: string
-    - name: stylist_id
-      in: query
-      description: Stylist ID
-      required: true
-      type: integer
 
 components:
   schemas:
@@ -39,7 +34,7 @@ components:
           properties:
             client_id:
               type: integer
-            stylist_id:
+            booking_id:
               type: integer
             text:
               type: string

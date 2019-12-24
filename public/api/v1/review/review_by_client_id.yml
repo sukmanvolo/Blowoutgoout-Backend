@@ -1,0 +1,15 @@
+get:
+  description: Show reviews by Client ID
+  tags:
+    - Review
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: client_id
+      in: path
+      description: Client ID
+      required: true
+      type: integer
+      format: int64

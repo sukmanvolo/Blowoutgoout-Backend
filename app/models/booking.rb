@@ -4,6 +4,7 @@ class Booking < ApplicationRecord
   has_many :messages, dependent: :destroy
   belongs_to :schedule
   has_one :payment
+  has_many :reviews
 
   before_create :check_status_default
 

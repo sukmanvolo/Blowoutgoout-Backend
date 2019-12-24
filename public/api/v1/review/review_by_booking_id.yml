@@ -1,0 +1,15 @@
+get:
+  description: show reviews by Booking ID
+  tags:
+    - Review
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: booking_id
+      in: path
+      description: Booking ID
+      required: true
+      type: integer
+      format: int64

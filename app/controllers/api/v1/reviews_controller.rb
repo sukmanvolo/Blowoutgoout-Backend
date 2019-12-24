@@ -10,7 +10,13 @@ module Api::V1
 
     # GET /stylists/by_stylist
     def by_stylist
-      @reviews = reviews.by_stylist(params[:stylist_id]) if params[:stylist_id]
+      @reviews = Review.by_stylist(params[:stylist_id]) if params[:stylist_id]
+      json_response(@reviews)
+    end
+
+    # GET /stylists/by_booking
+    def by_booking
+      @reviews = Review.by_booking(params[:booking_id]) if params[:booking_id]
       json_response(@reviews)
     end
 
@@ -43,7 +49,7 @@ module Api::V1
     private
 
     def review_params
-      params.require(:reviews).permit(:client_id, :stylist_id, :text, :rate)
+      params.require(:reviews).permit(:client_id, :booking_id, :text, :rate)
     end
 
     def set_review

@@ -16,7 +16,6 @@ class Stylist < ApplicationRecord
   has_many :schedules, through: :stylist_schedules
 
   has_many :schedules
-  has_many :reviews
   has_many :favorites, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :bookings, dependent: :destroy
