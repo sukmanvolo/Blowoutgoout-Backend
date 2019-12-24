@@ -1,6 +1,6 @@
 class StylistSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :email, :phone, :lat, :long, :image,
-             :reviews, :is_favorite
+             :reviews, :is_favorite, :description
 
   def image
     if object.image_attached?
