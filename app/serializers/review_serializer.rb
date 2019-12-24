@@ -2,7 +2,7 @@ class ReviewSerializer < ActiveModel::Serializer
   attributes :id, :text, :rate, :booking_id, :status, :client, :stylist
 
   def client
-    Client.find_by_id(object&.client).as_json
+    Client.find_by_id(object&.client_id).as_json
   end
 
   def stylist
