@@ -75,3 +75,7 @@ components:
                   type: string
                 device_id:
                   type: string
+                lat:
+                  type: string
+                long:
+                  type: string
