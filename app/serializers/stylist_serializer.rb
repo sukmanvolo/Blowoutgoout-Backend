@@ -1,6 +1,6 @@
 class StylistSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :email, :phone, :lat, :long, :image,
-             :reviews, :is_favorite, :description
+             :reviews, :is_favorite
 
   def image
     if object.image_attached?
@@ -24,8 +24,8 @@ class StylistSerializer < ActiveModel::Serializer
 
   def reviews
     {
-      count: object.reviews_count,
-      rating: object.reviews_rating
+      count: object.bookings_reviews_count,
+      rating: object.bookings_reviews_rating
     }
   end
 

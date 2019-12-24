@@ -3,10 +3,16 @@
 class BookingSerializer < ActiveModel::Serializer
   attributes :id, :client_id, :client_full_name,
              :date, :time_from, :time_to, :service_lat,
-             :service_long, :status, :fee, :notes, :services, :stylist, :card
+             :service_long, :status, :fee, :notes, :services, :stylist, :card, :rated
 
   belongs_to :stylist, serializer: ShowStylistSerializer
 
+  has_many :reviews
+
+  def rated
+    object.reviews_count > 0
+  end
+  
   def client_full_name
     object&.client&.full_name
   end

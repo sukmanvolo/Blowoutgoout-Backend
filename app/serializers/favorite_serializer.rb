@@ -52,8 +52,8 @@ class FavoriteSerializer < ActiveModel::Serializer
 
   def ratings
     {
-      count: object&.stylist&.reviews_count,
-      rating: object&.stylist&.reviews_rating
+      count: object&.stylist&.bookings_reviews_count,
+      rating: object&.stylist&.bookings_reviews_rating
     }
   end
 end

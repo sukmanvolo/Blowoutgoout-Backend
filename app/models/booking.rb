@@ -14,10 +14,10 @@ class Booking < ApplicationRecord
   validates :service_ids, :time_from, :time_to, :card_token, presence: true
   validate :check_valid_date
 
-  scope :by_client, ->(id) { where(client_id: id) }
-  scope :by_stylist, ->(id) { where(stylist_id: id) }
-  scope :upcoming, -> { where(status: %w[confirmed pending]).joins(:schedule).merge(Schedule.upcoming) }
-  scope :past, -> { where(status: %w[confirmed completed]).joins(:schedule).merge(Schedule.past) }
+  scope :by_client, ->(id) {where(client_id: id)}
+  scope :by_stylist, ->(id) {where(stylist_id: id)}
+  scope :upcoming, -> {where(status: %w[confirmed pending]).joins(:schedule).merge(Schedule.upcoming)}
+  scope :past, -> {where(status: %w[confirmed completed]).joins(:schedule).merge(Schedule.past)}
 
   delegate :amount, :name, to: :service, prefix: true
   delegate :customer_id, to: :client, prefix: true
@@ -31,6 +31,15 @@ class Booking < ApplicationRecord
     end
 
     response
+  end
+
+  def reviews_count
+    reviews.count
+  end
+
+  def reviews_rating
+    return 0 unless reviews_count > 0
+    (reviews.sum(&:rate) / reviews_count).round(1)
   end
 
   private

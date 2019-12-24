@@ -16,6 +16,7 @@ class Stylist < ApplicationRecord
   has_many :schedules, through: :stylist_schedules
 
   has_many :schedules
+  has_many :reviews
   has_many :favorites, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :bookings, dependent: :destroy
@@ -67,13 +68,14 @@ class Stylist < ApplicationRecord
     [first_name, last_name].join(' ').titleize
   end
 
-  def reviews_count
-    reviews.count
+  def bookings_reviews_count
+    return 0 unless bookings.count > 0
+    bookings.sum(&:reviews_count)
   end
 
-  def reviews_rating
-    return 0 unless reviews_count > 0
-    (reviews.sum(&:rate) / reviews_count).round(1)
+  def bookings_reviews_rating
+    return 0 unless bookings_reviews_count > 0
+    (bookings.sum(&:reviews_rating) / bookings_reviews_count).round(1)
   end
 
   def is_favorite?(client_id)
