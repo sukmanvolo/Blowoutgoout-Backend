@@ -56,6 +56,10 @@ components:
               type: string
             description:
               type: string
+            lat:
+              type: string
+            long:
+              type: string
             user_attributes:
               type: object
               properties:
@@ -74,8 +78,4 @@ components:
                 device_type:
                   type: string
                 device_id:
-                  type: string
-                lat:
-                  type: string
-                long:
                   type: string

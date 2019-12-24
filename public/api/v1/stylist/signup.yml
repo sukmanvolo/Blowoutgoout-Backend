@@ -19,6 +19,10 @@ definitions:
       stylists:
         type: object
         properties:
+          lat:
+            type: string
+          long:
+            type: string
           user_attributes:
             type: object
             properties:
@@ -35,9 +39,5 @@ definitions:
               device_type:
                 type: string
               device_id:
-                type: string
-              lat:
-                type: string
-              long:
                 type: string
                 
