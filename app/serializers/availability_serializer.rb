@@ -6,6 +6,6 @@ class AvailabilitySerializer < ActiveModel::Serializer
   end
 
   def end_time
-    object.tmp_end_time.strftime('%H:%M:%S')
+    object.end_time.strftime('%H:%M:%S')
   end
 end

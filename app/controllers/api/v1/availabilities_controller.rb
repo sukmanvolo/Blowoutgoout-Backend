@@ -20,7 +20,7 @@ module Api::V1
       @available_schedules = []
       duration = Service.where(id: service_ids).pluck(:duration).sum || 0
       stylist_schedules.each do |sc|
-        sc.tmp_end_time = sc.start_time + duration.hours
+        sc.end_time ||= sc.start_time + duration.hours
         @available_schedules << sc
       end
 

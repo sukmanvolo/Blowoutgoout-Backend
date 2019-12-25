@@ -41,7 +41,8 @@ class CreateScheduleService
   def associate_to_stylist(schedule)
     sc = StylistSchedule.new(stylist_id: stylist_id,
                              schedule_id: schedule.id,
-                             start_time: schedule_data[:start_time]
+                             start_time: schedule_data[:start_time],
+                             end_time: schedule_data[:end_time]
                              )
     if sc.valid?
       sc.save
