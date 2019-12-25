@@ -1,7 +1,7 @@
 class Schedule < ApplicationRecord
-  attr_accessor :start_time
+  attr_accessor :start_time, :end_time
 
-  has_many :stylist_schedules
+  has_many :stylist_schedules, dependent: :destroy
   has_many :stylists, through: :stylist_schedules
 
   validates :date, presence: true

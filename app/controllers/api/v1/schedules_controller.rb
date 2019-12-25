@@ -73,7 +73,7 @@ module Api::V1
     private
 
     def schedule_params
-      params.require(:schedules).permit(:stylist_id, :date, :start_time, service_ids: [])
+      params.require(:schedules).permit(:stylist_id, :date, :start_time, :end_time, service_ids: [])
     end
 
     def set_schedule

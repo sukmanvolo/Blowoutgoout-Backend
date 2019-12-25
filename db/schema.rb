@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_25_134548) do
+ActiveRecord::Schema.define(version: 2019_12_25_134549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 2019_12_25_134548) do
     t.datetime "updated_at", null: false
     t.time "start_time"
     t.boolean "available", default: true
+    t.time "end_time"
     t.index ["schedule_id"], name: "index_stylist_schedules_on_schedule_id"
     t.index ["stylist_id", "schedule_id", "start_time"], name: "index_stylist_id_and_schedule_id_and_start_time", unique: true
     t.index ["stylist_id"], name: "index_stylist_schedules_on_stylist_id"
