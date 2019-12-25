@@ -1,7 +1,9 @@
 class ShowStylistSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :description, :phone, :lat,
             :long, :image, :is_favorite, :cosmetology_license, :liability_insurance,
-            :eligibility_document, :gallery_images, :ratings
+            :eligibility_document, :gallery_images, :ratings, :service_type
+
+  has_one :service_type, serializer: ServiceTypeSerializer
   
   def ratings
     {

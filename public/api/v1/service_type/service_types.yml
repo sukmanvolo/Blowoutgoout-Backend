@@ -12,7 +12,7 @@ post:
       in: body
       description: Service type data
       schema:
-        $ref: '#/components/schemas/service_type_data'
+        $ref: '#/components/schemas/params_service_type_data'
 get:
   description: Get all service_types - [Admin, Client, Stylist]
   tags:
@@ -26,7 +26,7 @@ get:
 
 components:
   schemas:
-    service_type_data:
+    params_service_type_data:
       type: object
       properties:
         name:
@@ -35,7 +35,7 @@ components:
           enum:
             - inactive
             - active
-        service_type_id:
-          type: integer
         stylist_id:
           type: integer
+        service_ids:
+          type: array

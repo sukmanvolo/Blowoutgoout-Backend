@@ -49,11 +49,13 @@ components:
     service_type_data:
       type: object
       properties:
-        date:
+        name:
           type: string
         status:
           enum:
             - inactive
             - active
+        stylist_id:
+          type: integer
         service_ids:
           type: array
