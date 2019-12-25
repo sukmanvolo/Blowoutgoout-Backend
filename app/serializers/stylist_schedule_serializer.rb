@@ -7,7 +7,7 @@ class StylistScheduleSerializer < ActiveModel::Serializer
   end
 
   def end_time
-    object.end_time.strftime('%H:%M:%S')
+    object.end_time.present? ? object.end_time.strftime('%H:%M:%S') : ''
   end
 
   def created_at
