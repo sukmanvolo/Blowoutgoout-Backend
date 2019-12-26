@@ -86,4 +86,16 @@ class Stylist < ApplicationRecord
   def payments
     bookings.paid.map { |b| b.payment.as_json }
   end
+
+  def total_payments
+    return 0 unless bookings.count > 0
+    payments = bookings.paid.map {|b| b.payment}
+    payments ? payments.sum(&:amount) : 0
+  end
+
+  def total_earning
+    return 0 unless bookings.count > 0
+    payments = bookings.completed.map {|b| b.payment}
+    payments ? payments.sum(&:amount) : 0
+  end
 end

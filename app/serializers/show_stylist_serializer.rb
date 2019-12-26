@@ -1,7 +1,8 @@
 class ShowStylistSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :description, :phone, :lat,
-            :long, :image, :is_favorite, :cosmetology_license, :liability_insurance,
-            :eligibility_document, :gallery_images, :ratings, :service_type
+             :long, :image, :is_favorite, :cosmetology_license, :liability_insurance,
+             :eligibility_document, :gallery_images, :ratings, :service_type,
+             :total_earning, :total_payments
 
   has_one :service_type, serializer: ServiceTypeSerializer
   
@@ -79,5 +80,13 @@ class ShowStylistSerializer < ActiveModel::Serializer
            .routes
            .url_helpers
            .rails_representation_url(object.eligibility_document.variant(resize: "100x100").processed)
+  end
+
+  def total_earning
+    object.total_earning
+  end
+
+  def total_payments
+    object.total_payments
   end
 end
