@@ -38,6 +38,10 @@ paths:
     $ref: '/api/v1/stylist/add_gallery_images.yml'
   stylists/{id}/gallery_images/{image_id}:
     $ref: '/api/v1/stylist/remove_gallery_images.yml'
+  stylists/booked_payment_data:
+    $ref: '/api/v1/stylist/booked_payment_data.yml'
+  stylists/next_payday_payment_data:
+    $ref: '/api/v1/stylist/next_payday_payment_data.yml'
   services:
     $ref: '/api/v1/service/services.yml'
   services/{id}:
@@ -100,8 +104,6 @@ paths:
       $ref: '/api/v1/review/review_by_stylist_id.yml'
   reviews/{id}:
     $ref: '/api/v1/review/review_by_id.yml'
-
-
 
 securityDefinitions:
   JWT:

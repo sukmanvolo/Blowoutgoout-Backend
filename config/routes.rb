@@ -41,6 +41,8 @@ Rails.application.routes.draw do
         collection do
           get 'nearest_stylists', to: 'stylists#nearest_stylists'
           get 'available_stylists', to: 'stylists#available_stylists'
+          get 'booked_payment_data', to: 'stylists#booked_payment_data'
+          get 'next_payday_payment_data', to: 'stylists#next_payday_payment_data'
         end
         member do
           post 'gallery_images', to: 'stylists#gallery_images'

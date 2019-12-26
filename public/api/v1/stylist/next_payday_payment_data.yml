@@ -1,0 +1,15 @@
+get:
+  description: Show Netx PayDay Payment Data by ID
+  tags:
+    - Stylist
+  parameters:
+    - name: Authorization
+      description: "JWT token"
+      type: string
+      in: header
+    - name: id
+      in: query
+      description: ID
+      required: true
+      type: integer
+      format: int64

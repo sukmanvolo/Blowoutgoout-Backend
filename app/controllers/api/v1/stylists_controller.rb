@@ -1,6 +1,6 @@
 module Api::V1
   class StylistsController < BaseController
-    before_action :set_stylist, only: %i[show update destroy gallery_images remove_gallery_image]
+    before_action :set_stylist, only: %i[show update destroy gallery_images remove_gallery_image booked_payment_data next_payday_payment_data]
 
     # GET /stylists
     def index
@@ -91,6 +91,20 @@ module Api::V1
     def remove_gallery_image
       @stylist.gallery_images.where(id: params[:image_id]).purge
       head :no_content
+    end
+
+    def booked_payment_data
+      @booked_payments = Payment.joins(:booking)
+                             .where("bookings.date < ? and bookings.stylist_id = ?", Date.today, @stylist.id)
+
+      render json: @booked_payments, each_serializer: PaymentDataSerializer, status: :ok
+    end
+
+    def next_payday_payment_data
+      @next_payday_payments = Payment.joins(:booking)
+                                  .where("bookings.date >= ? and bookings.stylist_id = ?", Date.today, @stylist.id)
+
+      render json: @next_payday_payments, each_serializer: PaymentDataSerializer, status: :ok
     end
 
     private
