@@ -31,6 +31,11 @@ delete:
       required: true
       type: integer
       format: int64
+    - name: date
+      in: query
+      description: Scheduled Date
+      required: true
+      type: string
     - name: start_time
       in: query
       description: Start Time

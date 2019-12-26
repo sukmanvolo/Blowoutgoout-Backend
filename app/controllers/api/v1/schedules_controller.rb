@@ -62,8 +62,11 @@ module Api::V1
 
     def destroy_by_stylist
       stylist_id = current_user.admin? ? params[:stylist_id] : current_user.stylist.id
-      @stylist_schedules = StylistSchedule.where(stylist_id: stylist_id,
-                                                 start_time: params[:start_time]).first
+      @stylist_schedules = StylistSchedule.joins(:schedule)
+                               .where(schedules: {date: params[:date]})
+                               .where(stylist_schedules: {stylist_id: stylist_id,
+                                                          start_time: params[:start_time]}).first
+      
       @stylist_schedules.destroy
       head :no_content
     end
