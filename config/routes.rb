@@ -57,6 +57,7 @@ Rails.application.routes.draw do
         collection do
           get 'nearest_schedules', to: 'schedules#nearest_schedules'
           get 'by_stylist', to: 'schedules#by_stylist'
+          delete 'by_stylist', to: 'schedules#destroy_by_stylist'
         end
       end
       resources :availabilities do

@@ -60,6 +60,14 @@ module Api::V1
       head :no_content
     end
 
+    def destroy_by_stylist
+      stylist_id = current_user.admin? ? params[:stylist_id] : current_user.stylist.id
+      @stylist_schedules = StylistSchedule.where(stylist_id: stylist_id,
+                                                 start_time: params[:start_time]).first
+      @stylist_schedules.destroy
+      head :no_content
+    end
+
     def nearest_schedules
       distance = params[:distance] || 25
       stylists = Stylist.nearest_stylists(distance, params[:lat], params[:long])
@@ -81,11 +89,7 @@ module Api::V1
     end
 
     def stylist_id
-      if current_user.admin?
-        Stylist.where(id: schedule_params[:stylist_id])&.pluck(:id)&.first
-      else
-        current_user.stylist.id
-      end
+      current_user.admin? ? schedule_params[:stylist_id] : current_user.stylist.id
     end
 
     def service_ids
