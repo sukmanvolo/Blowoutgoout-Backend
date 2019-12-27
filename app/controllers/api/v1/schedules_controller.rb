@@ -16,7 +16,7 @@ module Api::V1
       schedules = schedules.to_date(params[:to_date]) if params[:to_date]
 
       # filter by service_ids array
-      schedules = schedules.reject{ |s| puts "adfadsafasdfasdfa", (s.service_ids & service_ids) == false } if params[:service_ids] && service_ids
+      schedules = schedules.reject{ |s| (s.service_ids & service_ids) == false } if params[:service_ids] && service_ids
 
       json_response(schedules)
     end
