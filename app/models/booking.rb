@@ -50,7 +50,7 @@ class Booking < ApplicationRecord
   end
 
   def check_valid_date
-    if self.date < Date.today
+    if self.date && self.date < Date.today
       self.errors.add(:date, :invalid, message: "you cannot make a booking for a past date")
     end
   end

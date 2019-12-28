@@ -36,8 +36,7 @@ module Api::V1
     # PUT /bookings/:id
     def update
       authorize @booking
-      @booking.attributes = booking_params
-      if UpdateBooking.call(@booking).result
+      if @booking.update(booking_params)
         json_response(@booking, :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)

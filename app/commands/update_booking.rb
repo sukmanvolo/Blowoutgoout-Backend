@@ -13,9 +13,9 @@ class UpdateBooking
     if booking.changed?
       if booking.status_changed? && booking.status_was == "confirmed"
         booking.errors.add(:status, "You can not edit this appointment")
-      # else
-      #   # TODO: send push notification.
-      #   booking.status = 'pending'
+      else
+        # TODO: send push notification.
+        booking.status = 'pending'
       end
     end
     booking.errors.empty? && booking.save
