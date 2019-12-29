@@ -14,7 +14,7 @@ module Api::V1
       stylist_schedules = stylist_schedules.where(start_time: params[:start_time]) if params[:start_time]
 
       # filter by service_ids array
-      stylist_schedules = stylist_schedules.reject { |sc| (sc.schedule.service_ids & service_ids).empty? } if service_ids
+      stylist_schedules = stylist_schedules.reject { |sc| (sc.schedule.service_ids & service_ids) == false} if params[:service_ids] && service_ids
 
       # check if the schedule slot is available
       @available_schedules = []
