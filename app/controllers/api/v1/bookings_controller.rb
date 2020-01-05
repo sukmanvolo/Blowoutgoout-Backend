@@ -2,7 +2,7 @@ module Api::V1
   class BookingsController < BaseController
     before_action :set_booking, only: [:show, :update, :destroy, :confirm,
                                        :reject, :complete]
-    before_action :stylist_schedule, only: [:create, :reject]
+    before_action :stylist_schedule, only: [:create]
 
     # GET /bookings
     def index
@@ -45,8 +45,7 @@ module Api::V1
 
     # DELETE /bookings/:id
     def destroy
-      @booking.status = 'cancelled'
-      if ChangeBookingStatus.call(@booking).result
+      if @booking.update_attribute(:status, 'cancelled')
         CreateNotification.call(current_user, cancel_notification)
         json_response(@booking, :no_content)
       else
@@ -57,8 +56,7 @@ module Api::V1
     # PUT /bookings/:id/confirm
     def confirm
       authorize @booking
-      @booking.status = 'confirmed'
-      if ChangeBookingStatus.call(@booking).result
+      if @booking.update_attribute(:status, 'confirmed')
         json_response(@booking, :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)
@@ -67,8 +65,7 @@ module Api::V1
 
     def complete
       authorize @booking
-      @booking.status = 'completed'
-      if ChangeBookingStatus.call(@booking).result
+      if @booking.update_attribute(:status, 'completed')
         json_response(@booking, :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)
@@ -78,11 +75,11 @@ module Api::V1
     # PUT /bookings/:id/reject
     def reject
       authorize @booking
-      @booking.status = 'rejected'
-      if ChangeBookingStatus.call(@booking).result
-        @stylist_schedule.update(available: true)
+      if @booking.update_attribute(:status, 'rejected')
+        @stylist_schedule = @booking.stylist_schedule
+        @stylist_schedule.update(available: true) if @stylist_schedule
         CreateNotification.call(current_user, cancel_notification)
-        json_response(@booking, status: :accepted)
+        json_response(@booking, :accepted)
       else
         json_response(@booking.errors.messages, :unprocessable_entity)
       end

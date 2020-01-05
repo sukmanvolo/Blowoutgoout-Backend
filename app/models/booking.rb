@@ -42,6 +42,12 @@ class Booking < ApplicationRecord
     (reviews.sum(&:rate) / reviews_count).round(1)
   end
 
+  def stylist_schedule
+    StylistSchedule.where(stylist_id: stylist_id,
+                          schedule_id: schedule_id,
+                          start_time: time_from).first
+  end
+
   private
 
   def check_status_default
