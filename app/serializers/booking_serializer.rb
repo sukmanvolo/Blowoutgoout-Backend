@@ -30,19 +30,11 @@ class BookingSerializer < ActiveModel::Serializer
   end
 
   def fee
-    f = 0.0
-    object&.schedule&.service_ids&.each do |service_id|
-      f += Service.find(service_id).amount
-    end
-    f
+    object.fee
   end
 
   def services
-    srvs = []
-    object&.schedule&.service_ids&.each do |service_id|
-      srvs << Service.find(service_id).as_json
-    end
-    srvs
+    object.services
   end
 
   def card

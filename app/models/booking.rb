@@ -29,8 +29,16 @@ class Booking < ApplicationRecord
     service_ids.each do |service_id|
       response << Service.find(service_id).as_json
     end
-
     response
+  end
+
+  def fee
+    return 0.0 unless service_ids.present?
+    f = 0.0
+    service_ids.each do |service_id|
+      f += Service.find(service_id).amount
+    end
+    f
   end
 
   def reviews_count
