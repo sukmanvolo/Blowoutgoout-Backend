@@ -56,8 +56,6 @@ components:
               type: string
             time_to:
               type: string
-            fee:
-              type: string
             service_lat:
               type: string
             service_long:
