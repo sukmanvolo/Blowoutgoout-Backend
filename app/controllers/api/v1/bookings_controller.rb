@@ -100,7 +100,7 @@ module Api::V1
 
     def booking_params
       params.require(:bookings).permit(:client_id, :stylist_id,
-                                       :time_from, :time_to, :fee, :service_lat,
+                                       :time_from, :time_to, :service_lat,
                                        :service_long, :date, :status, :schedule_id,
                                        :card_token, :service_amount, :notes, service_ids: [])
     end

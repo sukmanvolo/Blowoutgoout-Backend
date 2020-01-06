@@ -49,7 +49,7 @@ module Api::V1
             @payment.amount = amount
             @payment.charge_id = stripe_charge.result.id
             @payment.save!
-            booking.update(status: 'paid')
+            booking.update_attribute(:status, 'paid')
 
             json_response(@payment, :created)
           else
