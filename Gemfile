@@ -29,7 +29,7 @@ gem 'breakpoint'
 # https://github.com/FortAwesome/font-awesome-sass
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'font-awesome-sass', '~> 5.9.0'
-gem 'geokit-rails', '2.3.1'
+gem 'geokit-rails', '2.5.0'
 gem 'image_processing', '1.8.0'
 gem 'jwt', '1.5.6'
 # gem 'omniauth-facebook'
