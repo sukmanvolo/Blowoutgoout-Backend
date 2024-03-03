@@ -178,7 +178,7 @@ GEM
     pundit (2.0.1)
       activesupport (>= 3.0.0)
     racc (1.7.3)
-    rack (2.0.5)
+    rack (2.2.8.1)
     rack-cors (2.0.1)
       rack (>= 2.0.0)
     rack-test (1.0.0)
